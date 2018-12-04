@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/04 11:43:28 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/04 13:42:43 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ typedef struct	s_ls
 	struct s_ls		*next;
 	struct dirent	*pdent;
 }				t_ls;
+
+typedef struct	s_opt
+{
+	int				opt;
+
+}				t_opt;
 
 t_ls	*ls_new(struct dirent *pdent);
 int		ls_size(t_ls *lst);

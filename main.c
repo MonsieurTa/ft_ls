@@ -6,11 +6,20 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/04 11:30:46 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/04 13:42:05 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void	print_name(t_ls *lst)
+{
+	while (lst)
+	{
+		ft_printf("name :%s\n", lst->pdent->d_name);
+		lst = lst->next;
+	}
+}
 
 int	main(int ac, char **av)
 {
@@ -20,12 +29,12 @@ int	main(int ac, char **av)
 	t_ls			*lst;
 	t_ls			*node;
 
-	if (ac != 2)
+	if (ac != 1)
 		return (0);
-	if ((pdir = opendir(av[1])) == NULL)
+	if ((pdir = opendir(".")) == NULL)
 	{
 		ft_putstr_fd(strerror(errno), 2);
-		return (0);
+		ft_putchar('\n');
 	}
 	lst = NULL;
 	while ((pdent = readdir(pdir)))
@@ -33,6 +42,13 @@ int	main(int ac, char **av)
 		node = ls_new(pdent);
 		ls_append(&lst, &node);
 	}
-	ft_printf("size = %d\n", ls_size(lst));
+	lst = ls_mergesort(lst, ls_size(lst));
+	print_name(lst);
+	/*
+	 * reccursivite
+	 */
+
+	closedir(pdir);
+	ls_rm(&lst);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/04 09:38:00 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/04 11:29:08 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef struct	s_ls
 }				t_ls;
 
 t_ls	*ls_new(struct dirent *pdent);
-void	ls_append(t_ls **lst, t_ls *node);
+int		ls_size(t_ls *lst);
+void	ls_append(t_ls **lst, t_ls **node);
 void	ls_rm(t_ls **lst);
 
 #endif

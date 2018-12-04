@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/04 09:32:44 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/04 11:30:46 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ int	main(int ac, char **av)
 		ft_putstr_fd(strerror(errno), 2);
 		return (0);
 	}
-	pdent = readdir(pdir);
-	node = ls_new(pdent);
-	ls_append(&lst, node);
-	free(node->pdent);
-	free(node);
+	lst = NULL;
+	while ((pdent = readdir(pdir)))
+	{
+		node = ls_new(pdent);
+		ls_append(&lst, &node);
+	}
+	ft_printf("size = %d\n", ls_size(lst));
 	return (0);
 }

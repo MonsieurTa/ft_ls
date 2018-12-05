@@ -6,19 +6,20 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 09:56:50 by wta               #+#    #+#             */
-/*   Updated: 2018/12/04 13:17:22 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/05 00:36:44 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_ls	*ls_new(struct dirent *pdent)
+t_ls	*ls_new(struct dirent *pdent, t_ls *parent)
 {
 	t_ls	*node;
 
 	if (!(node = (t_ls*)malloc(sizeof(t_ls))))
 		return (NULL);
 	node->next = NULL;
+	node->parent = parent;
 	if (!(node->pdent = ft_memalloc(sizeof(*pdent))))
 		return (NULL);
 	ft_memcpy(node->pdent, pdent, sizeof(*pdent));

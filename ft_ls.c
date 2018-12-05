@@ -6,13 +6,13 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 09:56:50 by wta               #+#    #+#             */
-/*   Updated: 2018/12/05 00:36:44 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/05 08:25:21 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_ls	*ls_new(struct dirent *pdent, t_ls *parent)
+t_ls	*ls_new(struct dirent pdent, t_ls *parent)
 {
 	t_ls	*node;
 
@@ -20,9 +20,9 @@ t_ls	*ls_new(struct dirent *pdent, t_ls *parent)
 		return (NULL);
 	node->next = NULL;
 	node->parent = parent;
-	if (!(node->pdent = ft_memalloc(sizeof(*pdent))))
+	if (!(node->pdent = (struct dirent*)malloc(pdent.d_reclen)))
 		return (NULL);
-	ft_memcpy(node->pdent, pdent, sizeof(*pdent));
+	ft_memcpy(node->pdent, &pdent, pdent.d_reclen);
 	return (node);
 }
 
@@ -58,7 +58,9 @@ void	ls_rm(t_ls **lst)
 			tmp = *lst;
 			*lst = (*lst)->next;
 			free(tmp->pdent);
+			tmp->pdent = NULL;
 			free(tmp);
+			tmp = NULL;
 		}
 	}
 }

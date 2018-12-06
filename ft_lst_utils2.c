@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:13:16 by wta               #+#    #+#             */
-/*   Updated: 2018/12/06 11:02:16 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/06 17:42:28 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_lst_ls	*lst_pop_append(t_lst_ls *lst, t_lst_ls *side)
 	t_lst_ls	*tmp;
 
 	tmp = side->next;
-	lst_append(lst, side);
+	lst_append(&lst, side);
 	side = tmp;
 	return (side);
 }
@@ -63,9 +63,9 @@ t_lst_ls		*lst_mergesort(t_lst_ls *lst, int len)
 	{
 		tmp = lst->next;
 		if (index < len / 2)
-			lst_append(left, lst);
+			lst_append(&left, lst);
 		else
-			lst_append(right, lst);
+			lst_append(&right, lst);
 		lst = tmp;
 	}
 	left = lst_mergesort(left, lst_size(left));

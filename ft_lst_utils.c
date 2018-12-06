@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:12:47 by wta               #+#    #+#             */
-/*   Updated: 2018/12/06 15:13:40 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/06 17:43:36 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_lst_ls	*lst_newnode(t_file *file)
 {
 	t_lst_ls	*node;
 
-	if ((node = ft_memalloc(sizeof(t_lst_ls*))) == NULL)
+	if ((node = ft_memalloc(sizeof(t_lst_ls))) == NULL)
 		return (NULL);
 	node->file = file;
 	node->next = NULL;
@@ -49,14 +49,14 @@ t_file		*ls_newfile(DIR *pdir, char *path)
 	return (NULL);
 }
 
-void		lst_append(t_lst_ls *lst, t_lst_ls *node)
+void		lst_append(t_lst_ls **lst, t_lst_ls *node)
 {
 	t_lst_ls	*tmp;
 
 	tmp = NULL;
-	if (lst && node)
+	if (*lst && node)
 	{
-		tmp = lst;
+		tmp = *lst;
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = node;
@@ -64,8 +64,8 @@ void		lst_append(t_lst_ls *lst, t_lst_ls *node)
 	}
 	else if (node)
 	{
-		lst = node;
-		node->next = NULL;
+		*lst = node;
+		(*lst)->next = NULL;
 	}
 }
 
@@ -80,6 +80,7 @@ void		lst_rm(t_lst_ls *lst)
 		{
 			tmp = lst;
 			lst = lst->next;
+			free(tmp->file->pdent);
 			free(tmp->file);
 			free(tmp);
 		}

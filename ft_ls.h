@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/06 15:07:59 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/06 17:54:00 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct	s_lst_ls
 ** lst_append(t_lst_ls *lst, t_lst_ls *node)
 ** Ajoute un maillon a la suite d'une liste chainee.
 */
-void		lst_append(t_lst_ls *lst, t_lst_ls *node);
+void		lst_append(t_lst_ls **lst, t_lst_ls *node);
 
 /*
 **	lst_rm(t_lst_ls *lst)
@@ -72,6 +72,11 @@ int			lst_size(t_lst_ls *lst);
 */
 t_lst_ls	*lst_newnode(t_file *file);
 
+/*
+** t_lst_ls	*link_file(char *path)
+** Cree une liste chainee qui lie tous les fichier d'un dossier depuis son 
+** chemin
+*/
 t_file		*ls_newfile(DIR *pdir, char *path);
 /*
 ** t_lst_ls	*ls_mergesort(t_lst_ls *lst, int len)

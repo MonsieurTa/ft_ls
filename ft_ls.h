@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/06 10:43:37 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/06 15:07:59 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct stat		t_stat;
 typedef struct	s_file
 {
 	t_dirent	*pdent;
-	t_stat		*stat;
+	t_stat		stat;
 	char		*path;
 	int			time;
 }				t_file;
@@ -46,8 +46,6 @@ typedef struct	s_lst_ls
 	struct s_lst_ls	*next;
 	t_file			*file;
 }				t_lst_ls;
-
-
 
 /*
 ** lst_append(t_lst_ls *lst, t_lst_ls *node)
@@ -74,6 +72,7 @@ int			lst_size(t_lst_ls *lst);
 */
 t_lst_ls	*lst_newnode(t_file *file);
 
+t_file		*ls_newfile(DIR *pdir, char *path);
 /*
 ** t_lst_ls	*ls_mergesort(t_lst_ls *lst, int len)
 ** Trie une liste chainee.

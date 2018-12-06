@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:12:47 by wta               #+#    #+#             */
-/*   Updated: 2018/12/06 10:41:15 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/06 15:13:40 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,32 @@ t_lst_ls	*lst_newnode(t_file *file)
 	node->file = file;
 	node->next = NULL;
 	return (node);
+}
+
+t_file		*ls_newfile(DIR *pdir, char *path)
+{
+	t_dirent	*tmp;
+	t_file		*file;
+
+	file = NULL;
+	if ((file = ft_memalloc(sizeof(t_file))) != NULL)
+	{
+		if ((tmp = readdir(pdir)) != NULL)
+		{
+			if ((file->pdent = ft_memalloc(tmp->d_reclen)) != NULL)
+			{
+				ft_memcpy(file->pdent, tmp, tmp->d_reclen);
+				if ((stat(path, &(file->stat)) == 0))
+				{
+					file->path = path;
+					return (file);
+				}
+			}
+			free(file->pdent);
+		}
+		free(file);
+	}
+	return (NULL);
 }
 
 void		lst_append(t_lst_ls *lst, t_lst_ls *node)

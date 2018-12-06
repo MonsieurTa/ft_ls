@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "options.h"
+#include "../options.h"
 
 int main(int argc, char **argv)
 {

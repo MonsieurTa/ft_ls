@@ -31,6 +31,7 @@ Suggestion de norme personelle pour le projet :
 - Ne pas utiliser 0 (la valeur) pour tester '\0' (le char) dans les chaines de caracteres.
 - Ne pas utiliser de ++index a l'interieur des whiles (while (++index < val)), le faire sur une ligne a part.
 - Si possible les valeurs d'erreur utilisees doivent etre -1 pour les entier et NULL pour les pointeurs.
+- Si une fonction ne retourne que 2 valeurs (SUCCESS / ERROR) 0 est utilise pour SUCCESS et -1 pour ERROR.
 - Les includes system (<>) doivent etre au dessus des includes user ("").
 - L'include du .h equivalent du .c (ft_ls.h pour ft_ls.c) doit etre le dernier de la liste des includes.
 /!\ Cette norme est contournable s'il faut economiser des lignes pour complier a la norme 42 /!\

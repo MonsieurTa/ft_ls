@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/05 04:41:47 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/06 10:43:37 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,63 @@
 # include <string.h>
 # include <dirent.h>
 
-typedef struct	s_ls
+typedef	struct dirent	t_dirent;
+typedef struct stat		t_stat;
+
+/*
+** t_file est la structure contenant toutes les informations relatives a un
+** fichier.
+*/
+typedef struct	s_file
 {
-	struct s_ls		*parent;
-	struct s_ls		*next;
-	struct dirent	*pdent;
-}				t_ls;
+	t_dirent	*pdent;
+	t_stat		*stat;
+	char		*path;
+	int			time;
+}				t_file;
 
-typedef struct	s_opt
+/*
+** t_lst_ls est la structure de la liste chainee contenant le pointeur sur le
+** prochain element de la liste et un pointeur sur les informations d'un
+** fichier
+*/
+typedef struct	s_lst_ls
 {
-	int				opt;
+	struct s_lst_ls	*next;
+	t_file			*file;
+}				t_lst_ls;
 
-}				t_opt;
 
-t_ls	*ls_new(struct dirent pdent, t_ls *parent);
-int		ls_size(t_ls *lst);
-void	ls_append(t_ls **lst, t_ls **node);
-void	ls_rm(t_ls **lst);
-t_ls	*ls_merge(t_ls *left, t_ls *right);
-t_ls	*ls_mergesort(t_ls *lst, int n);
+
+/*
+** lst_append(t_lst_ls *lst, t_lst_ls *node)
+** Ajoute un maillon a la suite d'une liste chainee.
+*/
+void		lst_append(t_lst_ls *lst, t_lst_ls *node);
+
+/*
+**	lst_rm(t_lst_ls *lst)
+**	Supprime une liste chainee.
+*/
+void		lst_rm(t_lst_ls *lst);
+
+/*
+** lst_size(t_lst_ls *lst)
+** Recupere la taille d'une liste chainee.
+*/
+int			lst_size(t_lst_ls *lst);
+
+/*
+** t_lst_ls	*lst_newnode(t_file *file)
+** Creer un nouveau maillon qui contient un pointeur sur structure sur les
+** informations d'un fichier.
+*/
+t_lst_ls	*lst_newnode(t_file *file);
+
+/*
+** t_lst_ls	*ls_mergesort(t_lst_ls *lst, int len)
+** Trie une liste chainee.
+*/
+t_lst_ls	*lst_mergesort(t_lst_ls *lst, int len);
 
 #endif

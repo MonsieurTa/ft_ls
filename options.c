@@ -6,30 +6,13 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:04:09 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/06 14:53:04 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/07 08:38:19 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "options_rules.h"
 #include "options.h"
-
-/*
-** Set l'option opt_name, retourne 0 si tout est ok et -1 si une
-** erreur est survenue (parametres invalides etc).
-*/
-
-static int			set_opt(t_opts *opts, t_opt_name opt_name)
-{
-	unsigned int	opt_idx;
-
-	if (opts == NULL || opt_name <= LS_INVALID_OPT || opt_name >= LS_OPT_SIZE)
-	{
-		return (-1);
-	}
-	opt_idx = (unsigned int)opt_name;
-	opts->mask |= (1 << opt_idx);
-	return (0);
-}
 
 /*
 ** Initialise le tableau de char d'opt passe en param.
@@ -53,8 +36,8 @@ static void			init_opt_tab(char *opt_tab)
 	opt_tab[LS_REV] = 'r';
 	opt_tab[LS_SIZESO] = 'S';
 	opt_tab[LS_TIMESO] = 't';
-	opt_tab[LS_CREASO] = 'U';
-	opt_tab[LS_ACCESO] = 'u';
+	opt_tab[LS_CREATI] = 'U';
+	opt_tab[LS_ACCETI] = 'u';
 }
 
 /*
@@ -101,7 +84,8 @@ int					init_opts(int argc, char **argv, t_opts *opts, char *fail)
 				*fail = argv[idx][arg_idx];
 				return (-1);
 			}
-			set_opt(opts, cur_opt_name);
+			set_opt_val(opts, cur_opt_name, 1);
+			apply_rules_for_opt(opts, cur_opt_name);
 			++arg_idx;
 		}
 		++idx;
@@ -119,4 +103,21 @@ int					get_opt(t_opts *opts, t_opt_name opt_name)
 	}
 	opt_idx = (unsigned int)opt_name;
 	return ((opts->mask >> opt_idx) & 1);
+}
+
+int					set_opt_val(t_opts *opts, t_opt_name opt_name, int new_val)
+{
+	unsigned int	opt_idx;
+
+	if ((new_val != 0 && new_val != 1) || opts == NULL
+			|| opt_name <= LS_INVALID_OPT || opt_name >= LS_OPT_SIZE)
+	{
+		return (-1);
+	}
+	opt_idx = (unsigned int)opt_name;
+	if (new_val == 0)
+		opts->mask &= ~(1 << opt_idx);
+	else
+		opts->mask |= (1 << opt_idx);
+	return (0);
 }

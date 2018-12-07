@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/07 11:40:18 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/07 13:38:53 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef enum	e_opt_name
 typedef struct	s_opts
 {
 	int		mask;
+	int		(*cmp_fun)(t_file *file1, t_file *file2);
 }				t_opts;
 
 /*

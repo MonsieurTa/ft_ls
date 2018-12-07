@@ -24,8 +24,8 @@ int main(int argc, char **argv)
 	printf("r = %d\n", get_opt(&lol, LS_REV));
 	printf("S = %d\n", get_opt(&lol, LS_SIZESO));
 	printf("t = %d\n", get_opt(&lol, LS_TIMESO));
-	printf("U = %d\n", get_opt(&lol, LS_CREASO));
-	printf("u = %d\n", get_opt(&lol, LS_ACCESO));
+	printf("U = %d\n", get_opt(&lol, LS_CREATI));
+	printf("u = %d\n", get_opt(&lol, LS_ACCETI));
 
 	return (0);
 }

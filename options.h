@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/06 14:45:46 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/07 08:34:36 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef enum	e_opt_name
 	LS_REV,
 	LS_SIZESO,
 	LS_TIMESO,
-	LS_CREASO,
-	LS_ACCESO,
+	LS_CREATI,
+	LS_ACCETI,
 	LS_OPT_SIZE
 }				t_opt_name;
 
@@ -59,5 +59,11 @@ int				init_opts(int argc, char **argv, t_opts *opts, char *fail);
 ** l'est pas et -1 si opt_name ou opts est invalide.
 */
 int				get_opt(t_opts *opts, t_opt_name opt_name);
+
+/*
+** Set l'option opt_name a new_val, retourne 0 si tout est ok et -1 si une
+** erreur est survenue (parametres invalides etc, new_val doit valoir 0 ou 1).
+*/
+int				set_opt_val(t_opts *opts, t_opt_name opt_name, int new_val);
 
 #endif

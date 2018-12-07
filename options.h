@@ -6,13 +6,16 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/07 08:34:36 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/07 11:40:18 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OPTIONS_H
 # define OPTIONS_H
 
+/*
+** Enum representant la liste des options possibles.
+*/
 typedef enum	e_opt_name
 {
 	LS_INVALID_OPT = -1,

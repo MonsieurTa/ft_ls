@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 06:53:21 by wta               #+#    #+#             */
-/*   Updated: 2018/12/08 08:05:35 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/08 09:55:22 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,17 @@ char	*get_new_path(char *path, char *name)
 			return (ft_strjoinpath(path, name));
 	}
 	return (NULL);
+}
+
+int			lst_size(t_lst_ls *lst)
+{
+	int	size;
+
+	size = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		size++;
+	}
+	return (size);
 }

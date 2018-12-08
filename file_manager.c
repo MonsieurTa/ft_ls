@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:48:29 by wta               #+#    #+#             */
-/*   Updated: 2018/12/08 09:30:08 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/08 09:52:48 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_lst_ls	*link_file(char *path)
 	pdir = NULL;
 /*
 ** TODO : Generer un message d'erreur depuis errno
- */
+*/
 	if ((pdir = opendir(path)) == NULL)
 		return (NULL);
 	file = NULL;

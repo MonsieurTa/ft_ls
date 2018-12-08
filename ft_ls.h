@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/08 07:54:13 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/08 09:59:12 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,31 @@ t_lst_ls	*lst_newnode(t_file *file);
 */
 t_lst_ls	*link_file(char *path);
 
+/*
+** Cree un pointeur sur structure t_file contenant toutes les informations
+** du fichier/dossier.
+ */
 t_file		*ls_newfile(DIR *pdir, char *path);
 
+/*
+** Genere le chemin d'un fichier/dossier.
+ */
 char	*get_new_path(char *path, char *name);
+
 /*
 ** t_lst_ls	*ls_mergesort(t_lst_ls *lst, int len)
 ** Trie une liste chainee.
 */
-
 t_lst_ls	*lst_mergesort(t_lst_ls *lst, int len);
 
+/*
+** Fonction de recursivite pour l'option -R
+ */
 void	ls_rec(char *path);
+
+/*
+** OUTIL DE TEST : Affiche le strict minimum des noms des t_file
+ */
 void	print_files(t_lst_ls *lst);
 
 #endif

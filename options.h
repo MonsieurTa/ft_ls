@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/07 13:38:53 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/08 09:04:57 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef enum	e_opt_name
 	LS_NOGRP,
 	LS_SLASHD,
 	LS_REC,
-	LS_REV,
+	LS_REVSO,
 	LS_SIZESO,
 	LS_TIMESO,
 	LS_CREATI,
@@ -42,6 +42,7 @@ typedef enum	e_opt_name
 
 /*
 ** Structure representant la liste des options du programme.
+** Le pointeur cmp_fun vaut NULL si aucun tri ne doit etre effectue.
 */
 typedef struct	s_opts
 {

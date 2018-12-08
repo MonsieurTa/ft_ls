@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:04:09 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/07 08:38:19 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/08 08:28:54 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void			init_opt_tab(char *opt_tab)
 	opt_tab[LS_NOGRP] = 'o';
 	opt_tab[LS_SLASHD] = 'p';
 	opt_tab[LS_REC] = 'R';
-	opt_tab[LS_REV] = 'r';
+	opt_tab[LS_REVSO] = 'r';
 	opt_tab[LS_SIZESO] = 'S';
 	opt_tab[LS_TIMESO] = 't';
 	opt_tab[LS_CREATI] = 'U';

@@ -6,12 +6,14 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/07 11:40:18 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/08 09:32:12 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OPTIONS_H
 # define OPTIONS_H
+
+# include "ft_ls.h"
 
 /*
 ** Enum representant la liste des options possibles.
@@ -32,7 +34,7 @@ typedef enum	e_opt_name
 	LS_NOGRP,
 	LS_SLASHD,
 	LS_REC,
-	LS_REV,
+	LS_REVSO,
 	LS_SIZESO,
 	LS_TIMESO,
 	LS_CREATI,
@@ -42,10 +44,12 @@ typedef enum	e_opt_name
 
 /*
 ** Structure representant la liste des options du programme.
+** Le pointeur cmp_fun vaut NULL si aucun tri ne doit etre effectue.
 */
 typedef struct	s_opts
 {
 	int		mask;
+	int		(*cmp_fun)(t_file *file1, t_file *file2);
 }				t_opts;
 
 /*

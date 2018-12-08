@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/08 10:04:29 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/08 13:58:29 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,10 @@
 
 # include "libft/includes/ft_printf.h"
 # include "libft/includes/libft.h"
-# include <sys/types.h>
-# include <sys/stat.h>
 # include <errno.h>
 # include <string.h>
-# include <dirent.h>
-
-typedef	struct dirent	t_dirent;
-typedef struct stat		t_stat;
-
-/*
-** t_file est la structure contenant toutes les informations relatives a un
-** fichier.
-*/
-typedef struct	s_file
-{
-	t_dirent	*pdent;
-	t_stat		stat;
-	char		*path;
-	int			time;
-}				t_file;
+# include "options.h"
+# include "file.h"
 
 /*
 ** t_lst_ls est la structure de la liste chainee contenant le pointeur sur le
@@ -83,7 +67,7 @@ t_lst_ls	*link_file(char *path);
 ** Cree un pointeur sur structure t_file contenant toutes les informations
 ** du fichier/dossier.
  */
-t_file		*ls_newfile(DIR *pdir, char *path);
+t_file		*lst_newfile(DIR *pdir, char *path);
 
 /*
 ** Genere le chemin d'un fichier/dossier.
@@ -99,11 +83,11 @@ t_lst_ls	*lst_mergesort(t_lst_ls *lst, int len);
 /*
 ** Fonction de recursivite pour l'option -R
  */
-void	ls_rec(char *path);
+void	ls_rec(char *path, t_opts *opts);
 
 /*
 ** OUTIL DE TEST : Affiche le strict minimum des noms des t_file
  */
-void	print_files(t_lst_ls *lst);
+void	print_files(t_lst_ls *lst, t_opts *opts);
 
 #endif

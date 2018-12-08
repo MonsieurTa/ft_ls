@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:12:47 by wta               #+#    #+#             */
-/*   Updated: 2018/12/08 09:55:26 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/08 11:44:29 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_lst_ls	*lst_newnode(t_file *file)
 	return (node);
 }
 
-t_file		*is_symlink(t_file *file)
+t_file		*is_symlink(t_file *file, char *path)
 {
 	if (file->pdent->d_type == DT_LNK)
 	{
@@ -55,7 +55,7 @@ t_file		*lst_newfile(DIR *pdir, char *path)
 			if ((file->pdent = ft_memalloc(tmp->d_reclen)) != NULL)
 			{
 				ft_memcpy(file->pdent, tmp, tmp->d_reclen);
-				if ((file = is_symlink(file)) != NULL)
+				if ((file = is_symlink(file, path)) != NULL)
 					return (file);
 			}
 			free(file->pdent);

@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:12:47 by wta               #+#    #+#             */
-/*   Updated: 2018/12/08 07:54:18 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/08 09:29:44 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,25 @@ t_lst_ls	*lst_newnode(t_file *file)
 	return (node);
 }
 
+t_file		*is_symlink(t_file *file)
+{
+	if (file->pdent->d_type == DT_LNK)
+	{
+		if ((lstat(path, &(file->stat)) == 0))
+			if ((file->path = get_new_path(path, file->pdent->d_name))
+					!= NULL)
+				return (file);
+	}
+	else
+	{
+		if ((stat(path, &(file->stat)) == 0))
+			if ((file->path = get_new_path(path, file->pdent->d_name))
+					!= NULL)
+				return (file);
+	}
+	return (NULL);
+}
+
 t_file		*ls_newfile(DIR *pdir, char *path)
 {
 	t_dirent	*tmp;
@@ -36,10 +55,8 @@ t_file		*ls_newfile(DIR *pdir, char *path)
 			if ((file->pdent = ft_memalloc(tmp->d_reclen)) != NULL)
 			{
 				ft_memcpy(file->pdent, tmp, tmp->d_reclen);
-				if ((stat(path, &(file->stat)) == 0))
-					if ((file->path = get_new_path(path, file->pdent->d_name))
-							!= NULL)
-						return (file);
+				if ((file = is_symlink(file)) != NULL)
+					return (file);
 			}
 			free(file->pdent);
 		}

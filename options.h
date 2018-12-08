@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/08 09:32:12 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/08 11:57:33 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef enum	e_opt_name
 	LS_INVALID_OPT = -1,
 	LS_EXTATT = 0,
 	LS_ALL,
+	LS_STCHTI,
 	LS_DIRASF,
 	LS_ACL,
 	LS_NOSORT,

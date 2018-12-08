@@ -10,6 +10,7 @@ int main(int argc, char **argv)
 	printf("res = %d, fail = \'%c\'\n", res, err);
 	printf("@ = %d\n", get_opt(&lol, LS_EXTATT));
 	printf("a = %d\n", get_opt(&lol, LS_ALL));
+	printf("c = %d\n", get_opt(&lol, LS_STCHTI));
 	printf("d = %d\n", get_opt(&lol, LS_DIRASF));
 	printf("e = %d\n", get_opt(&lol, LS_ACL));
 	printf("f = %d\n", get_opt(&lol, LS_NOSORT));
@@ -21,7 +22,7 @@ int main(int argc, char **argv)
 	printf("o = %d\n", get_opt(&lol, LS_NOGRP));
 	printf("p = %d\n", get_opt(&lol, LS_SLASHD));
 	printf("R = %d\n", get_opt(&lol, LS_REC));
-	printf("r = %d\n", get_opt(&lol, LS_REV));
+	printf("r = %d\n", get_opt(&lol, LS_REVSO));
 	printf("S = %d\n", get_opt(&lol, LS_SIZESO));
 	printf("t = %d\n", get_opt(&lol, LS_TIMESO));
 	printf("U = %d\n", get_opt(&lol, LS_CREATI));

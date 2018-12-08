@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/06 18:03:52 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/08 07:24:35 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,9 @@ void	ls_rec(t_ls *parent, char *currpath)
 
 int	main(int ac, char **av)
 {
-	t_dirent	*pdent;
-	t_lst_ls	*lst;
-	t_file		*file;
-	DIR			*pdir;
-	char		*path;
-
 	if (ac != 2)
 		return (0);
-	pdent = NULL;
-	pdir = NULL;
-	path = NULL;
-	lst = NULL;
-	if ((pdir = opendir(av[1])) == NULL)
-		return (0);
-	while ((file = ls_newfile(pdir, av[1])) != NULL)
-		lst_append(&lst, lst_newnode(file));
-	closedir(pdir);
-	lst_rm(lst);
+	ls_rec(av[1]);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:12:47 by wta               #+#    #+#             */
-/*   Updated: 2018/12/06 17:43:36 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/08 07:54:18 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@ t_file		*ls_newfile(DIR *pdir, char *path)
 			{
 				ft_memcpy(file->pdent, tmp, tmp->d_reclen);
 				if ((stat(path, &(file->stat)) == 0))
-				{
-					file->path = path;
-					return (file);
-				}
+					if ((file->path = get_new_path(path, file->pdent->d_name))
+							!= NULL)
+						return (file);
 			}
 			free(file->pdent);
 		}
@@ -81,6 +80,7 @@ void		lst_rm(t_lst_ls *lst)
 			tmp = lst;
 			lst = lst->next;
 			free(tmp->file->pdent);
+			free(tmp->file->path);
 			free(tmp->file);
 			free(tmp);
 		}

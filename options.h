@@ -6,12 +6,14 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/08 09:04:57 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/08 09:32:12 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OPTIONS_H
 # define OPTIONS_H
+
+# include "ft_ls.h"
 
 /*
 ** Enum representant la liste des options possibles.

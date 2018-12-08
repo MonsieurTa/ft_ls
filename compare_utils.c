@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:11:41 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/08 09:03:53 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/08 09:24:46 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "ft_ls.h"
 #include "compare_utils.h"
 
-int		(*g_init_cmp_fun(t_opts *opts))(t_file *file1, t_file *file2)
+int		(*g_get_cmp_fun(t_opts *opts))(t_file *file1, t_file *file2)
 {
 	if (get_opt(opts, LS_NOSORT) == 1)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 11:36:26 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/08 09:04:00 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/08 09:24:57 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 ** Fonction prefixee par g_ car la norminette est bugee et croit que c'est
 ** une variable.
 */
-int		(*g_init_cmp_fun(t_opts *opts))(t_file *file1, t_file *file2);
+int		(*g_get_cmp_fun(t_opts *opts))(t_file *file1, t_file *file2);
 
 /*
 ** Fonction de comparaison de deux fichiers par taille inverse, retourne un

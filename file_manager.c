@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:48:29 by wta               #+#    #+#             */
-/*   Updated: 2018/12/08 15:16:17 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/09 07:11:16 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ void	ls_rec(char *path, t_opts *opts)
  */
 	lst = lst_mergesort(lst, lst_size(lst));
 	h_lst = lst;
+	if (ft_strcmp(path, ".") != 0)
+		ft_printf("\n%s:\n", lst->file->path);
+	lst = skip_hidden(lst);
 	print_files(lst, opts);
 	while ((lst = find_dir(lst)) != NULL)
 	{

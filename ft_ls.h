@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/08 13:58:29 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/09 03:40:43 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,14 @@ typedef struct	s_lst_ls
 	struct s_lst_ls	*next;
 	t_file			*file;
 }				t_lst_ls;
+
+typedef struct	s_fmt
+{
+	int	len_lst;
+	int	min_w;
+	int	max_col;
+	int	max_row;
+}				t_fmt;
 
 /*
 ** lst_append(t_lst_ls *lst, t_lst_ls *node)
@@ -72,7 +80,7 @@ t_file		*lst_newfile(DIR *pdir, char *path);
 /*
 ** Genere le chemin d'un fichier/dossier.
  */
-char	*get_new_path(char *path, char *name);
+char		*get_new_path(char *path, char *name);
 
 /*
 ** t_lst_ls	*ls_mergesort(t_lst_ls *lst, int len)
@@ -83,11 +91,12 @@ t_lst_ls	*lst_mergesort(t_lst_ls *lst, int len);
 /*
 ** Fonction de recursivite pour l'option -R
  */
-void	ls_rec(char *path, t_opts *opts);
+void		ls_rec(char *path, t_opts *opts);
 
 /*
 ** OUTIL DE TEST : Affiche le strict minimum des noms des t_file
  */
-void	print_files(t_lst_ls *lst, t_opts *opts);
+t_lst_ls	*skip_hidden(t_lst_ls *lst);
+void		print_files(t_lst_ls *lst, t_opts *opts);
 
 #endif

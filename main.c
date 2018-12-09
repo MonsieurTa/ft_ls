@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/08 13:45:57 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/09 05:55:42 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 int	main(int ac, char **av)
 {
 	t_opts	opts;
+	char	c;
 
 
+	if ((init_opts(ac, av, &opts, &c)) == -1)
+		return (0);
 	opts.ws = get_winsize();
-	ft_printf("rows=%d cols=%d\n", opts.ws.ws_row, opts.ws.ws_col);
 	if (ac != 2)
 		return (0);
 	ls_rec(av[1], &opts);

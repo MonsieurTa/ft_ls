@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 06:53:21 by wta               #+#    #+#             */
-/*   Updated: 2018/12/08 09:55:22 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/09 06:52:35 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,11 @@ char	*get_new_path(char *path, char *name)
 {
 	if (path != NULL && name != NULL)
 	{
+		if (ft_strcmp(name, ".") == 0)
+			return (ft_strdup(path));
 		if (is_slash_ended(path) == 1)
 			return (ft_strjoin(path, name));
-		else
-			return (ft_strjoinpath(path, name));
+		return (ft_strjoinpath(path, name));
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:12:47 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 08:28:35 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/10 14:05:55 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,16 @@ t_file		*lst_newfile(DIR *pdir, char *path)
 	file = NULL;
 	if ((file = ft_memalloc(sizeof(t_file))) != NULL)
 	{
-		if ((tmp = readdir(pdir)) != NULL)
+		if ((tmp = readdir(pdir)) == NULL)
+			return (NULL);
+	}
+	else
+		while ((tmp = readdir(pdir)) != NULL)
+			if (is_curr_or_parent(tmp) == 0 && *tmp->d_name != '.')
+				break ;
+	if (tmp != NULL && (file = ft_memalloc(sizeof(t_file))) != NULL)
+	{
+		if ((file->pdent = ft_memalloc(tmp->d_reclen)) != NULL)
 		{
 			if ((file->pdent = ft_memalloc(tmp->d_reclen)) != NULL)
 			{

@@ -6,18 +6,20 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:51:37 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 10:10:51 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/10 15:30:36 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "options.h"
 #include "print.h"
+#include "set_field.h"
 
 void	ls_rec(char *path, char *currdir, t_opts *opts)
 {
 	t_lst_ls	*h_lst;
 	t_lst_ls	*lst;
+	char		*field;
 
 	if ((lst = link_file(path, opts)) == NULL)
 		return ;

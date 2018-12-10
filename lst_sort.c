@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:13:16 by wta               #+#    #+#             */
-/*   Updated: 2018/12/08 08:46:46 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/10 08:33:14 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,17 @@ static t_lst_ls	*lst_pop_append(t_lst_ls **lst, t_lst_ls *side)
 	return (side);
 }
 
-static t_lst_ls	*lst_merge(t_lst_ls	*left, t_lst_ls *right)
+static t_lst_ls	*lst_merge(t_lst_ls *left, t_lst_ls *right,
+		int (*cmp_fun)(t_file *file1, t_file *file2))
 {
 	t_lst_ls	*res;
 	t_lst_ls	*tmp;
-	char		*s1;
-	char		*s2;
 
 	res = NULL;
 	tmp = NULL;
 	while (left && right)
 	{
-		s1 = left->file->pdent->d_name;
-		s2 = right->file->pdent->d_name;
-		if (ft_strcmp(s1, s2) <= 0)
+		if (cmp_fun(left->file, right->file) <= 0)
 			left = lst_pop_append(&res, left);
 		else
 			right = lst_pop_append(&res, right);
@@ -47,7 +44,8 @@ static t_lst_ls	*lst_merge(t_lst_ls	*left, t_lst_ls *right)
 	return (res);
 }
 
-t_lst_ls		*lst_mergesort(t_lst_ls *lst, int len)
+t_lst_ls		*lst_mergesort(t_lst_ls *lst, int len,
+		int (*cmp_fun)(t_file *file1, t_file *file2))
 {
 	t_lst_ls	*left;
 	t_lst_ls	*right;
@@ -69,7 +67,7 @@ t_lst_ls		*lst_mergesort(t_lst_ls *lst, int len)
 		lst = tmp;
 		index++;
 	}
-	left = lst_mergesort(left, lst_size(left));
-	right = lst_mergesort(right, lst_size(right));
-	return (lst_merge(left, right));
+	left = lst_mergesort(left, lst_size(left), cmp_fun);
+	right = lst_mergesort(right, lst_size(right), cmp_fun);
+	return (lst_merge(left, right, cmp_fun));
 }

@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:12:47 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 05:50:30 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/10 08:28:35 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ t_file		*lst_newfile(DIR *pdir, char *path)
 			if ((file->pdent = ft_memalloc(tmp->d_reclen)) != NULL)
 			{
 				ft_memcpy(file->pdent, tmp, tmp->d_reclen);
-				if ((file = is_symlink(file, path)) != NULL)
-					return (file);
+				if ((file->path = get_new_path(path, file->pdent->d_name))
+						!= NULL && (file = is_symlink(file)) != NULL)
+						return (file);
+				free(file->path);
 			}
 			free(file->pdent);
 		}

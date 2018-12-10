@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 07:58:01 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/10 09:20:59 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ t_lst_ls		*lst_newnode(t_file *file);
 ** Cree une liste chainee qui lie tous les fichier d'un dossier depuis son
 ** chemin
 */
-t_lst_ls		*link_file(char *path);
+t_lst_ls		*link_file(char *path, t_opts *opts);
 
 /*
 ** Cree un pointeur sur structure t_file contenant toutes les informations
 ** du fichier/dossier.
 */
-t_file			*lst_newfile(DIR *pdir, char *path);
+t_file			*lst_newfile(DIR *pdir, char *path, t_opts *opts);
 
 /*
 ** Genere le chemin d'un fichier/dossier.

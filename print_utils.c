@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:52:59 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 06:19:53 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/10 09:32:22 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,6 @@ int			ft_ceil(float x)
 	return (ix + 1);
 }
 
-t_lst_ls	*skip_hidden(t_lst_ls *lst)
-{
-	if (lst)
-		while (lst && *lst->file->pdent->d_name == '.')
-			lst = lst->next;
-	return (lst);
-}
-
 void		get_fmt(t_fmt *fmt, t_lst_ls *lst, t_opts *opts)
 {
 	fmt->len_lst = 0;
@@ -61,4 +53,14 @@ void		get_fmt(t_fmt *fmt, t_lst_ls *lst, t_opts *opts)
 	fmt->max_col = opts->ws.ws_col / fmt->min_w;
 	fmt->max_row = ft_ceil((float)fmt->len_lst / (float)fmt->max_col);
 	fmt->max_col = ft_ceil((float)fmt->len_lst / (float)fmt->max_row);
+}
+
+int			is_hidden(t_file *file)
+{
+	if (file)
+	{
+		if (*file->pdent->d_name == '.')
+			return (1);
+	}
+	return (0);
 }

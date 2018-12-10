@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:04:09 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/08 08:28:54 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/08 11:58:01 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void			init_opt_tab(char *opt_tab)
 {
 	opt_tab[LS_EXTATT] = '@';
 	opt_tab[LS_ALL] = 'a';
+	opt_tab[LS_STCHTI] = 'c';
 	opt_tab[LS_DIRASF] = 'd';
 	opt_tab[LS_ACL] = 'e';
 	opt_tab[LS_NOSORT] = 'f';

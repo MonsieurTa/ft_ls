@@ -11,6 +11,8 @@ int main(int argc, char **argv)
 
 	if (lol.cmp_fun == cmp_file_size_rev)
 		printf("size_rev\n");
+	else if (lol.cmp_fun == cmp_file_stch_rev)
+		printf("stch_rev\n");
 	else if (lol.cmp_fun == cmp_file_crea_rev)
 		printf("crea_rev\n");
 	else if (lol.cmp_fun == cmp_file_acce_rev)
@@ -21,6 +23,8 @@ int main(int argc, char **argv)
 		printf("lexical_rev\n");
 	else if (lol.cmp_fun == cmp_file_size)
 		printf("size\n");
+	else if (lol.cmp_fun == cmp_file_stch)
+		printf("stch\n");
 	else if (lol.cmp_fun == cmp_file_crea)
 		printf("crea\n");
 	else if (lol.cmp_fun == cmp_file_acce)
@@ -29,8 +33,10 @@ int main(int argc, char **argv)
 		printf("time\n");
 	else if (lol.cmp_fun == cmp_file_lexical)
 		printf("lexical\n");
-	else
+	else if (lol.cmp_fun == NULL)
 		printf("NULL\n");
+	else
+		printf("error\n");
 
 	return (0);
 }

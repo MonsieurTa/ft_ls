@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 11:36:26 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/08 09:24:57 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/08 13:40:53 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ int		(*g_get_cmp_fun(t_opts *opts))(t_file *file1, t_file *file2);
 ** nombre < 0 si file1 < file2, = 0 si file1 = file2, > 0 si file1 > file2.
 */
 int		cmp_file_size_rev(t_file *file1, t_file *file2);
+
+/*
+** Fonction de comparaison de deux fichiers par
+** date de stat change inverse, retourne un
+** nombre < 0 si file1 < file2, = 0 si file1 = file2, > 0 si file1 > file2.
+*/
+int		cmp_file_stch_rev(t_file *file1, t_file *file2);
 
 /*
 ** Fonction de comparaison de deux fichiers par date de crea inverse, retourne
@@ -62,6 +69,12 @@ int		cmp_file_lexical_rev(t_file *file1, t_file *file2);
 int		cmp_file_size(t_file *file1, t_file *file2);
 
 /*
+** Fonction de comparaison de deux fichiers par date de stat change, retourne
+** un nombre < 0 si file1 < file2, = 0 si file1 = file2, > 0 si file1 > file2.
+*/
+int		cmp_file_stch(t_file *file1, t_file *file2);
+
+/*
 ** Fonction de comparaison de deux fichiers par date de crea, retourne un
 ** nombre < 0 si file1 < file2, = 0 si file1 = file2, > 0 si file1 > file2.
 */
@@ -84,5 +97,10 @@ int		cmp_file_time(t_file *file1, t_file *file2);
 ** nombre < 0 si file1 < file2, = 0 si file1 = file2, > 0 si file1 > file2.
 */
 int		cmp_file_lexical(t_file *file1, t_file *file2);
+
+/*
+** Retourne 0 si time1 = time2, < 0 si time1 < time2, > 0 si time1 > time2.
+*/
+int		compare_timespec(struct timespec *time1, struct timespec *time2);
 
 #endif

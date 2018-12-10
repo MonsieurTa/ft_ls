@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 10:09:22 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/10 10:48:01 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 		return (0);
 	opts.cmp_fun = g_get_cmp_fun(&opts);
 	opts.ws = get_winsize();
-	opts.tab_w = 1;
+	opts.tab_w = get_tab_w(&opts);
 	if (ac - nb_opts != 2)
 		return (0);
 	ls_rec(av[nb_opts + 1], av[nb_opts + 1], &opts);

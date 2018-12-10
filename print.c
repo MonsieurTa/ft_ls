@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 11:09:53 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 10:36:34 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/10 10:45:13 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,5 @@ void		print_files(t_lst_ls *lst, t_opts *opts)
 	t_fmt	fmt;
 
 	get_fmt(&fmt, lst, opts);
-	print_by_col(lst, fmt);
+	print_by_col(lst, fmt, opts);
 }

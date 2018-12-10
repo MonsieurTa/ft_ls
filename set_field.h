@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 09:17:47 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/10 12:02:43 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/10 14:47:27 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ int		set_field_name(t_opts *opts, t_file *file, char **field);
 ** caracteres de field, set field a NULL en cas d'erreur.
 */
 int		set_field_size(t_opts *opts, t_file *file, char **field);
+
+int		set_field_rights(t_opts *opts, t_file *file, char **field);
 
 #endif

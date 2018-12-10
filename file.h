@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 13:55:13 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 08:28:53 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/10 09:09:05 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ typedef struct	s_file
 }				t_file;
 
 t_file		*is_symlink(t_file *file);
+int			is_curr_or_parent(t_dirent *pdent);
 
 #endif

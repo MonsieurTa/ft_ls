@@ -6,28 +6,25 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:48:29 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 08:29:30 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/10 09:20:33 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "options.h"
 
-t_lst_ls	*link_file(char *path)
+t_lst_ls	*link_file(char *path, t_opts *opts)
 {
 	t_lst_ls	*lst;
 	t_file		*file;
 	DIR			*pdir;
 
 	pdir = NULL;
-/*
-** TODO : Generer un message d'erreur depuis errno
-*/
 	if ((pdir = opendir(path)) == NULL)
 		return (NULL);
 	file = NULL;
 	lst = NULL;
-	while ((file = lst_newfile(pdir, path)) != NULL)
+	while ((file = lst_newfile(pdir, path, opts)) != NULL)
 		lst_append(&lst, lst_newnode(file));
 	closedir(pdir);
 	return (lst);

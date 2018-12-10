@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   options_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 10:48:01 by wta              ###   ########.fr       */
+/*   Created: 2018/12/10 10:41:07 by wta               #+#    #+#             */
+/*   Updated: 2018/12/10 10:48:19 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
 #include "options.h"
-#include "compare_utils.h"
 
-int	main(int ac, char **av)
+int	get_tab_w(t_opts *opt)
 {
-	t_opts	opts;
-	char	c;
-	int		nb_opts;
-
-	if ((nb_opts = init_opts(ac - 1, av + 1, &opts, &c)) == -1)
-		return (0);
-	opts.cmp_fun = g_get_cmp_fun(&opts);
-	opts.ws = get_winsize();
-	opts.tab_w = get_tab_w(&opts);
-	if (ac - nb_opts != 2)
-		return (0);
-	ls_rec(av[nb_opts + 1], av[nb_opts + 1], &opts);
-	return (0);
+	if (get_opt(opt, LS_COLOR) == 1)
+		return (1);
+	return (8);
 }

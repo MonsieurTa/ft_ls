@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:13:16 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 08:33:14 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/10 09:49:27 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_lst_ls	*lst_merge(t_lst_ls *left, t_lst_ls *right,
 	tmp = NULL;
 	while (left && right)
 	{
-		if (cmp_fun(left->file, right->file) <= 0)
+		if (cmp_fun(left->file, right->file) >= 0)
 			left = lst_pop_append(&res, left);
 		else
 			right = lst_pop_append(&res, right);

@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 09:05:00 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/10 09:17:36 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/10 15:00:54 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		set_field_name(t_opts *opts, t_file *file, char **field)
 			*field = NULL;
 		return (0);
 	}
-	if (get_opt(opts, LS_SLASHD) == 1 && file->pdent->d_type == DT_DIR)
+	if (get_opt(opts, LS_SLASHD) == 1 && S_ISDIR(file->stat.st_mode))
 	{
 		*field = ft_strjoin(file->pdent->d_name, "/");
 		return (ft_strlen(file->pdent->d_name) + 1);

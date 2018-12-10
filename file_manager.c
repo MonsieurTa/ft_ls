@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:48:29 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 06:01:48 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/10 08:29:30 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,17 @@ t_lst_ls	*find_dir(t_lst_ls *lst)
 	return (lst);
 }
 
-t_file		*is_symlink(t_file *file, char *path)
+t_file		*is_symlink(t_file *file)
 {
 	if (file->pdent->d_type == DT_LNK)
 	{
-		if ((lstat(path, &(file->stat)) == 0))
-			if ((file->path = get_new_path(path, file->pdent->d_name))
-					!= NULL)
-				return (file);
+		if ((lstat(file->path, &(file->stat)) == 0))
+			return (file);
 	}
 	else
 	{
-		if ((stat(path, &(file->stat)) == 0))
-			if ((file->path = get_new_path(path, file->pdent->d_name))
-					!= NULL)
-				return (file);
+		if ((stat(file->path, &(file->stat)) == 0))
+			return (file);
 	}
 	return (NULL);
 }

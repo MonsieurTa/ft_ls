@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 06:20:33 by wta              ###   ########.fr       */
+/*   Created: 2018/12/10 05:57:10 by wta               #+#    #+#             */
+/*   Updated: 2018/12/10 06:22:24 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-#include "options.h"
+#ifndef PRINT_H
+# define PRINT_H
 
-int	main(int ac, char **av)
-{
-	t_opts	opts;
-	char	c;
+# include "options.h"
+# include "ft_ls.h"
 
+void		get_fmt(t_fmt *fmt, t_lst_ls *lst, t_opts *opts);
 
-	if ((init_opts(ac, av, &opts, &c)) == -1)
-		return (0);
-	opts.ws = get_winsize();
-	if (ac != 2)
-		return (0);
-	ls_rec(av[1], av[1], &opts);
-	return (0);
-}
+#endif

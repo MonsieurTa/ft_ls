@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:48:29 by wta               #+#    #+#             */
-/*   Updated: 2018/12/09 07:11:16 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/10 06:01:48 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,21 @@ t_lst_ls	*find_dir(t_lst_ls *lst)
 	return (lst);
 }
 
-void	ls_rec(char *path, t_opts *opts)
+t_file		*is_symlink(t_file *file, char *path)
 {
-	t_lst_ls	*h_lst;
-	t_lst_ls	*lst;
-
-	if ((lst = link_file(path)) == NULL)
-		return ;
-/*
-** TODO : Afficher les fichiers et/ou dossier selon les options demandees
- */
-	lst = lst_mergesort(lst, lst_size(lst));
-	h_lst = lst;
-	if (ft_strcmp(path, ".") != 0)
-		ft_printf("\n%s:\n", lst->file->path);
-	lst = skip_hidden(lst);
-	print_files(lst, opts);
-	while ((lst = find_dir(lst)) != NULL)
+	if (file->pdent->d_type == DT_LNK)
 	{
-		ls_rec(lst->file->path, opts);
-		lst = lst->next;
+		if ((lstat(path, &(file->stat)) == 0))
+			if ((file->path = get_new_path(path, file->pdent->d_name))
+					!= NULL)
+				return (file);
 	}
-	lst_rm(h_lst);
+	else
+	{
+		if ((stat(path, &(file->stat)) == 0))
+			if ((file->path = get_new_path(path, file->pdent->d_name))
+					!= NULL)
+				return (file);
+	}
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/08 13:56:53 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/10 05:40:18 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,8 @@ int				get_opt(t_opts *opts, t_opt_name opt_name);
 */
 int				set_opt_val(t_opts *opts, t_opt_name opt_name, int new_val);
 
+/*
+** Recupere les informations sur la largeur/hauteur du terminal.
+*/ 
 t_ws			get_winsize(void);
 #endif

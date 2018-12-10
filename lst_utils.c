@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:12:47 by wta               #+#    #+#             */
-/*   Updated: 2018/12/08 11:44:29 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/10 05:50:30 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,6 @@ t_lst_ls	*lst_newnode(t_file *file)
 	node->file = file;
 	node->next = NULL;
 	return (node);
-}
-
-t_file		*is_symlink(t_file *file, char *path)
-{
-	if (file->pdent->d_type == DT_LNK)
-	{
-		if ((lstat(path, &(file->stat)) == 0))
-			if ((file->path = get_new_path(path, file->pdent->d_name))
-					!= NULL)
-				return (file);
-	}
-	else
-	{
-		if ((stat(path, &(file->stat)) == 0))
-			if ((file->path = get_new_path(path, file->pdent->d_name))
-					!= NULL)
-				return (file);
-	}
-	return (NULL);
 }
 
 t_file		*lst_newfile(DIR *pdir, char *path)
@@ -102,4 +83,17 @@ void		lst_rm(t_lst_ls *lst)
 			free(tmp);
 		}
 	}
+}
+
+int				lst_size(t_lst_ls *lst)
+{
+	int	size;
+
+	size = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		size++;
+	}
+	return (size);
 }

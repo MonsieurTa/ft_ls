@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 06:53:21 by wta               #+#    #+#             */
-/*   Updated: 2018/12/08 09:55:22 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/10 05:50:41 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int		is_slash_ended(char *path)
 	return (path[index] == '/');
 }
 
-static char	*ft_strjoinpath(char const *s1, char const *s2)
+static char		*ft_strjoinpath(char const *s1, char const *s2)
 {
 	char	*new;
 	int		index;
@@ -46,27 +46,15 @@ static char	*ft_strjoinpath(char const *s1, char const *s2)
 	return (NULL);
 }
 
-char	*get_new_path(char *path, char *name)
+char			*get_new_path(char *path, char *name)
 {
 	if (path != NULL && name != NULL)
 	{
+		if (ft_strcmp(name, ".") == 0)
+			return (ft_strdup(path));
 		if (is_slash_ended(path) == 1)
 			return (ft_strjoin(path, name));
-		else
-			return (ft_strjoinpath(path, name));
+		return (ft_strjoinpath(path, name));
 	}
 	return (NULL);
-}
-
-int			lst_size(t_lst_ls *lst)
-{
-	int	size;
-
-	size = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		size++;
-	}
-	return (size);
 }

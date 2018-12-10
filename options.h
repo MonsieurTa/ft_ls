@@ -13,7 +13,10 @@
 #ifndef OPTIONS_H
 # define OPTIONS_H
 
-# include "ft_ls.h"
+# include <sys/ioctl.h>
+# include "file.h"
+
+typedef struct winsize t_ws;
 
 /*
 ** Enum representant la liste des options possibles.
@@ -50,6 +53,7 @@ typedef enum	e_opt_name
 typedef struct	s_opts
 {
 	int		mask;
+	t_ws	ws;
 	int		(*cmp_fun)(t_file *file1, t_file *file2);
 }				t_opts;
 
@@ -74,4 +78,8 @@ int				get_opt(t_opts *opts, t_opt_name opt_name);
 */
 int				set_opt_val(t_opts *opts, t_opt_name opt_name, int new_val);
 
+/*
+** Recupere les informations sur la largeur/hauteur du terminal.
+*/ 
+t_ws			get_winsize(void);
 #endif

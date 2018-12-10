@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   get_winsize.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 11:44:00 by fwerner           #+#    #+#             */
-/*   Updated: 2018/11/14 15:17:45 by fwerner          ###   ########.fr       */
+/*   Created: 2018/12/08 13:07:56 by wta               #+#    #+#             */
+/*   Updated: 2018/12/08 13:22:57 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strcmp(const char *s1, const char *s2)
+#include "options.h"
+#include <sys/ioctl.h>
+
+t_ws	get_winsize(void)
 {
-	while (*s1 == *s2 && *s1 != '\0' && *s2 != '\0')
-	{
-		++s1;
-		++s2;
-	}
-	return ((unsigned char)(*s1) - (unsigned char)(*s2));
+	t_ws	ws;
+	ioctl(0, TIOCGWINSZ, &ws);
+	return (ws);
 }

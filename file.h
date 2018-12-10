@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   file.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 06:20:33 by wta              ###   ########.fr       */
+/*   Created: 2018/12/08 13:55:13 by wta               #+#    #+#             */
+/*   Updated: 2018/12/10 06:01:34 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-#include "options.h"
+#ifndef FILE_H
+# define FILE_H
 
-int	main(int ac, char **av)
+# include <dirent.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+
+typedef	struct dirent	t_dirent;
+typedef struct stat		t_stat;
+
+/*
+** t_file est la structure contenant toutes les informations relatives a un
+** fichier.
+*/
+typedef struct	s_file
 {
-	t_opts	opts;
-	char	c;
+	t_dirent	*pdent;
+	t_stat		stat;
+	char		*path;
+	int			time;
+}				t_file;
 
+t_file		*is_symlink(t_file *file, char *path);
 
-	if ((init_opts(ac, av, &opts, &c)) == -1)
-		return (0);
-	opts.ws = get_winsize();
-	if (ac != 2)
-		return (0);
-	ls_rec(av[1], av[1], &opts);
-	return (0);
-}
+#endif

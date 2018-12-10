@@ -6,11 +6,12 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:48:29 by wta               #+#    #+#             */
-/*   Updated: 2018/12/08 09:52:48 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/10 06:01:48 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#include "options.h"
 
 t_lst_ls	*link_file(char *path)
 {
@@ -26,7 +27,7 @@ t_lst_ls	*link_file(char *path)
 		return (NULL);
 	file = NULL;
 	lst = NULL;
-	while ((file = ls_newfile(pdir, path)) != NULL)
+	while ((file = lst_newfile(pdir, path)) != NULL)
 		lst_append(&lst, lst_newnode(file));
 	closedir(pdir);
 	return (lst);
@@ -35,43 +36,27 @@ t_lst_ls	*link_file(char *path)
 t_lst_ls	*find_dir(t_lst_ls *lst)
 {
 	while (lst != NULL && (lst->file->pdent->d_type != DT_DIR
-		|| *lst->file->pdent->d_name == '.'
+		|| ft_strcmp(lst->file->pdent->d_name, ".") == 0
 		|| ft_strcmp(lst->file->pdent->d_name, "..") == 0))
 		lst = lst->next;
 	return (lst);
 }
 
-void	print_files(t_lst_ls *lst)
+t_file		*is_symlink(t_file *file, char *path)
 {
-	if (lst != NULL)
+	if (file->pdent->d_type == DT_LNK)
 	{
-		ft_printf("%s\n", lst->file->path);
-		while (lst)
-		{
-			ft_printf("%s\n", lst->file->pdent->d_name);
-			lst = lst->next;
-		}
-		ft_printf("\n");
+		if ((lstat(path, &(file->stat)) == 0))
+			if ((file->path = get_new_path(path, file->pdent->d_name))
+					!= NULL)
+				return (file);
 	}
-}
-
-void	ls_rec(char *path)
-{
-	t_lst_ls	*h_lst;
-	t_lst_ls	*lst;
-
-	if ((lst = link_file(path)) == NULL)
-		return ;
-/*
-** TODO : Afficher les fichiers et/ou dossier selon les options demandees
- */
-	lst = lst_mergesort(lst, lst_size(lst));
-	h_lst = lst;
-	print_files(lst);
-	while ((lst = find_dir(lst)) != NULL)
+	else
 	{
-		ls_rec(lst->file->path);
-		lst = lst->next;
+		if ((stat(path, &(file->stat)) == 0))
+			if ((file->path = get_new_path(path, file->pdent->d_name))
+					!= NULL)
+				return (file);
 	}
-	lst_rm(h_lst);
+	return (NULL);
 }

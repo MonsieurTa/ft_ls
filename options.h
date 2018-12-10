@@ -6,12 +6,17 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/07 11:40:18 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/10 10:47:51 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OPTIONS_H
 # define OPTIONS_H
+
+# include <sys/ioctl.h>
+# include "file.h"
+
+typedef struct winsize t_ws;
 
 /*
 ** Enum representant la liste des options possibles.
@@ -21,6 +26,7 @@ typedef enum	e_opt_name
 	LS_INVALID_OPT = -1,
 	LS_EXTATT = 0,
 	LS_ALL,
+	LS_STCHTI,
 	LS_DIRASF,
 	LS_ACL,
 	LS_NOSORT,
@@ -32,7 +38,7 @@ typedef enum	e_opt_name
 	LS_NOGRP,
 	LS_SLASHD,
 	LS_REC,
-	LS_REV,
+	LS_REVSO,
 	LS_SIZESO,
 	LS_TIMESO,
 	LS_CREATI,
@@ -42,10 +48,14 @@ typedef enum	e_opt_name
 
 /*
 ** Structure representant la liste des options du programme.
+** Le pointeur cmp_fun vaut NULL si aucun tri ne doit etre effectue.
 */
 typedef struct	s_opts
 {
 	int		mask;
+	t_ws	ws;
+	int		tab_w;
+	int		(*cmp_fun)(t_file *file1, t_file *file2);
 }				t_opts;
 
 /*
@@ -68,5 +78,12 @@ int				get_opt(t_opts *opts, t_opt_name opt_name);
 ** erreur est survenue (parametres invalides etc, new_val doit valoir 0 ou 1).
 */
 int				set_opt_val(t_opts *opts, t_opt_name opt_name, int new_val);
+
+/*
+** Recupere les informations sur la largeur/hauteur du terminal.
+*/ 
+t_ws			get_winsize(void);
+
+int				get_tab_w(t_opts *opt);
 
 #endif

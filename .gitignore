@@ -3,3 +3,5 @@ libft/objs/
 objs/
 ft_ls
 a.out
+.*.swp
+*.dSYM

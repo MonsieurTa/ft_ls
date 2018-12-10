@@ -6,14 +6,14 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:52:59 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 09:32:22 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/10 10:08:52 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "options.h"
 
-int			get_min_w(t_lst_ls *lst, int *len)
+int			get_min_w(t_lst_ls *lst, int *len, t_opts *opts)
 {
 	t_lst_ls	*tmp;
 	int			filename_w;
@@ -27,7 +27,8 @@ int			get_min_w(t_lst_ls *lst, int *len)
 		while (tmp)
 		{
 			filename_w = ft_strlen(tmp->file->pdent->d_name);
-			min_w = (filename_w > min_w) ? filename_w + 1 : min_w;
+			filename_w += opts->tab_w - (filename_w % opts->tab_w);
+			min_w = (filename_w > min_w) ? filename_w : min_w;
 			tmp = tmp->next;
 			(*len)++;
 		}
@@ -48,7 +49,7 @@ int			ft_ceil(float x)
 void		get_fmt(t_fmt *fmt, t_lst_ls *lst, t_opts *opts)
 {
 	fmt->len_lst = 0;
-	fmt->min_w = get_min_w(lst, &fmt->len_lst);
+	fmt->min_w = get_min_w(lst, &fmt->len_lst, opts);
 	fmt->min_w = (fmt->min_w == 0) ? 1 : fmt->min_w;
 	fmt->max_col = opts->ws.ws_col / fmt->min_w;
 	fmt->max_row = ft_ceil((float)fmt->len_lst / (float)fmt->max_col);

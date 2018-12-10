@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/10 08:49:23 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/10 10:08:29 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct	s_opts
 {
 	int		mask;
 	t_ws	ws;
+	int		tab_w;
 	int		(*cmp_fun)(t_file *file1, t_file *file2);
 }				t_opts;
 

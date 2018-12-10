@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 09:16:15 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/08 11:07:57 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/10 09:50:38 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ int		cmp_file_lexical(t_file *file1, t_file *file2)
 		return (file2 == NULL ? 0 : -1);
 	else if (file2 == NULL)
 		return (1);
-	return (ft_strcmp(file1->pdent->d_name, file2->pdent->d_name));
+	return (ft_strcmp(file1->pdent->d_name, file2->pdent->d_name) * -1);
 }

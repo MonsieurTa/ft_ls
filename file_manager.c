@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:48:29 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 09:20:33 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/10 16:47:51 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_lst_ls	*link_file(char *path, t_opts *opts)
 	DIR			*pdir;
 
 	pdir = NULL;
-	if ((pdir = opendir(path)) == NULL)
+	if (access(path, X_OK) != 0 || (pdir = opendir(path)) == NULL)
 		return (NULL);
 	file = NULL;
 	lst = NULL;

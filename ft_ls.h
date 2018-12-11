@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 12:39:23 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/11 15:26:52 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ t_lst_ls		*lst_mergesort(t_lst_ls *lst, int len,
 void			ls_rec(char *path, char *currdir, t_opts *opts);
 
 t_lst_ls		*find_dir(t_lst_ls *lst);
+t_lst_ls	*find_file(t_lst_ls *lst);
 
 /*
 ** OUTIL DE TEST : Affiche le strict minimum des noms des t_file

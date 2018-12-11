@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   display_selector.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/10 05:57:10 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 15:22:04 by wta              ###   ########.fr       */
+/*   Created: 2018/12/11 14:19:36 by wta               #+#    #+#             */
+/*   Updated: 2018/12/11 14:36:45 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "ft_ls.h"
+#include "options.h"
+#include "print.h"
 
-# include "ft_ls.h"
+void	display_selector(char *path, char *currdir, t_opts *opts)
+{
+	t_lst_ls	*lst;
 
-void		display_selector(char *path, char *currdir, t_opts *opts);
-int			is_hidden(t_file *file);
-
-#endif
+	lst = NULL;
+	if (get_opt(opts, LS_REC) == 1)
+		ls_rec(path, currdir, opts);
+	else
+	{
+		if ((lst = link_file(path, opts)) != NULL)
+			print_files(lst, opts);
+	}
+}

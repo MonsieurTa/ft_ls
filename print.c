@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 11:09:53 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 13:22:29 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/11 15:22:25 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int				print_files(t_lst_ls *lst, t_opts *opts)
 {
 	int		print_ret;
 	t_fmt	fmt;
+	char	*field;
 
 	if (get_opt(opts, LS_BYLINE) == 1 || get_opt(opts, LS_BYCLMN) == 1)
 	{

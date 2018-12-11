@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:48:29 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 16:47:51 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/11 15:12:17 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,15 @@ t_lst_ls	*find_dir(t_lst_ls *lst)
 {
 	while (lst != NULL && (lst->file->pdent->d_type != DT_DIR
 		|| ft_strcmp(lst->file->pdent->d_name, ".") == 0
+		|| ft_strcmp(lst->file->pdent->d_name, "..") == 0))
+		lst = lst->next;
+	return (lst);
+}
+
+t_lst_ls	*find_file(t_lst_ls *lst)
+{
+	while (lst != NULL
+		&& (ft_strcmp(lst->file->pdent->d_name, ".") == 0
 		|| ft_strcmp(lst->file->pdent->d_name, "..") == 0))
 		lst = lst->next;
 	return (lst);

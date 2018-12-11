@@ -6,13 +6,14 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 13:33:56 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/11 15:22:31 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "options.h"
 #include "compare_utils.h"
+#include "print.h"
 
 int	main(int ac, char **av)
 {
@@ -29,6 +30,6 @@ int	main(int ac, char **av)
 	set_tab_w(&opts);
 	if (ac - nb_opts != 2)
 		return (0);
-	ls_rec(av[nb_opts + 1], av[nb_opts + 1], &opts);
+	display_selector(av[nb_opts + 1], av[nb_opts + 1], &opts);
 	return (0);
 }

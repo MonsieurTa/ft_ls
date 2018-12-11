@@ -6,13 +6,14 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 11:09:53 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 10:45:13 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/11 09:03:55 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "options.h"
 #include "print.h"
+#include "set_field.h"
 
 void		print_by_col(t_lst_ls *lst, t_fmt fmt, t_opts *opts)
 {
@@ -50,7 +51,15 @@ void		print_by_col(t_lst_ls *lst, t_fmt fmt, t_opts *opts)
 void		print_files(t_lst_ls *lst, t_opts *opts)
 {
 	t_fmt	fmt;
+	char	*field;
 
 	get_fmt(&fmt, lst, opts);
-	print_by_col(lst, fmt, opts);
+//	print_by_col(lst, fmt, opts);
+	while (lst)
+	{
+		set_field_rights(opts, lst->file, &field);
+		ft_printf("%s %s\n", field, lst->file->pdent->d_name);
+		free(field);
+		lst = lst->next;
+	}
 }

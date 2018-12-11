@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:13:16 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 09:49:27 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/11 16:39:44 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_lst_ls	*lst_merge(t_lst_ls *left, t_lst_ls *right,
 	return (res);
 }
 
-t_lst_ls		*lst_mergesort(t_lst_ls *lst, int len,
+t_lst_ls		*lst_mergesort(t_lst_ls *lst,
 		int (*cmp_fun)(t_file *file1, t_file *file2))
 {
 	t_lst_ls	*left;
@@ -52,22 +52,22 @@ t_lst_ls		*lst_mergesort(t_lst_ls *lst, int len,
 	t_lst_ls	*tmp;
 	int			index;
 
-	if (len <= 1)
+	if (lst->next == NULL)
 		return (lst);
 	left = NULL;
 	right = NULL;
 	index = 0;
-	while (index < len)
+	while (lst)
 	{
 		tmp = lst->next;
-		if (index < len / 2)
-			lst_append(&left, lst);
+		if (index % 2 == 0)
+			lst = lst_pop_append(&left, lst);
 		else
-			lst_append(&right, lst);
+			lst = lst_pop_append(&right, lst);
 		lst = tmp;
 		index++;
 	}
-	left = lst_mergesort(left, lst_size(left), cmp_fun);
-	right = lst_mergesort(right, lst_size(right), cmp_fun);
+	left = lst_mergesort(left, cmp_fun);
+	right = lst_mergesort(right, cmp_fun);
 	return (lst_merge(left, right, cmp_fun));
 }

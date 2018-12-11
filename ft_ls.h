@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 15:13:17 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/11 16:36:39 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char			*get_new_path(char *path, char *name);
 /*
 ** Trie une liste chainee.
 */
-t_lst_ls		*lst_mergesort(t_lst_ls *lst, int len,
+t_lst_ls		*lst_mergesort(t_lst_ls *lst,
 		int (*cmp_fun)(t_file *file1, t_file *file2));
 
 /*

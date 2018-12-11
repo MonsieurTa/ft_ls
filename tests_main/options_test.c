@@ -5,11 +5,14 @@ int main(int argc, char **argv)
 {
 	char err = '\0';
 	t_opts lol;
+	def_opts_for_is_tty(&lol);
 	int res = init_opts(argc - 1, argv + 1, &lol, &err);
 
 	printf("res = %d, fail = \'%c\'\n", res, err);
 	printf("@ = %d\n", get_opt(&lol, LS_EXTATT));
+	printf("1 = %d\n", get_opt(&lol, LS_BYLINE));
 	printf("a = %d\n", get_opt(&lol, LS_ALL));
+	printf("C = %d\n", get_opt(&lol, LS_BYCLMN));
 	printf("c = %d\n", get_opt(&lol, LS_STCHTI));
 	printf("d = %d\n", get_opt(&lol, LS_DIRASF));
 	printf("e = %d\n", get_opt(&lol, LS_ACL));

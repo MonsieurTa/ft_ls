@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   set_winsize.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 08:52:20 by fwerner          ###   ########.fr       */
+/*   Created: 2018/12/08 13:07:56 by wta               #+#    #+#             */
+/*   Updated: 2018/12/11 08:50:29 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
 #include "options.h"
-#include "compare_utils.h"
+#include <sys/ioctl.h>
 
-int	main(int ac, char **av)
+void	set_winsize(t_opts *opts)
 {
-	t_opts	opts;
-	char	c;
-	int		nb_opts;
-
-	def_opts_for_is_tty(&opts);
-	if ((nb_opts = init_opts(ac - 1, av + 1, &opts, &c)) == -1)
-		return (0);
-	set_cmp_fun(&opts);
-	set_winsize(&opts);
-	set_tab_w(&opts);
-	if (ac - nb_opts != 2)
-		return (0);
-	ls_rec(av[nb_opts + 1], av[nb_opts + 1], &opts);
-	return (0);
+	ioctl(0, TIOCGWINSZ, &(opts->ws));
 }

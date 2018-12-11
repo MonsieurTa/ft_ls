@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/10 10:47:51 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/11 08:09:34 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <sys/ioctl.h>
 # include "file.h"
 
-typedef struct winsize t_ws;
+typedef struct winsize	t_ws;
 
 /*
 ** Enum representant la liste des options possibles.
@@ -25,7 +25,9 @@ typedef enum	e_opt_name
 {
 	LS_INVALID_OPT = -1,
 	LS_EXTATT = 0,
+	LS_BYLINE,
 	LS_ALL,
+	LS_BYCLMN,
 	LS_STCHTI,
 	LS_DIRASF,
 	LS_ACL,
@@ -81,7 +83,7 @@ int				set_opt_val(t_opts *opts, t_opt_name opt_name, int new_val);
 
 /*
 ** Recupere les informations sur la largeur/hauteur du terminal.
-*/ 
+*/
 t_ws			get_winsize(void);
 
 int				get_tab_w(t_opts *opt);

@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 11:09:53 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 12:47:42 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/11 13:22:29 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,23 @@ static int		ft_ceil(float x)
 	if (x == (float)ix)
 		return (ix);
 	return (ix + 1);
+}
+
+/*
+** Affiche la liste de fichier par ligne (affichage minimal).
+*/
+
+static int		print_by_line(t_opts *opts, t_lst_ls *lst, t_fmt *fmt)
+{
+	int			print_ret;
+
+	while (lst != NULL)
+	{
+		if (ft_printf("%s\n", lst->file->fields.name) == -1)
+			return (-1);
+		lst = lst->next;
+	}
+	return (0);
 }
 
 /*
@@ -78,17 +95,18 @@ int				print_files(t_lst_ls *lst, t_opts *opts)
 	int		print_ret;
 	t_fmt	fmt;
 
-	//si -C
-	if (init_minimum_fields_and_fmt(opts, lst, &fmt) == -1)
+	if (get_opt(opts, LS_BYLINE) == 1 || get_opt(opts, LS_BYCLMN) == 1)
 	{
+		if (init_minimum_fields_and_fmt(opts, lst, &fmt) == -1)
+		{
+			delete_minimum_fields(lst);
+			return (-1);
+		}
+		if (get_opt(opts, LS_BYLINE) == 1)
+			print_ret = print_by_line(opts, lst, &fmt);
+		else
+			print_ret = print_by_col(opts, lst, &fmt);
 		delete_minimum_fields(lst);
-		return (-1);
 	}
-	print_ret = print_by_col(opts, lst, &fmt);
-	delete_minimum_fields(lst);
-	//si -1
-	//print_by_line
-	//si -l
-	//print_by_ong
 	return (print_ret);
 }

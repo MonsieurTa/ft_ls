@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/11 08:28:03 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/11 08:48:51 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,13 @@ int				set_opt_val(t_opts *opts, t_opt_name opt_name, int new_val);
 void			def_opts_for_is_tty(t_opts *opts);
 
 /*
-** Recupere les informations sur la largeur/hauteur du terminal.
+** Set les informations sur la largeur/hauteur du terminal.
 */
-t_ws			get_winsize(void);
+void			set_winsize(t_opts *opt);
 
-int				get_tab_w(t_opts *opt);
+/*
+** Set la largeur d'une tabulation selon les options du programme.
+*/
+void			set_tab_w(t_opts *opt);
 
 #endif

@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_winsize.c                                      :+:      :+:    :+:   */
+/*   set_winsize.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 13:07:56 by wta               #+#    #+#             */
-/*   Updated: 2018/12/08 13:22:57 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/11 08:50:29 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "options.h"
 #include <sys/ioctl.h>
 
-t_ws	get_winsize(void)
+void	set_winsize(t_opts *opts)
 {
-	t_ws	ws;
-	ioctl(0, TIOCGWINSZ, &ws);
-	return (ws);
+	ioctl(0, TIOCGWINSZ, &(opts->ws));
 }

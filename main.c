@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 10:48:01 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/11 08:31:31 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int ac, char **av)
 	char	c;
 	int		nb_opts;
 
+	def_opts_for_is_tty(&opts);
 	if ((nb_opts = init_opts(ac - 1, av + 1, &opts, &c)) == -1)
 		return (0);
 	opts.cmp_fun = g_get_cmp_fun(&opts);

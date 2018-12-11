@@ -5,6 +5,7 @@ int main(int argc, char **argv)
 {
 	char err = '\0';
 	t_opts lol;
+	def_opts_for_is_tty(&lol);
 	int res = init_opts(argc - 1, argv + 1, &lol, &err);
 
 	printf("res = %d, fail = \'%c\'\n", res, err);

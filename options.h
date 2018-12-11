@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/11 08:09:34 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/11 08:28:03 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,12 @@ int				get_opt(t_opts *opts, t_opt_name opt_name);
 ** erreur est survenue (parametres invalides etc, new_val doit valoir 0 ou 1).
 */
 int				set_opt_val(t_opts *opts, t_opt_name opt_name, int new_val);
+
+/*
+** Set les options par defauts selon si la sortie standard est
+** un terminal ou non.
+*/
+void			def_opts_for_is_tty(t_opts *opts);
 
 /*
 ** Recupere les informations sur la largeur/hauteur du terminal.

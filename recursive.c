@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:51:37 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 16:46:30 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/11 15:19:11 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ls_rec(char *path, char *currdir, t_opts *opts)
 	t_lst_ls	*lst;
 	char		*field;
 
+	if (ft_strcmp(path, currdir) != 0)
+		ft_printf("\n%s:\n", path);
 	if ((lst = link_file(path, opts)) == NULL)
 		return ;
 /*
@@ -29,8 +31,6 @@ void	ls_rec(char *path, char *currdir, t_opts *opts)
 	if (opts->cmp_fun != NULL)
 		lst = lst_mergesort(lst, lst_size(lst), opts->cmp_fun);
 	h_lst = lst;
-	if (ft_strcmp(path, currdir) != 0)
-		ft_printf("\n%s:\n", path);
 	print_files(lst, opts);
 	while ((lst = find_dir(lst)) != NULL)
 	{

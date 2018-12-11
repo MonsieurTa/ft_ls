@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 09:20:59 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/11 15:13:57 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ typedef struct	s_lst_ls
 	t_file			*file;
 }				t_lst_ls;
 
+/*
+** Structure contenant des informations sur le format d'affichage.
+*/
 typedef struct	s_fmt
 {
-	int	len_lst;
-	int	min_w;
-	int	max_col;
-	int	max_row;
+	int		lst_size;
+	int		name_max_s;
 }				t_fmt;
 
 /*
@@ -89,12 +90,17 @@ t_lst_ls		*lst_mergesort(t_lst_ls *lst, int len,
 void			ls_rec(char *path, char *currdir, t_opts *opts);
 
 t_lst_ls		*find_dir(t_lst_ls *lst);
+t_lst_ls	*find_file(t_lst_ls *lst);
 
 /*
 ** OUTIL DE TEST : Affiche le strict minimum des noms des t_file
 */
 t_lst_ls		*skip_hidden(t_lst_ls *lst);
 
-void			print_files(t_lst_ls *lst, t_opts *opts);
+/*
+** Affiche la liste des fichiers au format decrit par les options. Retourne -1
+** en cas d'erreur et 0 en cas de succes.
+*/
+int				print_files(t_lst_ls *lst, t_opts *opts);
 
 #endif

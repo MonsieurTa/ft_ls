@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 11:36:26 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/08 13:40:53 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/11 08:46:12 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@
 # include "ft_ls.h"
 
 /*
-** Retourne un pointeur sur fonction pour effectuer les comparaisons de
+** Set le pointeur cmp_fun de opts sur une fonction de comparaison de
 ** fichier selon les options passees en parametre, ou NULL si les fichiers
 ** ne doivent pas etre tries.
-** Fonction prefixee par g_ car la norminette est bugee et croit que c'est
-** une variable.
 */
-int		(*g_get_cmp_fun(t_opts *opts))(t_file *file1, t_file *file2);
+void	set_cmp_fun(t_opts *opts);
 
 /*
 ** Fonction de comparaison de deux fichiers par taille inverse, retourne un

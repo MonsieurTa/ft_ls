@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/10 10:47:51 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/11 08:48:51 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <sys/ioctl.h>
 # include "file.h"
 
-typedef struct winsize t_ws;
+typedef struct winsize	t_ws;
 
 /*
 ** Enum representant la liste des options possibles.
@@ -25,7 +25,9 @@ typedef enum	e_opt_name
 {
 	LS_INVALID_OPT = -1,
 	LS_EXTATT = 0,
+	LS_BYLINE,
 	LS_ALL,
+	LS_BYCLMN,
 	LS_STCHTI,
 	LS_DIRASF,
 	LS_ACL,
@@ -80,10 +82,19 @@ int				get_opt(t_opts *opts, t_opt_name opt_name);
 int				set_opt_val(t_opts *opts, t_opt_name opt_name, int new_val);
 
 /*
-** Recupere les informations sur la largeur/hauteur du terminal.
-*/ 
-t_ws			get_winsize(void);
+** Set les options par defauts selon si la sortie standard est
+** un terminal ou non.
+*/
+void			def_opts_for_is_tty(t_opts *opts);
 
-int				get_tab_w(t_opts *opt);
+/*
+** Set les informations sur la largeur/hauteur du terminal.
+*/
+void			set_winsize(t_opts *opt);
+
+/*
+** Set la largeur d'une tabulation selon les options du programme.
+*/
+void			set_tab_w(t_opts *opt);
 
 #endif

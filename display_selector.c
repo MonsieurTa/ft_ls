@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 14:19:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 14:36:45 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/11 15:48:46 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	display_selector(char *path, char *currdir, t_opts *opts)
 	else
 	{
 		if ((lst = link_file(path, opts)) != NULL)
+		{
 			print_files(lst, opts);
+			lst_rm(lst);
+		}
 	}
 }

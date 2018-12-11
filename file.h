@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 13:55:13 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 10:25:44 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/11 15:00:59 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct stat		t_stat;
 */
 typedef struct	s_fields
 {
+	char	*rights;
+	char	*size;
 	char	*name;
 }				t_fields;
 

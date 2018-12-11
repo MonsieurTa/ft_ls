@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 12:39:23 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/11 15:13:17 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct	s_lst_ls
 typedef struct	s_fmt
 {
 	int		lst_size;
+	int		rights_max_s;
+	int		size_max_s;
 	int		name_max_s;
 }				t_fmt;
 

@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   set_acl_attr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 08:34:29 by wta              ###   ########.fr       */
+/*   Created: 2018/12/11 08:44:13 by wta               #+#    #+#             */
+/*   Updated: 2018/12/11 09:12:41 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-#include "options.h"
-#include "compare_utils.h"
+#include <stdlib.h>
+#include "sys/types.h"
+#include "sys/xattr.h"
+#include "sys/acl.h"
 
-int	main(int ac, char **av)
+int		has_xattr(char *filepath)
 {
-	t_opts	opts;
-	char	c;
-	int		nb_opts;
+	return (listxattr(filepath, NULL, 0, XATTR_NOFOLLOW) > 0);
+}
 
-	if ((nb_opts = init_opts(ac - 1, av + 1, &opts, &c)) == -1)
-		return (0);
-	opts.cmp_fun = g_get_cmp_fun(&opts);
-	opts.ws = get_winsize();
-	opts.tab_w = get_tab_w(&opts);
-	if (ac - nb_opts != 2)
-		return (0);
-	ls_rec(av[nb_opts + 1], av[nb_opts + 1], &opts);
-	return (0);
+int		has_acl(char *filepath)
+{
+	acl_t	acl;
+	int		res;
+
+	acl = NULL;
+	acl = acl_get_link_np(filepath, ACL_TYPE_EXTENDED);
+	res = (acl != NULL) ? 1 : 0;
+	acl_free(acl);
+	acl = NULL;
+	return (res);
 }

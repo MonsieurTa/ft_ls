@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 09:17:47 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/10 14:47:27 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/11 09:13:20 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,8 @@ int		set_field_name(t_opts *opts, t_file *file, char **field);
 int		set_field_size(t_opts *opts, t_file *file, char **field);
 
 int		set_field_rights(t_opts *opts, t_file *file, char **field);
+
+int		has_xattr(char *filepath);
+int		has_acl(char *filepath);
 
 #endif

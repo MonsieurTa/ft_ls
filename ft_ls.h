@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 11:56:31 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/12 14:41:16 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_lst_ls		*lst_mergesort(t_lst_ls *lst,
 /*
 ** Fonction de recursivite pour l'option -R
 */
-void			ls_rec(char *path, char *currdir, t_opts *opts);
+void			ls_rec(char *path, t_opts *opts);
 
 t_lst_ls		*find_dir(t_lst_ls *lst);
 t_lst_ls	*find_file(t_lst_ls *lst);

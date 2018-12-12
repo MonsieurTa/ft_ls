@@ -6,13 +6,14 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:09:09 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/11 15:21:28 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/12 09:55:23 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "options.h"
 #include "set_field.h"
+#include "fields_utils.h"
 
 /*
 ** Init a null les fields utilises pour l'affichage complet.
@@ -25,68 +26,42 @@ static void		null_init_all_fields(t_file *file)
 	file->fields.name = NULL;
 }
 
-/*
-** Free tous les fields alloues dans les lst_size premiers fichier de la
-** liste de fichier pour l'affichage complet.
-*/
-
-static void		abort_init_all_fields(t_lst_ls *lst, int lst_size)
+int				init_all_fields_and_fmt(t_opts *opts, t_file *file)
 {
-	while (lst != NULL && lst_size != 0)
-	{
-		free(lst->file->fields.rights);
-		free(lst->file->fields.size);
-		free(lst->file->fields.name);
-		lst = lst->next;
-		--lst_size;
-	}
-}
-
-int				init_all_fields_and_fmt(t_opts *opts, t_lst_ls *lst,
-		t_fmt *fmt)
-{
-	t_lst_ls	*lst_head;
 	int			tmp_size;
 
-	lst_head = lst;
-	fmt->rights_max_s = 0;
-	fmt->size_max_s = 0;
-	fmt->name_max_s = 0;
-	fmt->lst_size = 0;
-	while (lst != NULL)
+	null_init_all_fields(file);
+	tmp_size = set_field_rights(opts, file, &(file->fields.rights));
+	if (file->fields.rights == NULL)
 	{
-		null_init_all_fields(lst->file);
-		tmp_size = set_field_rights(opts, lst->file, &(lst->file->fields.rights));
-		if (lst->file->fields.rights == NULL)
-		{
-			abort_init_all_fields(lst_head, fmt->lst_size + 1);
-			return (-1);
-		}
-		if (tmp_size > fmt->rights_max_s)
-			fmt->rights_max_s = tmp_size;
-		tmp_size = set_field_size(opts, lst->file, &(lst->file->fields.size));
-		if (lst->file->fields.size == NULL)
-		{
-			abort_init_all_fields(lst_head, fmt->lst_size + 1);
-			return (-1);
-		}
-		if (tmp_size > fmt->size_max_s)
-			fmt->size_max_s = tmp_size;
-		tmp_size = set_field_name(opts, lst->file, &(lst->file->fields.name));
-		if (lst->file->fields.name == NULL)
-		{
-			abort_init_all_fields(lst_head, fmt->lst_size + 1);
-			return (-1);
-		}
-		if (tmp_size > fmt->name_max_s)
-			fmt->name_max_s = tmp_size;
-		lst = lst->next;
-		++(fmt->lst_size);
+		delete_all_fields(file);
+		return (-1);
 	}
+	if (tmp_size > opts->fmt.rights_max_s)
+		opts->fmt.rights_max_s = tmp_size;
+	tmp_size = set_field_size(opts, file, &(file->fields.size));
+	if (file->fields.size == NULL)
+	{
+		delete_all_fields(file);
+		return (-1);
+	}
+	if (tmp_size > opts->fmt.size_max_s)
+		opts->fmt.size_max_s = tmp_size;
+	tmp_size = set_field_name(opts, file, &(file->fields.name));
+	if (file->fields.name == NULL)
+	{
+		delete_all_fields(file);
+		return (-1);
+	}
+	if (tmp_size > opts->fmt.name_max_s)
+		opts->fmt.name_max_s = tmp_size;
+	++(opts->fmt.lst_size);
 	return (0);
 }
 
-void			delete_all_fields(t_lst_ls *lst)
+void			delete_all_fields(t_file *file)
 {
-	abort_init_all_fields(lst, -1);
+	free(file->fields.rights);
+	free(file->fields.size);
+	free(file->fields.name);
 }

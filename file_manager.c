@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:48:29 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 10:38:20 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/12 11:08:08 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,7 @@ int			init_file_infs(t_file *file, t_opts *opts)
 {
 	int		fun_ret;
 
-	if (file->pdent->d_type == DT_LNK)
-		fun_ret = lstat(file->path, &(file->stat));
-	else
-		fun_ret = stat(file->path, &(file->stat));
+	fun_ret = lstat(file->path, &(file->stat));
 	if (fun_ret == 0)
 	{
 		if (get_opt(opts, LS_LONGF) == 1)

@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:51:37 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 15:19:11 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/12 09:21:01 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ls_rec(char *path, char *currdir, t_opts *opts)
 ** TODO : Afficher les fichiers et/ou dossier selon les options demandees
 */
 	if (opts->cmp_fun != NULL)
-		lst = lst_mergesort(lst, lst_size(lst), opts->cmp_fun);
+		lst = lst_mergesort(lst, opts->cmp_fun);
 	h_lst = lst;
 	print_files(lst, opts);
 	while ((lst = find_dir(lst)) != NULL)
@@ -44,5 +44,5 @@ void	ls_rec(char *path, char *currdir, t_opts *opts)
 				ls_rec(lst->file->path, currdir, opts);
 		lst = lst->next;
 	}
-	lst_rm(h_lst);
+	lst_rm(h_lst, opts);
 }

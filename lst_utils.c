@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:12:47 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 10:05:49 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/12 11:48:43 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,23 +57,27 @@ t_file		*lst_newfile(DIR *pdir, char *path, t_opts *opts)
 	return (NULL);
 }
 
-void		lst_append(t_lst_ls **lst, t_lst_ls *node)
+void		lst_append(t_lst_ls **head, t_lst_ls **tail, t_lst_ls *node)
 {
 	t_lst_ls	*tmp;
 
 	tmp = NULL;
-	if (*lst && node)
+	if (*tail != NULL && node != NULL)
 	{
-		tmp = *lst;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = node;
+		(*tail)->next = node;
+		*tail = node;
+		node->next = NULL;
+	}
+	else if (*head && node)
+	{
+		(*head)->next = node;
+		*tail = node;
 		node->next = NULL;
 	}
 	else if (node)
 	{
-		*lst = node;
-		(*lst)->next = NULL;
+		*head = node;
+		(*head)->next = NULL;
 	}
 }
 

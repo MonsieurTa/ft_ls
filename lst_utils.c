@@ -6,13 +6,14 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:12:47 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 16:32:45 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/12 10:05:49 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "file.h"
 #include "options.h"
+#include "fields_utils.h"
 
 t_lst_ls	*lst_newnode(t_file *file)
 {
@@ -46,7 +47,7 @@ t_file		*lst_newfile(DIR *pdir, char *path, t_opts *opts)
 		{
 			ft_memcpy(file->pdent, tmp, tmp->d_reclen);
 			if ((file->path = get_new_path(path, file->pdent->d_name))
-					!= NULL && (file = is_symlink(file)) != NULL)
+					!= NULL && init_file_infs(file, opts) == 0)
 				return (file);
 			free(file->path);
 		}
@@ -76,10 +77,12 @@ void		lst_append(t_lst_ls **lst, t_lst_ls *node)
 	}
 }
 
-void		lst_rm(t_lst_ls *lst)
+void		lst_rm(t_lst_ls *lst, t_opts *opts)
 {
 	t_lst_ls	*tmp;
+	int			all_fileds_are_init;
 
+	all_fileds_are_init = get_opt(opts, LS_LONGF);
 	tmp = NULL;
 	if (lst)
 	{
@@ -87,23 +90,14 @@ void		lst_rm(t_lst_ls *lst)
 		{
 			tmp = lst;
 			lst = lst->next;
+			if (all_fileds_are_init == 1)
+				delete_all_fields(tmp->file);
+			else
+				delete_minimum_fields(tmp->file);
 			free(tmp->file->pdent);
 			free(tmp->file->path);
 			free(tmp->file);
 			free(tmp);
 		}
 	}
-}
-
-int				lst_size(t_lst_ls *lst)
-{
-	int	size;
-
-	size = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		size++;
-	}
-	return (size);
 }

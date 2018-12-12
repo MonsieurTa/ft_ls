@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 14:19:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 16:37:28 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/12 09:03:17 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	display_selector(char *path, char *currdir, t_opts *opts)
 			if (opts->cmp_fun != NULL)
 				lst = lst_mergesort(lst, opts->cmp_fun);
 			print_files(lst, opts);
-			lst_rm(lst);
+			lst_rm(lst, opts);
 		}
 	}
 }

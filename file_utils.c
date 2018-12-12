@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_utils.c                                      :+:      :+:    :+:   */
+/*   file_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/10 05:52:59 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 09:22:30 by wta              ###   ########.fr       */
+/*   Created: 2018/12/10 09:06:36 by wta               #+#    #+#             */
+/*   Updated: 2018/12/10 09:24:14 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "file.h"
+#include "libft/includes/libft.h"
 
-int				is_hidden(t_file *file)
+int		is_curr_or_parent(t_dirent *pdent)
 {
-	if (file)
+	if (pdent)
 	{
-		if (*file->pdent->d_name == '.')
+		if (ft_strcmp(pdent->d_name, ".") == 0)
+			return (1);
+		if (ft_strcmp(pdent->d_name, "..") == 0)
 			return (1);
 	}
 	return (0);
-}
-
-/*
-** Retourne x arrondi a l'entier superieur.
-*/
-
-int		ft_ceil(float x)
-{
-	int	ix;
-
-	ix = (int)x;
-	if (x == (float)ix)
-		return (ix);
-	return (ix + 1);
 }

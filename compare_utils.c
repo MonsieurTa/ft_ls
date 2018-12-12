@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:11:41 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/08 14:25:16 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/11 08:47:28 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,43 @@
 #include "ft_ls.h"
 #include "compare_utils.h"
 
-static int		(*g_get_cmp_fun_rev(t_opts *opts))(t_file *file1, t_file *file2)
+/*
+** Set le pointeur cmp_fun de opts a la fonction reverse correspondant
+** aux parametres de tri.
+*/
+
+static void		set_cmp_fun_rev(t_opts *opts)
 {
 	if (get_opt(opts, LS_SIZESO) == 1)
-		return (cmp_file_size_rev);
+		opts->cmp_fun = cmp_file_size_rev;
 	else if (get_opt(opts, LS_STCHTI) == 1 && get_opt(opts, LS_TIMESO) == 1)
-		return (cmp_file_stch_rev);
+		opts->cmp_fun = cmp_file_stch_rev;
 	else if (get_opt(opts, LS_CREATI) == 1 && get_opt(opts, LS_TIMESO) == 1)
-		return (cmp_file_crea_rev);
+		opts->cmp_fun = cmp_file_crea_rev;
 	else if (get_opt(opts, LS_ACCETI) == 1 && get_opt(opts, LS_TIMESO) == 1)
-		return (cmp_file_acce_rev);
+		opts->cmp_fun = cmp_file_acce_rev;
 	else if (get_opt(opts, LS_TIMESO) == 1)
-		return (cmp_file_time_rev);
-	return (cmp_file_lexical_rev);
+		opts->cmp_fun = cmp_file_time_rev;
+	else
+		opts->cmp_fun = cmp_file_lexical_rev;
 }
 
-int		(*g_get_cmp_fun(t_opts *opts))(t_file *file1, t_file *file2)
+void			set_cmp_fun(t_opts *opts)
 {
 	if (get_opt(opts, LS_NOSORT) == 1)
-		return (NULL);
+		opts->cmp_fun = NULL;
 	else if (get_opt(opts, LS_REVSO) == 1)
-		return (g_get_cmp_fun_rev(opts));
+		set_cmp_fun_rev(opts);
 	else if (get_opt(opts, LS_SIZESO) == 1)
-		return (cmp_file_size);
+		opts->cmp_fun = cmp_file_size;
 	else if (get_opt(opts, LS_STCHTI) == 1 && get_opt(opts, LS_TIMESO) == 1)
-		return (cmp_file_stch);
+		opts->cmp_fun = cmp_file_stch;
 	else if (get_opt(opts, LS_CREATI) == 1 && get_opt(opts, LS_TIMESO) == 1)
-		return (cmp_file_crea);
+		opts->cmp_fun = cmp_file_crea;
 	else if (get_opt(opts, LS_ACCETI) == 1 && get_opt(opts, LS_TIMESO) == 1)
-		return (cmp_file_acce);
+		opts->cmp_fun = cmp_file_acce;
 	else if (get_opt(opts, LS_TIMESO) == 1)
-		return (cmp_file_time);
-	return (cmp_file_lexical);
+		opts->cmp_fun = cmp_file_time;
+	else
+		opts->cmp_fun = cmp_file_lexical;
 }

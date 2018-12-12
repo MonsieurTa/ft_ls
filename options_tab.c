@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_utils.c                                      :+:      :+:    :+:   */
+/*   options_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/10 05:52:59 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 09:22:30 by wta              ###   ########.fr       */
+/*   Created: 2018/12/10 10:41:07 by wta               #+#    #+#             */
+/*   Updated: 2018/12/11 08:51:59 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "options.h"
 
-int				is_hidden(t_file *file)
+void	set_tab_w(t_opts *opts)
 {
-	if (file)
-	{
-		if (*file->pdent->d_name == '.')
-			return (1);
-	}
-	return (0);
-}
-
-/*
-** Retourne x arrondi a l'entier superieur.
-*/
-
-int		ft_ceil(float x)
-{
-	int	ix;
-
-	ix = (int)x;
-	if (x == (float)ix)
-		return (ix);
-	return (ix + 1);
+	if (get_opt(opts, LS_COLOR) == 1)
+		opts->tab_w = 1;
+	else
+		opts->tab_w = 8;
 }

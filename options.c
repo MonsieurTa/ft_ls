@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:04:09 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/08 11:58:01 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/11 07:55:34 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 static void			init_opt_tab(char *opt_tab)
 {
 	opt_tab[LS_EXTATT] = '@';
+	opt_tab[LS_BYLINE] = '1';
 	opt_tab[LS_ALL] = 'a';
+	opt_tab[LS_BYCLMN] = 'C';
 	opt_tab[LS_STCHTI] = 'c';
 	opt_tab[LS_DIRASF] = 'd';
 	opt_tab[LS_ACL] = 'e';
@@ -46,7 +48,7 @@ static void			init_opt_tab(char *opt_tab)
 ** ou LS_INVALID_OPT si c'est une option invalide.
 */
 
-static t_opt_name	char_to_opt_name(char opt_char)
+static t_opt_name	char2opt(char opt_char)
 {
 	static char		opt_tab[LS_OPT_SIZE] = {0};
 	t_opt_name		idx;
@@ -71,16 +73,16 @@ int					init_opts(int argc, char **argv, t_opts *opts, char *fail)
 	int			arg_idx;
 	t_opt_name	cur_opt_name;
 
-	if (opts == NULL || fail == NULL)
+	if ((idx = 0) == 1 || opts == NULL || fail == NULL)
 		return (-1);
-	idx = 0;
 	while (idx < argc && argv[idx][0] == '-' && argv[idx][1] != '\0')
 	{
+		if (argv[idx][1] == '-' && argv[idx][2] == '\0')
+			return (idx + 1);
 		arg_idx = 1;
 		while (argv[idx][arg_idx] != '\0')
 		{
-			cur_opt_name = char_to_opt_name(argv[idx][arg_idx]);
-			if (cur_opt_name == LS_INVALID_OPT)
+			if ((cur_opt_name = char2opt(argv[idx][arg_idx])) == LS_INVALID_OPT)
 			{
 				*fail = argv[idx][arg_idx];
 				return (-1);

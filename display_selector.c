@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_utils.c                                      :+:      :+:    :+:   */
+/*   display_selector.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/10 05:52:59 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 09:22:30 by wta              ###   ########.fr       */
+/*   Created: 2018/12/11 14:19:36 by wta               #+#    #+#             */
+/*   Updated: 2018/12/12 09:03:17 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#include "options.h"
+#include "print.h"
 
-int				is_hidden(t_file *file)
+void	display_selector(char *path, char *currdir, t_opts *opts)
 {
-	if (file)
+	t_lst_ls	*lst;
+
+	lst = NULL;
+	if (get_opt(opts, LS_REC) == 1)
+		ls_rec(path, currdir, opts);
+	else
 	{
-		if (*file->pdent->d_name == '.')
-			return (1);
+		if ((lst = link_file(path, opts)) != NULL)
+		{
+			if (opts->cmp_fun != NULL)
+				lst = lst_mergesort(lst, opts->cmp_fun);
+			print_files(lst, opts);
+			lst_rm(lst, opts);
+		}
 	}
-	return (0);
-}
-
-/*
-** Retourne x arrondi a l'entier superieur.
-*/
-
-int		ft_ceil(float x)
-{
-	int	ix;
-
-	ix = (int)x;
-	if (x == (float)ix)
-		return (ix);
-	return (ix + 1);
 }

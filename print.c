@@ -6,50 +6,120 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 11:09:53 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 05:59:15 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/12 11:27:55 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "options.h"
 #include "print.h"
+#include "fields_utils.h"
 
-void		print_by_col(t_lst_ls *lst, t_fmt fmt)
+/*
+** Affiche la liste de fichier par ligne (affichage minimal).
+*/
+
+static int		print_by_line(t_opts *opts, t_lst_ls *lst)
 {
+	int			print_ret;
+
+	while (lst != NULL)
+	{
+		if (ft_printf("%s\n", lst->file->fields.name) < 0)
+			return (-1);
+		lst = lst->next;
+	}
+	return (0);
+}
+
+/*
+** Affiche la liste de fichier par colonne (affichage minimal).
+*/
+
+static int		print_by_col(t_opts *opts, t_lst_ls *lst)
+{
+	t_lst_ls	**line;
+	int			print_ret;
 	t_lst_ls	*h_lst;
 	int			idx;
 	int			row;
 	int			col;
+	int			col_size = opts->fmt.name_max_s + opts->tab_w - (opts->fmt.name_max_s % opts->tab_w);
+	int			max_col = opts->ws.ws_col / col_size;
+	int			max_row = ft_ceil((float)opts->fmt.lst_size / (float)max_col);
 
+	max_col = ft_ceil((float)opts->fmt.lst_size / (float)max_row);
 	h_lst = lst;
-	row = 0;
-	while (lst && row < fmt.max_row)
+	if ((line = ft_memalloc(sizeof(t_lst_ls*) * (max_col + 1))) == NULL)
+		return (-1);
+	col = 0;
+	idx = 0;
+	while (lst && col < max_col)
 	{
-		idx = 0;
-		col = 0;
-		while (lst && col < fmt.max_col)
-		{
-			if (idx == row + col * fmt.max_row)
-			{
-				if (col + 1 == fmt.max_col)
-					ft_printf("%s", lst->file->pdent->d_name);
-				else
-					ft_printf("%-*s", fmt.min_w, lst->file->pdent->d_name);
-				col++;
-			}
+		while (idx++ != col * (max_row + 1))
 			lst = lst->next;
-			idx++;
+		line[col] = lst;
+		col++;
+	}
+	row = 0;
+	while (row < max_row)
+	{
+		col = 0;
+		while (col < max_col)
+		{
+			if (line[col])
+			{
+				if (col + 1 == max_col)
+					print_ret = ft_printf("%s", line[col]->file->fields.name);
+				else
+					print_ret = ft_printf("%-*s", col_size, line[col]->file->fields.name);
+				if (print_ret < 0)
+					return (-1);
+				line[col] = line[col]->next;
+			}
+			else
+				break ;
+			col++;
 		}
 		ft_putchar('\n');
-		lst = h_lst;
 		row++;
 	}
+	if (line)
+		free(line);
+	return (0);
 }
 
-void		print_files(t_lst_ls *lst, t_opts *opts)
-{
-	t_fmt	fmt;
+/*
+** Affiche la liste de fichier par ligne en affichage complet.
+*/
 
-	get_fmt(&fmt, lst, opts);
-	print_by_col(lst, fmt);
+static int		print_with_long_f(t_opts *opts, t_lst_ls *lst)
+{
+	int			print_ret;
+
+	while (lst != NULL)
+	{
+		if (ft_printf("%-*s %-*s %s\n",
+					opts->fmt.rights_max_s, lst->file->fields.rights,
+					opts->fmt.size_max_s, lst->file->fields.size,
+					lst->file->fields.name) < 0)
+			return (-1);
+		lst = lst->next;
+	}
+	return (0);
+}
+
+int				print_files(t_lst_ls *lst, t_opts *opts)
+{
+	int		print_ret;
+	char	*field;
+
+	print_ret = 0;
+	if (get_opt(opts, LS_BYLINE) == 1)
+		print_ret = print_by_line(opts, lst);
+	else if (get_opt(opts, LS_BYCLMN) == 1)
+		print_ret = print_by_col(opts, lst);
+	else if(get_opt(opts, LS_LONGF) == 1)
+		print_ret = print_with_long_f(opts, lst);
+	return (print_ret);
 }

@@ -1,37 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_utils.c                                      :+:      :+:    :+:   */
+/*   set_winsize.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/10 05:52:59 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 09:22:30 by wta              ###   ########.fr       */
+/*   Created: 2018/12/08 13:07:56 by wta               #+#    #+#             */
+/*   Updated: 2018/12/11 08:50:29 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "options.h"
+#include <sys/ioctl.h>
 
-int				is_hidden(t_file *file)
+void	set_winsize(t_opts *opts)
 {
-	if (file)
-	{
-		if (*file->pdent->d_name == '.')
-			return (1);
-	}
-	return (0);
-}
-
-/*
-** Retourne x arrondi a l'entier superieur.
-*/
-
-int		ft_ceil(float x)
-{
-	int	ix;
-
-	ix = (int)x;
-	if (x == (float)ix)
-		return (ix);
-	return (ix + 1);
+	ioctl(0, TIOCGWINSZ, &(opts->ws));
 }

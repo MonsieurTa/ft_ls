@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   options_tty.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/10 05:57:10 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 09:24:29 by wta              ###   ########.fr       */
+/*   Created: 2018/12/11 08:21:05 by fwerner           #+#    #+#             */
+/*   Updated: 2018/12/11 08:32:22 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include <unistd.h>
+#include "options.h"
 
-# include "ft_ls.h"
-
-void		display_selector(char *path, char *currdir, t_opts *opts);
-int			is_hidden(t_file *file);
-int			ft_ceil(float x);
-
-#endif
+void	def_opts_for_is_tty(t_opts *opts)
+{
+	if (isatty(STDOUT_FILENO))
+	{
+		set_opt_val(opts, LS_BYCLMN, 1);
+	}
+	else
+	{
+		set_opt_val(opts, LS_BYLINE, 1);
+	}
+}

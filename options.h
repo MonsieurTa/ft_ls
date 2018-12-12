@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/08 11:57:33 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/12 09:17:01 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <sys/ioctl.h>
 # include "file.h"
 
-typedef struct winsize t_ws;
+typedef struct winsize	t_ws;
 
 /*
 ** Enum representant la liste des options possibles.
@@ -25,7 +25,9 @@ typedef enum	e_opt_name
 {
 	LS_INVALID_OPT = -1,
 	LS_EXTATT = 0,
+	LS_BYLINE,
 	LS_ALL,
+	LS_BYCLMN,
 	LS_STCHTI,
 	LS_DIRASF,
 	LS_ACL,
@@ -47,6 +49,17 @@ typedef enum	e_opt_name
 }				t_opt_name;
 
 /*
+** Structure contenant des informations sur le format d'affichage.
+*/
+typedef struct	s_fmt
+{
+	int		lst_size;
+	int		rights_max_s;
+	int		size_max_s;
+	int		name_max_s;
+}				t_fmt;
+
+/*
 ** Structure representant la liste des options du programme.
 ** Le pointeur cmp_fun vaut NULL si aucun tri ne doit etre effectue.
 */
@@ -54,7 +67,9 @@ typedef struct	s_opts
 {
 	int		mask;
 	t_ws	ws;
+	int		tab_w;
 	int		(*cmp_fun)(t_file *file1, t_file *file2);
+	t_fmt	fmt;
 }				t_opts;
 
 /*
@@ -79,7 +94,19 @@ int				get_opt(t_opts *opts, t_opt_name opt_name);
 int				set_opt_val(t_opts *opts, t_opt_name opt_name, int new_val);
 
 /*
-** Recupere les informations sur la largeur/hauteur du terminal.
-*/ 
-t_ws			get_winsize(void);
+** Set les options par defauts selon si la sortie standard est
+** un terminal ou non.
+*/
+void			def_opts_for_is_tty(t_opts *opts);
+
+/*
+** Set les informations sur la largeur/hauteur du terminal.
+*/
+void			set_winsize(t_opts *opt);
+
+/*
+** Set la largeur d'une tabulation selon les options du programme.
+*/
+void			set_tab_w(t_opts *opt);
+
 #endif

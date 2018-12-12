@@ -16,20 +16,6 @@
 #include "fields_utils.h"
 
 /*
-** Retourne x arrondi a l'entier superieur.
-*/
-
-static int		ft_ceil(float x)
-{
-	int	ix;
-
-	ix = (int)x;
-	if (x == (float)ix)
-		return (ix);
-	return (ix + 1);
-}
-
-/*
 ** Affiche la liste de fichier par ligne (affichage minimal).
 */
 
@@ -52,41 +38,54 @@ static int		print_by_line(t_opts *opts, t_lst_ls *lst)
 
 static int		print_by_col(t_opts *opts, t_lst_ls *lst)
 {
+	t_lst_ls	**line;
 	int			print_ret;
 	t_lst_ls	*h_lst;
 	int			idx;
-	int			row;
 	int			col;
 	int			col_size = opts->fmt.name_max_s + opts->tab_w - (opts->fmt.name_max_s % opts->tab_w);
 	int			max_col = opts->ws.ws_col / col_size;
 	int			max_row = ft_ceil((float)opts->fmt.lst_size / (float)max_col);
 	max_col = ft_ceil((float)opts->fmt.lst_size / (float)max_row);
 
+	max_col = ft_ceil((float)fmt->lst_size / (float)max_row);
 	h_lst = lst;
-	row = 0;
-	while (lst && row < max_row)
+	if ((line = ft_memalloc(sizeof(t_lst_ls*) * (max_col + 1))) == NULL)
+		return (-1);
+	col = 0;
+	idx = 0;
+	while (lst && col < max_col)
 	{
-		idx = 0;
+		while (idx++ != col * (max_row + 1))
+			lst = lst->next;
+		line[col] = lst;
+		col++;
+	}
+	row = 0;
+	while (row < max_row)
+	{
 		col = 0;
-		while (lst && col < max_col)
+		while (col < max_col)
 		{
-			if (idx == row + col * max_row)
+			if (line[col])
 			{
 				if (col + 1 == max_col)
-					print_ret = ft_printf("%s", lst->file->fields.name);
+					print_ret = ft_printf("%s", line[col]->file->fields.name);
 				else
-					print_ret = ft_printf("%-*s", col_size, lst->file->fields.name);
+					print_ret = ft_printf("%-*s", col_size, line[col]->file->fields.name);
 				if (print_ret < 0)
 					return (-1);
-				col++;
+				line[col] = line[col]->next;
 			}
-			lst = lst->next;
-			idx++;
+			else
+				break ;
+			col++;
 		}
 		ft_putchar('\n');
-		lst = h_lst;
 		row++;
 	}
+	if (line)
+		free(line);
 	return (0);
 }
 

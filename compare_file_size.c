@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 09:10:56 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/08 10:44:02 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/12 12:36:27 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@ int		cmp_file_size_rev(t_file *file1, t_file *file2)
 
 int		cmp_file_size(t_file *file1, t_file *file2)
 {
-	if (file1 == NULL)
-		return (file2 == NULL ? 0 : -1);
-	else if (file2 == NULL)
-		return (1);
 	if (file1->stat.st_size < file2->stat.st_size)
 		return (-1);
 	else if (file1->stat.st_size > file2->stat.st_size)

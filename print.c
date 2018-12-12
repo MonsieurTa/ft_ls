@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 11:09:53 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 09:31:13 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/12 10:10:48 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ static int		print_by_col(t_opts *opts, t_lst_ls *lst)
 	int			print_ret;
 	t_lst_ls	*h_lst;
 	int			idx;
+	int			row;
 	int			col;
 	int			col_size = opts->fmt.name_max_s + opts->tab_w - (opts->fmt.name_max_s % opts->tab_w);
 	int			max_col = opts->ws.ws_col / col_size;
 	int			max_row = ft_ceil((float)opts->fmt.lst_size / (float)max_col);
-	max_col = ft_ceil((float)opts->fmt.lst_size / (float)max_row);
 
-	max_col = ft_ceil((float)fmt->lst_size / (float)max_row);
+	max_col = ft_ceil((float)opts->fmt.lst_size / (float)max_row);
 	h_lst = lst;
 	if ((line = ft_memalloc(sizeof(t_lst_ls*) * (max_col + 1))) == NULL)
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:48:29 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 09:56:17 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/12 10:38:20 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 #include "options.h"
 #include "fields_utils.h"
 
+//TODO ameliorer la gestion d'erreur
 t_lst_ls	*link_file(char *path, t_opts *opts)
 {
 	t_lst_ls	*lst;
+	t_lst_ls	*lst_back;
 	t_file		*file;
 	DIR			*pdir;
 
@@ -27,10 +29,15 @@ t_lst_ls	*link_file(char *path, t_opts *opts)
 	pdir = NULL;
 	if (access(path, X_OK) != 0 || (pdir = opendir(path)) == NULL)
 		return (NULL);
-	file = NULL;
-	lst = NULL;
+	file = lst_newfile(pdir, path, opts);
+	if (file == NULL || (lst = lst_newnode(file)) == NULL)
+		return (NULL);
+	lst_back = lst;
 	while ((file = lst_newfile(pdir, path, opts)) != NULL)
-		lst_append(&lst, lst_newnode(file));
+	{
+		lst_back->next = lst_newnode(file);
+		lst_back = lst_back->next;
+	}
 	closedir(pdir);
 	return (lst);
 }

@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 17:06:52 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/12 18:31:41 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ static void	sort_params(int idx, int ac, char **av)
 
 int	main(int ac, char **av)
 {
-	t_opts	opts;
-	char	c;
-	int		nb_opts;
-	int		idx;
+	t_lst_info	lst;
+	t_opts		opts;
+	char		c;
+	int			nb_opts;
+	int			idx;
 
 	opts.mask = 0;
 	def_opts_for_is_tty(&opts);
@@ -58,7 +59,18 @@ int	main(int ac, char **av)
 	}
 	else
 	{
-		idx = nb_opts;
+		idx = nb_opts + 1;
+		while (idx < ac)
+		{
+			multiple_file(&lst, &opts, av[idx]);
+			idx++;
+		}
+		if (lst.head != NULL)
+		{
+			print_files(lst.head, &opts);
+			lst_rm(lst.head, &opts);
+		}
+		idx = nb_opts + 1;
 		sort_params(idx, ac, av);
 		while (idx < ac)
 		{

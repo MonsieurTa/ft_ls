@@ -1,0 +1,103 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   multiple_file.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/12 17:42:20 by wta               #+#    #+#             */
+/*   Updated: 2018/12/12 18:28:33 by wta              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   multiple_file.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/12 17:23:55 by wta               #+#    #+#             */
+/*   Updated: 2018/12/12 17:36:35 by wta              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_ls.h"
+
+char	*get_dirpath(char *filepath)
+{
+	int		len;
+
+	if (filepath)
+	{
+		len = ft_strlen(filepath);
+		while (len >= 0 && filepath[len] != '/')
+			len--;
+		if (len < 0)
+			return (ft_strdup("."));
+		else
+			return (ft_strndup(filepath, len));
+	}
+	return (NULL);
+}
+
+char	*get_filename(char *filepath)
+{
+	int		len;
+
+	if (filepath)
+	{
+		len = ft_strlen(filepath);
+		while (len >= 0 && filepath[len] != '/')
+			len--;
+		if (len < 0)
+			return (ft_strdup(filepath));
+		else
+			return (ft_strdup(&filepath[len + 1]));
+	}
+	return (NULL);
+}
+
+t_file	*single_file(char *filepath, t_opts *opts)
+{
+	t_file		*file;
+	t_dirent	*tmp;
+	char		*filename;
+	char		*dirpath;
+	DIR			*pdir;
+
+	if ((filename = get_filename(filepath)) == NULL)
+		return (NULL);
+	if ((dirpath = get_dirpath(filepath)) == NULL)
+		return (NULL);
+	if (access(dirpath, X_OK) != 0 || (pdir = opendir(dirpath)) == NULL)
+		return (NULL);
+	while ((tmp = readdir(pdir)) != NULL)
+		if (ft_strequ(tmp->d_name, filename) == 1)
+			break;
+	free(filename);
+	free(dirpath);
+	closedir(pdir);
+	if (tmp != NULL && (file = ft_memalloc(sizeof(t_file))) != NULL)
+	{
+		if ((file->pdent = ft_memalloc(tmp->d_reclen)) != NULL)
+		{
+			ft_memcpy(file->pdent, tmp, tmp->d_reclen);
+			if ((file->path = ft_strdup(filepath)) != NULL
+					&& init_file_infs(file, opts) == 0 && S_ISDIR(file->stat.st_mode) == 0)
+				return (file);
+			free(file->path);
+		}
+		free(file->pdent);
+		free(file);
+	}
+	return (NULL);
+}
+
+void	multiple_file(t_lst_info *lst, t_opts *opts, char *path)
+{
+	t_file	*file;
+
+	if ((file = single_file(path, opts)) != NULL)
+		lst_append(&lst->head, &lst->tail, lst_newnode(file));
+}

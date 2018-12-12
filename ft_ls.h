@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 11:56:31 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/12 18:17:54 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,7 @@ int				print_files(t_lst_ls *lst, t_opts *opts);
 int			init_file_infs(t_file *file, t_opts *opts);
 
 int			is_curr_or_parent(t_dirent *pdent);
+
+void	multiple_file(t_lst_info *lst, t_opts *opts, char *path);
 
 #endif

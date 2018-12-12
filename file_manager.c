@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:48:29 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 11:08:08 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/12 16:12:06 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ t_lst_ls	*link_file(char *path, t_opts *opts)
 		return (NULL);
 	file = lst_newfile(pdir, path, opts);
 	if (file == NULL || (lst = lst_newnode(file)) == NULL)
+	{
+		closedir(pdir);
 		return (NULL);
+	}
 	lst_back = lst;
 	while ((file = lst_newfile(pdir, path, opts)) != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 09:35:40 by wta               #+#    #+#             */
-/*   Updated: 2018/12/02 16:17:37 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/12 09:53:58 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ char			*ft_strinsert(char *s1, char *s2, int index);
 char			*ft_convert_acc(char *output, int len, t_lpf *node);
 char			*ft_format(char *output, int len, t_lpf *node);
 char			*ft_itoa_pf(long long n, t_lpf *node);
+char			*ft_itoa_u(unsigned long long n);
 
 int				ft_abs(long long n);
 int				ft_intlen_base_u(unsigned long long n, int base);

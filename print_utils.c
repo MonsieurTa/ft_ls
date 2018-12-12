@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:52:59 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 11:30:57 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/12 09:22:30 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,18 @@ int				is_hidden(t_file *file)
 			return (1);
 	}
 	return (0);
+}
+
+/*
+** Retourne x arrondi a l'entier superieur.
+*/
+
+int		ft_ceil(float x)
+{
+	int	ix;
+
+	ix = (int)x;
+	if (x == (float)ix)
+		return (ix);
+	return (ix + 1);
 }

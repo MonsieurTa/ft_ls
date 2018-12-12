@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 13:55:13 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 09:09:05 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/11 15:00:59 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ typedef	struct dirent	t_dirent;
 typedef struct stat		t_stat;
 
 /*
+** Structure contenant la liste des champs d'un fichier.
+*/
+typedef struct	s_fields
+{
+	char	*rights;
+	char	*size;
+	char	*name;
+}				t_fields;
+
+/*
 ** t_file est la structure contenant toutes les informations relatives a un
 ** fichier.
 */
@@ -30,6 +40,7 @@ typedef struct	s_file
 	t_stat		stat;
 	char		*path;
 	int			time;
+	t_fields	fields;
 }				t_file;
 
 t_file		*is_symlink(t_file *file);

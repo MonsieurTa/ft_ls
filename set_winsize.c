@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   set_winsize.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/10 05:57:10 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 15:22:04 by wta              ###   ########.fr       */
+/*   Created: 2018/12/08 13:07:56 by wta               #+#    #+#             */
+/*   Updated: 2018/12/11 08:50:29 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "options.h"
+#include <sys/ioctl.h>
 
-# include "ft_ls.h"
-
-void		display_selector(char *path, char *currdir, t_opts *opts);
-int			is_hidden(t_file *file);
-
-#endif
+void	set_winsize(t_opts *opts)
+{
+	ioctl(0, TIOCGWINSZ, &(opts->ws));
+}

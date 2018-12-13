@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 11:09:53 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 11:27:55 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/13 09:35:47 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@
 ** Affiche la liste de fichier par ligne (affichage minimal).
 */
 
-static int		print_by_line(t_opts *opts, t_lst_ls *lst)
+static int		print_by_line(t_lst_ls *lst)
 {
-	int			print_ret;
-
 	while (lst != NULL)
 	{
 		if (ft_printf("%s\n", lst->file->fields.name) < 0)
@@ -95,8 +93,6 @@ static int		print_by_col(t_opts *opts, t_lst_ls *lst)
 
 static int		print_with_long_f(t_opts *opts, t_lst_ls *lst)
 {
-	int			print_ret;
-
 	while (lst != NULL)
 	{
 		if (ft_printf("%-*s %-*s %s\n",
@@ -112,11 +108,10 @@ static int		print_with_long_f(t_opts *opts, t_lst_ls *lst)
 int				print_files(t_lst_ls *lst, t_opts *opts)
 {
 	int		print_ret;
-	char	*field;
 
 	print_ret = 0;
 	if (get_opt(opts, LS_BYLINE) == 1)
-		print_ret = print_by_line(opts, lst);
+		print_ret = print_by_line(lst);
 	else if (get_opt(opts, LS_BYCLMN) == 1)
 		print_ret = print_by_col(opts, lst);
 	else if(get_opt(opts, LS_LONGF) == 1)

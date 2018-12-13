@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 17:13:03 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/13 08:22:12 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,18 @@ int	main(int ac, char **av)
 	set_winsize(&opts);
 	set_tab_w(&opts);
 	if (ac - 1 == nb_opts)
-	{
-		display_selector(".", ".", &opts);
-		return (0);
-	}
+		display_selector(".", 0, &opts);
+	else if (ac - 1 == nb_opts + 1)
+		display_selector(av[nb_opts + 1], 0, &opts);
 	else
 	{
-		idx = nb_opts;
+		idx = nb_opts + 1;
 		sort_params(idx, ac, av);
 		while (idx < ac)
 		{
-			display_selector(av[idx], av[idx], &opts);
+			display_selector(av[idx], 1, &opts);
+			if (idx < ac - 1)
+				ft_printf("\n");
 			idx++;
 		}
 	}

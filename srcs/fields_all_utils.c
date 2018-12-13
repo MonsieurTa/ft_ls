@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:09:09 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/13 13:49:09 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/13 14:10:00 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void		null_init_all_fields(t_file *file)
 	file->fields.rights = NULL;
 	file->fields.size = NULL;
 	file->fields.name = NULL;
+	file->fields.symlink_target = NULL;
 }
 
 int				init_all_fields_and_fmt(t_opts *opts, t_file *file)
@@ -67,6 +68,12 @@ int				init_all_fields_and_fmt(t_opts *opts, t_file *file)
 	}
 	if (file->fields.name_len > opts->fmt.name_max_s)
 		opts->fmt.name_max_s = file->fields.name_len;
+	set_field_symlink(opts, file, &(file->fields.symlink_target));
+	if (file->fields.symlink_target == NULL)
+	{
+		delete_all_fields(file);
+		return (-1);
+	}
 	++(opts->fmt.lst_size);
 	return (0);
 }
@@ -76,4 +83,5 @@ void			delete_all_fields(t_file *file)
 	free(file->fields.rights);
 	free(file->fields.size);
 	free(file->fields.name);
+	free(file->fields.symlink_target);
 }

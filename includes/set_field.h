@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 09:17:47 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/13 13:19:40 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/13 14:21:22 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ int		set_field_color_end_static(t_opts *opts, t_file *file, char **field);
 ** caracteres de field, set field a NULL en cas d'erreur.
 */
 int		set_field_name(t_opts *opts, t_file *file, char **field);
+
+/*
+** Set le pointeur sur field a une chaine de caractere representant la cible du
+** du symlink passe en parametre, chaine vide si file n'est pas un symlink.
+** Retourne le nombre de caracteres de field, set field a NULL en cas d'erreur.
+*/
+int		set_field_symlink(t_opts *opts, t_file *file, char **field);
 
 /*
 ** Set le pointeur sur field a une chaine de caractere representant la taille

@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 13:55:13 by wta               #+#    #+#             */
-/*   Updated: 2018/12/13 13:48:02 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/13 14:06:18 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct	s_fields
 	char	*color_end_static;
 	char	*name;
 	int		name_len;
+	char	*symlink_target;
 }				t_fields;
 
 /*

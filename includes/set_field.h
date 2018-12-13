@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 09:17:47 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/11 09:13:20 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/13 13:19:40 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,23 @@
 
 # include "options.h"
 # include "file.h"
+
+/*
+** Set le pointeur sur field a une chaine de caractere representant le debut
+** de la couleur du fichier passe en parametre selon les options. Retourne 0,
+** n'echoue jamais si les parametres sont valide, sinon retourne NULL.
+** *field ne devra pas etre free car pointera sur une string du stack.
+*/
+int		set_field_color_start_static(t_opts *opts, t_file *file, char **field);
+
+/*
+** !! Doit obligatoirement etre appele apres set_field_color_start_static !!
+** Set le pointeur sur field a une chaine de caractere representant la fin
+** de la couleur du fichier passe en parametre selon les options. Retourne 0,
+** n'echoue jamais si les parametres sont valide, sinon retourne NULL.
+** *field ne devra pas etre free car pointera sur une string du stack.
+*/
+int		set_field_color_end_static(t_opts *opts, t_file *file, char **field);
 
 /*
 ** Set le pointeur sur field a une chaine de caractere representant le nom

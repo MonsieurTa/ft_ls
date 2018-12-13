@@ -6,7 +6,7 @@
 #    By: wta <wta@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 20:09:26 by wta               #+#    #+#              #
-#    Updated: 2018/12/13 09:41:05 by fwerner          ###   ########.fr        #
+#    Updated: 2018/12/13 12:59:19 by fwerner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #=======================================================================  COLOR#
@@ -35,16 +35,17 @@ file_manager.c			file_utils.c			lst_sort.c				\
 lst_utils.c				options.c				options_rules.c			\
 options_tab.c			options_tty.c			path.c					\
 print.c					print_by_rules.c		print_utils.c			\
-recursive.c				set_attr_utils.c		set_field_gid.c			\
-set_field_hlnk.c		set_field_name.c		set_field_rights.c		\
-set_field_size.c		set_field_uid.c			set_winsize.c
+recursive.c				set_attr_utils.c		set_field_color_end_static.c \
+set_field_gid.c			set_field_hlnk.c		set_field_color_start_static.c \
+set_field_name.c		set_field_rights.c		set_field_size.c		\
+set_field_uid.c			set_winsize.c
 HEADER		=																\
 ft_ls.h				compare_utils.h		fields_utils.h		file.h			\
 options.h			options_rules.h		print.h				set_field.h
 #======================================================================# RULES #
 all : $(NAME)
 #=======================================================================# NAME #
-$(NAME) : $(LIBFT) $(OBJ) $(addprefix $(INCDIR)/,$(HEADER))
+$(NAME) : $(LIBFT) $(OBJ)
 	@$(CC) $(CFLAGS) $(INC) $(OBJ) $(LIBFT) -o $@
 	@echo "\n$(_GREEN)[CREATED]$(_WHITE)" $@
 	@echo "All objects files are in $(_DYELLOW)obj$(_WHITE)/"
@@ -53,7 +54,7 @@ $(OBJDIR) :
 	@mkdir $@
 	@echo "$(_YELLOW)[CREATED]$(_WHITE)" $@
 #======================================================================# FT_LS #
-$(addprefix $(OBJDIR)/,%.o) : $(addprefix $(SRCSDIR)/,%.c) | $(OBJDIR)
+$(addprefix $(OBJDIR)/,%.o) : $(addprefix $(SRCSDIR)/,%.c) $(addprefix $(INCDIR)/,$(HEADER)) | $(OBJDIR)
 	@$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 	@echo "\r                                                              \r\c"
 	@echo "$(_GREEN)[OK]$(_WHITE) $@\c"

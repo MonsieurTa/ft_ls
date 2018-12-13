@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 09:05:00 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/12 11:39:52 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/13 12:43:56 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char		*get_link_target_with_deco(t_file *file)
 
 int				set_field_name(t_opts *opts, t_file *file, char **field)
 {
-	char *tmp;
+	char	*tmp;
 
 	if (opts == NULL || file == NULL || field == NULL)
 	{

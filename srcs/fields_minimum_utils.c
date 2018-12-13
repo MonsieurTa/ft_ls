@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 11:30:12 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/12 09:30:19 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/13 12:52:35 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ int				init_minimum_fields_and_fmt(t_opts *opts, t_file *file)
 	int			tmp_size;
 
 	null_init_minimum_fields(file);
+	set_field_color_start_static(opts, file, &(file->fields.color_start_static));
+	if (file->fields.color_start_static == NULL)
+	{
+		delete_all_fields(file);
+		return (-1);
+	}
+	set_field_color_end_static(opts, file, &(file->fields.color_end_static));
+	if (file->fields.color_end_static == NULL)
+	{
+		delete_all_fields(file);
+		return (-1);
+	}
 	tmp_size = set_field_name(opts, file, &(file->fields.name));
 	if (file->fields.name == NULL)
 	{

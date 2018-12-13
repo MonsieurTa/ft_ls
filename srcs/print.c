@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 11:09:53 by wta               #+#    #+#             */
-/*   Updated: 2018/12/13 13:14:49 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/13 13:54:00 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ static int		print_by_col(t_opts *opts, t_lst_ls *lst)
 							line[col]->file->fields.name,
 						line[col]->file->fields.color_end_static);
 				else
-					print_ret = ft_printf("%s%-*s%s",
+					print_ret = ft_printf("%s%s%s%-*s",
 							line[col]->file->fields.color_start_static,
-							col_size, line[col]->file->fields.name,
-							line[col]->file->fields.color_end_static);
+							line[col]->file->fields.name,
+							line[col]->file->fields.color_end_static,
+							col_size - line[col]->file->fields.name_len, "");
 				if (print_ret < 0)
 					return (-1);
 				line[col] = line[col]->next;

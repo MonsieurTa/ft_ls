@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 12:48:00 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/13 13:05:48 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/13 13:41:43 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ int		set_field_color_start_static(t_opts *opts, t_file *file, char **field)
 			*field = "\033[32m";
 		else if (S_ISFIFO(file->stat.st_mode))
 			*field = "\033[33m";
+		else if (S_ISBLK(file->stat.st_mode))
+			*field = "\033[34;46m";
+		else if (S_ISCHR(file->stat.st_mode))
+			*field = "\033[34;43m";
 		else if (file->stat.st_mode & S_IXUSR)
 			*field = "\033[31m";
 		else

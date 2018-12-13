@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 13:55:13 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 09:19:59 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/13 15:58:29 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ typedef struct	s_fields
 {
 	char	*rights;
 	char	*size;
-	char	*name;
+	char	*color_start_static;
+	char	*color_end_static;
+	int		name_with_deco_len;
+	char	*name_deco;
 }				t_fields;
 
 /*

@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 11:30:12 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/13 13:56:21 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/13 16:01:00 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 static void		null_init_minimum_fields(t_file *file)
 {
-	file->fields.name = NULL;
+	file->fields.name_deco = NULL;
 }
 
 int				init_minimum_fields_and_fmt(t_opts *opts, t_file *file)
@@ -39,19 +39,20 @@ int				init_minimum_fields_and_fmt(t_opts *opts, t_file *file)
 		delete_minimum_fields(file);
 		return (-1);
 	}
-	file->fields.name_len = set_field_name(opts, file, &(file->fields.name));
-	if (file->fields.name == NULL)
+	file->fields.name_with_deco_len = ft_strlen(file->pdent->d_name);
+	file->fields.name_with_deco_len += set_field_name_deco(opts, file, &(file->fields.name_deco));
+	if (file->fields.name_deco == NULL)
 	{
 		delete_minimum_fields(file);
 		return (-1);
 	}
-	if (file->fields.name_len > opts->fmt.name_max_s)
-		opts->fmt.name_max_s = file->fields.name_len;
+	if (file->fields.name_with_deco_len > opts->fmt.name_with_deco_max_s)
+		opts->fmt.name_with_deco_max_s = file->fields.name_with_deco_len;
 	++(opts->fmt.lst_size);
 	return (0);
 }
 
 void			delete_minimum_fields(t_file *file)
 {
-	free(file->fields.name);
+	free(file->fields.name_deco);
 }

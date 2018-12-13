@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/12 09:17:01 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/13 15:06:44 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct	s_fmt
 	int		lst_size;
 	int		rights_max_s;
 	int		size_max_s;
-	int		name_max_s;
+	int		name_with_deco_max_s;
 }				t_fmt;
 
 /*

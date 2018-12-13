@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:09:09 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/12 09:55:23 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/13 16:00:50 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void		null_init_all_fields(t_file *file)
 {
 	file->fields.rights = NULL;
 	file->fields.size = NULL;
-	file->fields.name = NULL;
+	file->fields.name_deco = NULL;
 }
 
 int				init_all_fields_and_fmt(t_opts *opts, t_file *file)
@@ -47,14 +47,27 @@ int				init_all_fields_and_fmt(t_opts *opts, t_file *file)
 	}
 	if (tmp_size > opts->fmt.size_max_s)
 		opts->fmt.size_max_s = tmp_size;
-	tmp_size = set_field_name(opts, file, &(file->fields.name));
-	if (file->fields.name == NULL)
+	set_field_color_start_static(opts, file, &(file->fields.color_start_static));
+	if (file->fields.color_start_static == NULL)
 	{
 		delete_all_fields(file);
 		return (-1);
 	}
-	if (tmp_size > opts->fmt.name_max_s)
-		opts->fmt.name_max_s = tmp_size;
+	set_field_color_end_static(opts, file, &(file->fields.color_end_static));
+	if (file->fields.color_end_static == NULL)
+	{
+		delete_all_fields(file);
+		return (-1);
+	}
+	file->fields.name_with_deco_len = ft_strlen(file->pdent->d_name);
+	file->fields.name_with_deco_len += set_field_name_deco(opts, file, &(file->fields.name_deco));
+	if (file->fields.name_deco == NULL)
+	{
+		delete_all_fields(file);
+		return (-1);
+	}
+	if (file->fields.name_with_deco_len > opts->fmt.name_with_deco_max_s)
+		opts->fmt.name_with_deco_max_s = file->fields.name_with_deco_len;
 	++(opts->fmt.lst_size);
 	return (0);
 }
@@ -63,5 +76,5 @@ void			delete_all_fields(t_file *file)
 {
 	free(file->fields.rights);
 	free(file->fields.size);
-	free(file->fields.name);
+	free(file->fields.name_deco);
 }

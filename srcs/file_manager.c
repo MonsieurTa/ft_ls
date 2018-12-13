@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:48:29 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 16:12:06 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/13 15:56:27 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_lst_ls	*link_file(char *path, t_opts *opts)
 
 	opts->fmt.rights_max_s = 0;
 	opts->fmt.size_max_s = 0;
-	opts->fmt.name_max_s = 0;
+	opts->fmt.name_with_deco_max_s = 0;
 	opts->fmt.lst_size = 0;
 	pdir = NULL;
 	if (access(path, X_OK) != 0 || (pdir = opendir(path)) == NULL)

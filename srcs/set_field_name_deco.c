@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_field_name.c                                   :+:      :+:    :+:   */
+/*   set_field_symlink.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/10 09:05:00 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/12 11:39:52 by fwerner          ###   ########.fr       */
+/*   Created: 2018/12/13 14:11:02 by fwerner           #+#    #+#             */
+/*   Updated: 2018/12/13 15:10:57 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ static char		*get_link_target_with_deco(t_file *file)
 	return (result);
 }
 
-int				set_field_name(t_opts *opts, t_file *file, char **field)
+int				set_field_name_deco(t_opts *opts, t_file *file, char **field)
 {
-	char *tmp;
-
 	if (opts == NULL || file == NULL || field == NULL)
 	{
 		if (field != NULL)
@@ -45,18 +43,10 @@ int				set_field_name(t_opts *opts, t_file *file, char **field)
 		return (0);
 	}
 	if (get_opt(opts, LS_LONGF) == 1 && S_ISLNK(file->stat.st_mode))
-	{
-		tmp = get_link_target_with_deco(file);
-		*field = ft_strjoin(file->pdent->d_name, tmp);
-		free(tmp);
-	}
+		*field = get_link_target_with_deco(file);
 	else if (get_opt(opts, LS_SLASHD) == 1 && S_ISDIR(file->stat.st_mode))
-	{
-		*field = ft_strjoin(file->pdent->d_name, "/");
-	}
+		*field = ft_strdup("/");
 	else
-	{
-		*field = ft_strdup(file->pdent->d_name);
-	}
+		*field = ft_strdup("");
 	return (*field == NULL ? 0 : ft_strlen(*field));
 }

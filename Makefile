@@ -6,7 +6,7 @@
 #    By: wta <wta@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 20:09:26 by wta               #+#    #+#              #
-#    Updated: 2018/12/13 09:41:05 by fwerner          ###   ########.fr        #
+#    Updated: 2018/12/13 16:31:23 by wta              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #=======================================================================  COLOR#
@@ -37,7 +37,8 @@ options_tab.c			options_tty.c			path.c					\
 print.c					print_by_rules.c		print_utils.c			\
 recursive.c				set_attr_utils.c		set_field_gid.c			\
 set_field_hlnk.c		set_field_name.c		set_field_rights.c		\
-set_field_size.c		set_field_uid.c			set_winsize.c
+set_field_size.c		set_field_uid.c			set_winsize.c			\
+multiple_file.c
 HEADER		=																\
 ft_ls.h				compare_utils.h		fields_utils.h		file.h			\
 options.h			options_rules.h		print.h				set_field.h

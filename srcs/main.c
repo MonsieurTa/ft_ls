@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/13 14:49:06 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/13 16:29:41 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,6 @@
 #include "options.h"
 #include "compare_utils.h"
 #include "print.h"
-
-static void	sort_params(int idx, int ac, char **av)
-{
-	char	*tmp;
-	int		i;
-
-	tmp = NULL;
-	i = idx;
-	while (i < ac - 1)
-	{
-		if (ft_strcmp(av[i], av[i + 1]) > 0)
-		{
-			tmp = av[i];
-			av[i] = av[i + 1];
-			av[i + 1] = tmp;
-			if (i > idx)
-				i--;
-		}
-		else
-			i++;
-	}
-}
 
 int	main(int ac, char **av)
 {
@@ -55,9 +33,18 @@ int	main(int ac, char **av)
 	if (ac - 1 == nb_opts)
 		display_selector(".", 0, &opts);
 	else if (ac - 1 == nb_opts + 1)
+	{
 		display_selector(av[nb_opts + 1], 0, &opts);
+		multiple_file(&lst, &opts, av[nb_opts + 1]);
+		if (lst.head != NULL)
+		{
+			print_files(lst.head, &opts);
+			lst_rm(lst.head, &opts);
+		}
+	}
 	else
 	{
+		opts.has_dir = 0;
 		idx = nb_opts + 1;
 		while (idx < ac)
 		{
@@ -70,12 +57,11 @@ int	main(int ac, char **av)
 			lst_rm(lst.head, &opts);
 		}
 		idx = nb_opts + 1;
-		sort_params(idx, ac, av);
+		if (opts.has_dir == 1)
+			ft_printf("\n");
 		while (idx < ac)
 		{
 			display_selector(av[idx], 1, &opts);
-			if (idx < ac - 1)
-				ft_printf("\n");
 			idx++;
 		}
 	}

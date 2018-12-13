@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 14:19:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 15:03:27 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/13 16:24:06 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	display_selector(char *path, char print_name, t_opts *opts)
 	t_lst_ls	*lst_tmp;
 
 	lst = NULL;
-	if (print_name == 1)
-		ft_printf("%s:\n", path);
 	if ((lst = link_file(path, opts)) != NULL)
 	{
+		if (print_name == 1)
+			ft_printf("%s:\n", path);
 		if (opts->cmp_fun != NULL)
 			lst = lst_mergesort(lst, opts->cmp_fun);
 		print_files(lst, opts);

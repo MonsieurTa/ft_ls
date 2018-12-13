@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 16:36:39 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/12 14:41:16 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,21 @@ typedef struct	s_lst_ls
 	t_file			*file;
 }				t_lst_ls;
 
-/*
-** Structure contenant des informations sur le format d'affichage.
-*/
-typedef struct	s_fmt
+typedef struct	s_lst_info
 {
-	int		lst_size;
-	int		rights_max_s;
-	int		size_max_s;
-	int		name_max_s;
-}				t_fmt;
+	t_lst_ls	*head;
+	t_lst_ls	*tail;
+}				t_lst_info;
 
 /*
 ** Ajoute un maillon a la suite d'une liste chainee.
 */
-void			lst_append(t_lst_ls **lst, t_lst_ls *node);
+void			lst_append(t_lst_ls **head, t_lst_ls **tail, t_lst_ls *node);
 
 /*
 **	Supprime une liste chainee.
 */
-void			lst_rm(t_lst_ls *lst);
-
-/*
-** Recupere la taille d'une liste chainee.
-*/
-int				lst_size(t_lst_ls *lst);
+void			lst_rm(t_lst_ls *lst, t_opts *opts);
 
 /*
 ** Creer un nouveau maillon qui contient un pointeur sur structure sur les
@@ -89,7 +79,7 @@ t_lst_ls		*lst_mergesort(t_lst_ls *lst,
 /*
 ** Fonction de recursivite pour l'option -R
 */
-void			ls_rec(char *path, char *currdir, t_opts *opts);
+void			ls_rec(char *path, t_opts *opts);
 
 t_lst_ls		*find_dir(t_lst_ls *lst);
 t_lst_ls	*find_file(t_lst_ls *lst);
@@ -104,5 +94,13 @@ t_lst_ls		*skip_hidden(t_lst_ls *lst);
 ** en cas d'erreur et 0 en cas de succes.
 */
 int				print_files(t_lst_ls *lst, t_opts *opts);
+
+/*
+** Initialise les fields du fichier selon les options et maj le format
+** si besoin.
+*/
+int			init_file_infs(t_file *file, t_opts *opts);
+
+int			is_curr_or_parent(t_dirent *pdent);
 
 #endif

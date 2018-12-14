@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 11:09:53 by wta               #+#    #+#             */
-/*   Updated: 2018/12/13 16:15:50 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/14 11:31:44 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,22 @@ static int		print_by_col(t_opts *opts, t_lst_ls *lst)
 
 static int		print_with_long_f(t_opts *opts, t_lst_ls *lst)
 {
+	char	space_between_guid_and_uid;
+
+	if (get_opt(opts, LS_NOOWN) == 1 || get_opt(opts, LS_NOGRP) == 1)
+		space_between_guid_and_uid = 0;
+	else
+		space_between_guid_and_uid = 2;
+	if (ft_printf("total %lld\n", opts->fmt.dir_block_count) == -1)
+		return (-1);
 	while (lst != NULL)
 	{
-		if (ft_printf("%-*s %*s %s%s%s%s\n",
-					opts->fmt.rights_max_s, lst->file->fields.rights,
+		if (ft_printf("%s %*s %-*s%*s%-*s  %*s %s%s%s%s\n",
+					lst->file->fields.rights,
+					opts->fmt.hard_link_max_s, lst->file->fields.hard_link,
+					opts->fmt.user_max_s, lst->file->fields.user,
+					space_between_guid_and_uid, "",
+					opts->fmt.group_max_s, lst->file->fields.group,
 					opts->fmt.size_max_s, lst->file->fields.size,
 					lst->file->fields.color_start_static,
 					lst->file->pdent->d_name,

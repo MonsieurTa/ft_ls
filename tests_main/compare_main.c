@@ -1,13 +1,20 @@
 #include <stdio.h>
 #include "../options.h"
+#include "../print.h"
 #include "../compare_utils.h"
 
 int main(int argc, char **argv)
 {
 	char err = '\0';
 	t_opts lol;
-	int res = init_opts(argc - 1, argv + 1, &lol, &err);
-	lol.cmp_fun = g_get_cmp_fun(&lol);
+	int res;
+
+	lol.mask = 0;
+	def_opts_for_is_tty(&lol);
+	res = init_opts(argc - 1, argv + 1, &lol, &err);
+	set_cmp_fun(&lol);
+	set_winsize(&lol);
+	set_tab_w(&lol);
 
 	if (lol.cmp_fun == cmp_file_size_rev)
 		printf("size_rev\n");

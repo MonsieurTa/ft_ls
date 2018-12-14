@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 10:06:23 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/12 14:41:16 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,16 @@ typedef struct	s_lst_ls
 	t_file			*file;
 }				t_lst_ls;
 
+typedef struct	s_lst_info
+{
+	t_lst_ls	*head;
+	t_lst_ls	*tail;
+}				t_lst_info;
+
 /*
 ** Ajoute un maillon a la suite d'une liste chainee.
 */
-void			lst_append(t_lst_ls **lst, t_lst_ls *node);
+void			lst_append(t_lst_ls **head, t_lst_ls **tail, t_lst_ls *node);
 
 /*
 **	Supprime une liste chainee.
@@ -73,7 +79,7 @@ t_lst_ls		*lst_mergesort(t_lst_ls *lst,
 /*
 ** Fonction de recursivite pour l'option -R
 */
-void			ls_rec(char *path, char *currdir, t_opts *opts);
+void			ls_rec(char *path, t_opts *opts);
 
 t_lst_ls		*find_dir(t_lst_ls *lst);
 t_lst_ls	*find_file(t_lst_ls *lst);

@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:09:09 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/14 11:34:39 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/14 13:37:44 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void		null_init_all_fields(t_file *file)
 	file->fields.user = NULL;
 	file->fields.group = NULL;
 	file->fields.size = NULL;
+	file->fields.date = NULL;
 	file->fields.name_deco = NULL;
 }
 
@@ -72,6 +73,12 @@ int				init_all_fields_and_fmt(t_opts *opts, t_file *file)
 	}
 	if (tmp_size > opts->fmt.size_max_s)
 		opts->fmt.size_max_s = tmp_size;
+	set_field_date(opts, file, &(file->fields.date));
+	if (file->fields.date == NULL)
+	{
+		delete_all_fields(file);
+		return (-1);
+	}
 	set_field_color_start_static(opts, file, &(file->fields.color_start_static));
 	if (file->fields.color_start_static == NULL)
 	{
@@ -105,5 +112,6 @@ void			delete_all_fields(t_file *file)
 	free(file->fields.user);
 	free(file->fields.group);
 	free(file->fields.size);
+	free(file->fields.date);
 	free(file->fields.name_deco);
 }

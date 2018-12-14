@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 11:09:53 by wta               #+#    #+#             */
-/*   Updated: 2018/12/14 11:31:44 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/14 15:28:00 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,13 +116,14 @@ static int		print_with_long_f(t_opts *opts, t_lst_ls *lst)
 		return (-1);
 	while (lst != NULL)
 	{
-		if (ft_printf("%s %*s %-*s%*s%-*s  %*s %s%s%s%s\n",
+		if (ft_printf("%s %*s %-*s%*s%-*s  %*s %s %s%s%s%s\n",
 					lst->file->fields.rights,
 					opts->fmt.hard_link_max_s, lst->file->fields.hard_link,
 					opts->fmt.user_max_s, lst->file->fields.user,
 					space_between_guid_and_uid, "",
 					opts->fmt.group_max_s, lst->file->fields.group,
 					opts->fmt.size_max_s, lst->file->fields.size,
+					lst->file->fields.date,
 					lst->file->fields.color_start_static,
 					lst->file->pdent->d_name,
 					lst->file->fields.color_end_static,

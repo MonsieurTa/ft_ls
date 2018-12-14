@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 09:17:47 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/14 10:03:43 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/14 10:53:30 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,13 @@ int		set_field_size(t_opts *opts, t_file *file, char **field);
 ** caracteres de field, set field a NULL en cas d'erreur.
 */
 int		set_field_rights(t_opts *opts, t_file *file, char **field);
+
+/*
+** Set le pointeur sur field a une chaine de caractere representant le nombre
+** de hard link du fichier passe en parametre selon les options. Retourne
+** le nombre de caracteres de field, set field a NULL en cas d'erreur.
+*/
+int		set_field_nlink(t_opts *opts, t_file *file, char **field);
 
 /*
 ** Set le pointeur sur field a une chaine de caractere representant l'user

@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 11:09:53 by wta               #+#    #+#             */
-/*   Updated: 2018/12/14 10:29:34 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/14 10:49:52 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,9 @@ static int		print_with_long_f(t_opts *opts, t_lst_ls *lst)
 		space_between_guid_and_uid = 2;
 	while (lst != NULL)
 	{
-		if (ft_printf("%s %-*s%*s%-*s  %*s %s%s%s%s\n",
+		if (ft_printf("%s %*s %-*s%*s%-*s  %*s %s%s%s%s\n",
 					lst->file->fields.rights,
+					opts->fmt.hard_link_max_s, lst->file->fields.hard_link,
 					opts->fmt.user_max_s, lst->file->fields.user,
 					space_between_guid_and_uid, "",
 					opts->fmt.group_max_s, lst->file->fields.group,

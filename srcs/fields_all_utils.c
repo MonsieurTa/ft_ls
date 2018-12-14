@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:09:09 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/14 10:08:58 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/14 10:53:50 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 static void		null_init_all_fields(t_file *file)
 {
 	file->fields.rights = NULL;
+	file->fields.hard_link = NULL;
 	file->fields.user = NULL;
 	file->fields.group = NULL;
 	file->fields.size = NULL;
@@ -39,6 +40,14 @@ int				init_all_fields_and_fmt(t_opts *opts, t_file *file)
 		delete_all_fields(file);
 		return (-1);
 	}
+	tmp_size = set_field_nlink(opts, file, &(file->fields.hard_link));
+	if (file->fields.hard_link == NULL)
+	{
+		delete_all_fields(file);
+		return (-1);
+	}
+	if (tmp_size > opts->fmt.hard_link_max_s)
+		opts->fmt.hard_link_max_s = tmp_size;
 	tmp_size = set_field_uid(opts, file, &(file->fields.user));
 	if (file->fields.user == NULL)
 	{
@@ -91,6 +100,7 @@ int				init_all_fields_and_fmt(t_opts *opts, t_file *file)
 void			delete_all_fields(t_file *file)
 {
 	free(file->fields.rights);
+	free(file->fields.hard_link);
 	free(file->fields.user);
 	free(file->fields.group);
 	free(file->fields.size);

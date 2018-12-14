@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/14 10:40:20 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/14 11:28:16 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,13 @@ typedef enum	e_opt_name
 */
 typedef struct	s_fmt
 {
-	int		lst_size;
-	int		hard_link_max_s;
-	int		user_max_s;
-	int		group_max_s;
-	int		size_max_s;
-	int		name_with_deco_max_s;
+	ssize_t		dir_block_count;
+	int			lst_size;
+	int			hard_link_max_s;
+	int			user_max_s;
+	int			group_max_s;
+	int			size_max_s;
+	int			name_with_deco_max_s;
 }				t_fmt;
 
 /*

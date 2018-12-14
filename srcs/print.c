@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 11:09:53 by wta               #+#    #+#             */
-/*   Updated: 2018/12/14 10:49:52 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/14 11:31:44 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ static int		print_with_long_f(t_opts *opts, t_lst_ls *lst)
 		space_between_guid_and_uid = 0;
 	else
 		space_between_guid_and_uid = 2;
+	if (ft_printf("total %lld\n", opts->fmt.dir_block_count) == -1)
+		return (-1);
 	while (lst != NULL)
 	{
 		if (ft_printf("%s %*s %-*s%*s%-*s  %*s %s%s%s%s\n",

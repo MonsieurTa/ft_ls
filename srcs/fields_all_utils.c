@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:09:09 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/14 10:53:50 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/14 11:34:39 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int				init_all_fields_and_fmt(t_opts *opts, t_file *file)
 	}
 	if (file->fields.name_with_deco_len > opts->fmt.name_with_deco_max_s)
 		opts->fmt.name_with_deco_max_s = file->fields.name_with_deco_len;
+	opts->fmt.dir_block_count += file->stat.st_blocks;
 	++(opts->fmt.lst_size);
 	return (0);
 }

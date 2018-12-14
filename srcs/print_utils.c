@@ -1,22 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/10 05:57:10 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 09:33:19 by wta              ###   ########.fr       */
+/*   Created: 2018/12/10 05:52:59 by wta               #+#    #+#             */
+/*   Updated: 2018/12/12 09:22:30 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "ft_ls.h"
 
-# include "options.h"
-# include "ft_ls.h"
+int				is_hidden(t_file *file)
+{
+	if (file)
+	{
+		if (*file->pdent->d_name == '.')
+			return (1);
+	}
+	return (0);
+}
 
-void		get_fmt(t_fmt *fmt, t_lst_ls *lst, t_opts *opts);
-int			is_hidden(t_file *file);
+/*
+** Retourne x arrondi a l'entier superieur.
+*/
 
-#endif
+int		ft_ceil(float x)
+{
+	int	ix;
+
+	ix = (int)x;
+	if (x == (float)ix)
+		return (ix);
+	return (ix + 1);
+}

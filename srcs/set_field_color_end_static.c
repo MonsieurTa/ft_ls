@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_field_name.c                                   :+:      :+:    :+:   */
+/*   set_field_color_start_static.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/10 09:05:00 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/10 15:00:54 by fwerner          ###   ########.fr       */
+/*   Created: 2018/12/13 12:48:00 by fwerner           #+#    #+#             */
+/*   Updated: 2018/12/13 13:11:56 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/includes/libft.h"
+#include <stdlib.h>
 #include "options.h"
 #include "file.h"
+#include "set_field.h"
 
-int		set_field_name(t_opts *opts, t_file *file, char **field)
+int		set_field_color_end_static(t_opts *opts, t_file *file, char **field)
 {
 	if (opts == NULL || file == NULL || field == NULL)
 	{
@@ -22,14 +23,16 @@ int		set_field_name(t_opts *opts, t_file *file, char **field)
 			*field = NULL;
 		return (0);
 	}
-	if (get_opt(opts, LS_SLASHD) == 1 && S_ISDIR(file->stat.st_mode))
+	if (get_opt(opts, LS_COLOR) == 1)
 	{
-		*field = ft_strjoin(file->pdent->d_name, "/");
-		return (ft_strlen(file->pdent->d_name) + 1);
+		if ((file->fields.color_start_static)[0] == '\0')
+			*field = "";
+		else
+			*field = "\033[0m";
 	}
 	else
 	{
-		*field = ft_strdup(file->pdent->d_name);
-		return (ft_strlen(file->pdent->d_name));
+		*field = "";
 	}
+	return (0);
 }

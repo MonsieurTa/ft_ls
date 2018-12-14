@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 12:17:25 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 15:30:38 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/11 09:29:19 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 #include "libft/includes/ft_printf.h"
 #include "options.h"
 #include "file.h"
+#include "set_field.h"
 
-void	get_file_type(t_stat *stat, char *field)
+static void	get_file_type(t_stat *stat, char *field)
 {
 	if (S_ISBLK(stat->st_mode))
 		field[0] = 'b';
@@ -35,8 +36,11 @@ void	get_file_type(t_stat *stat, char *field)
 		field[0] = '?';
 }
 
-void	get_rights(t_stat *stat, char *field)
+static void	get_rights(t_file *file, char *field)
 {
+	t_stat	*stat;
+
+	stat = &file->stat;
 	field[1] = (stat->st_mode & S_IRUSR) ? 'r' : '-';
 	field[2] = (stat->st_mode & S_IWUSR) ? 'w' : '-';
 	field[3] = (stat->st_mode & S_IXUSR) ? 'x' : '-';
@@ -52,9 +56,11 @@ void	get_rights(t_stat *stat, char *field)
 		field[6] = (field[6] == 'x') ? 's' : 'S';
 	if (stat->st_mode & S_ISVTX)
 		field[9] = (field[9] == 'x') ? 't' : 'T';
+	field[10] = (has_xattr(file->path)) ? '@' : ' ';
+	field[10] = (has_acl(file->path)) ? '+' : field[10];
 }
 
-int		set_field_rights(t_opts *opts, t_file *file, char **field)
+int			set_field_rights(t_opts *opts, t_file *file, char **field)
 {
 	if (opts == NULL || file == NULL || field == NULL)
 	{
@@ -65,7 +71,8 @@ int		set_field_rights(t_opts *opts, t_file *file, char **field)
 	if ((*field = ft_strnew(11)) != NULL)
 	{
 		get_file_type(&(file->stat), *field);
-		get_rights(&file->stat, *field);
+		get_rights(file, *field);
+		return (11);
 	}
-	return (1);
+	return (0);
 }

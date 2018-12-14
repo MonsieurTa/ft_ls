@@ -6,7 +6,7 @@
 #    By: wta <wta@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 20:09:26 by wta               #+#    #+#              #
-#    Updated: 2018/12/13 16:08:23 by fwerner          ###   ########.fr        #
+#    Updated: 2018/12/14 10:52:05 by fwerner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #=======================================================================  COLOR#
@@ -36,7 +36,7 @@ lst_utils.c				options.c				options_rules.c			\
 options_tab.c			options_tty.c			path.c					\
 print.c					print_by_rules.c		print_utils.c			\
 recursive.c				set_attr_utils.c		set_field_color_end_static.c \
-set_field_gid.c			set_field_hlnk.c		set_field_color_start_static.c \
+set_field_gid.c			set_field_nlink.c		set_field_color_start_static.c \
 set_field_rights.c		set_field_name_deco.c	set_field_size.c		\
 set_field_uid.c			set_winsize.c
 HEADER		=																\

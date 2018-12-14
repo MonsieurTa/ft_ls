@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/13 15:06:44 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/14 09:49:21 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,11 @@ typedef struct winsize	t_ws;
 typedef enum	e_opt_name
 {
 	LS_INVALID_OPT = -1,
-	LS_EXTATT = 0,
-	LS_BYLINE,
+	LS_BYLINE = 0,
 	LS_ALL,
 	LS_BYCLMN,
 	LS_STCHTI,
 	LS_DIRASF,
-	LS_ACL,
 	LS_NOSORT,
 	LS_COLOR,
 	LS_NOOWN,

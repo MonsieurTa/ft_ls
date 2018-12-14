@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:09:09 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/13 16:00:50 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/14 10:08:58 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 static void		null_init_all_fields(t_file *file)
 {
 	file->fields.rights = NULL;
+	file->fields.user = NULL;
+	file->fields.group = NULL;
 	file->fields.size = NULL;
 	file->fields.name_deco = NULL;
 }
@@ -31,14 +33,28 @@ int				init_all_fields_and_fmt(t_opts *opts, t_file *file)
 	int			tmp_size;
 
 	null_init_all_fields(file);
-	tmp_size = set_field_rights(opts, file, &(file->fields.rights));
+	set_field_rights(opts, file, &(file->fields.rights));
 	if (file->fields.rights == NULL)
 	{
 		delete_all_fields(file);
 		return (-1);
 	}
-	if (tmp_size > opts->fmt.rights_max_s)
-		opts->fmt.rights_max_s = tmp_size;
+	tmp_size = set_field_uid(opts, file, &(file->fields.user));
+	if (file->fields.user == NULL)
+	{
+		delete_all_fields(file);
+		return (-1);
+	}
+	if (tmp_size > opts->fmt.user_max_s)
+		opts->fmt.user_max_s = tmp_size;
+	tmp_size = set_field_gid(opts, file, &(file->fields.group));
+	if (file->fields.group == NULL)
+	{
+		delete_all_fields(file);
+		return (-1);
+	}
+	if (tmp_size > opts->fmt.group_max_s)
+		opts->fmt.group_max_s = tmp_size;
 	tmp_size = set_field_size(opts, file, &(file->fields.size));
 	if (file->fields.size == NULL)
 	{
@@ -75,6 +91,8 @@ int				init_all_fields_and_fmt(t_opts *opts, t_file *file)
 void			delete_all_fields(t_file *file)
 {
 	free(file->fields.rights);
+	free(file->fields.user);
+	free(file->fields.group);
 	free(file->fields.size);
 	free(file->fields.name_deco);
 }

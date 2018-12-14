@@ -6,7 +6,7 @@
 #    By: wta <wta@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 20:09:26 by wta               #+#    #+#              #
-#    Updated: 2018/12/13 16:31:23 by wta              ###   ########.fr        #
+#    Updated: 2018/12/14 12:39:16 by wta              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #=======================================================================  COLOR#
@@ -25,7 +25,7 @@ OBJDIR		=	objs
 OBJ			=	$(addprefix $(OBJDIR)/,$(SRCS:.c=.o))
 CC			=	gcc
 INC			=	-I $(INCDIR) -I .
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
 SRCS		=															\
 main.c					compare_file_acce.c		compare_file_crea.c		\
 compare_file_lexical.c	compare_file_size.c		compare_file_stch.c		\
@@ -38,7 +38,7 @@ print.c					print_by_rules.c		print_utils.c			\
 recursive.c				set_attr_utils.c		set_field_gid.c			\
 set_field_hlnk.c		set_field_name.c		set_field_rights.c		\
 set_field_size.c		set_field_uid.c			set_winsize.c			\
-multiple_file.c
+multiple_file.c			error.c
 HEADER		=																\
 ft_ls.h				compare_utils.h		fields_utils.h		file.h			\
 options.h			options_rules.h		print.h				set_field.h

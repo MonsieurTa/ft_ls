@@ -6,12 +6,14 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 17:42:20 by wta               #+#    #+#             */
-/*   Updated: 2018/12/13 16:54:00 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/14 14:00:59 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "ft_ls.h"
 #include "options.h"
 #include "fields_utils.h"
+#include "error.h"
 
 char	*get_dirpath(char *filepath)
 {
@@ -47,7 +49,7 @@ char	*get_filename(char *filepath)
 	return (NULL);
 }
 
-t_file	*single_file(char *filepath, t_opts *opts)
+t_file	*single_file(char *filepath, t_stat *st_stat, t_opts *opts)
 {
 	t_file		*file;
 	t_dirent	*tmp;
@@ -62,11 +64,11 @@ t_file	*single_file(char *filepath, t_opts *opts)
 		free(filename);
 		return (NULL);
 	}
-	if (access(dirpath, X_OK) != 0 || (pdir = opendir(dirpath)) == NULL)
+	if ((pdir = opendir(dirpath)) == NULL)
 	{
 		free(filename);
 		free(dirpath);
-		return (NULL);
+		return (print_error(filename, st_stat));
 	}
 	while ((tmp = readdir(pdir)) != NULL)
 		if (ft_strequ(tmp->d_name, filename) == 1)
@@ -99,10 +101,10 @@ t_file	*single_file(char *filepath, t_opts *opts)
 	return (NULL);
 }
 
-void	multiple_file(t_lst_info *lst, t_opts *opts, char *path)
+void	multiple_file(t_lst_info *lst, t_opts *opts, t_stat *st_stat, char *path)
 {
 	t_file	*file;
 
-	if ((file = single_file(path, opts)) != NULL)
+	if ((file = single_file(path, st_stat,opts)) != NULL)
 		lst_append(&lst->head, &lst->tail, lst_newnode(file));
 }

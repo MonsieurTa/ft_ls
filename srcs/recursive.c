@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:51:37 by wta               #+#    #+#             */
-/*   Updated: 2018/12/13 09:36:05 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/14 12:46:37 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@
 
 void	ls_rec(char *path, t_opts *opts)
 {
+	t_stat		st_stat;
 	t_lst_ls	*h_lst;
 	t_lst_ls	*lst;
 
+	if (lstat(path, &st_stat) == -1)
+		return ;
 	ft_printf("\n%s:\n", path);
-	if ((lst = link_file(path, opts)) == NULL)
+	if ((lst = link_file(path, &st_stat, opts)) == NULL)
 		return ;
 /*
 ** TODO : Afficher les fichiers et/ou dossier selon les options demandees

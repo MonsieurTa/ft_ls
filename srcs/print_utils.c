@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 13:33:56 by fwerner          ###   ########.fr       */
+/*   Created: 2018/12/10 05:52:59 by wta               #+#    #+#             */
+/*   Updated: 2018/12/12 09:22:30 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include "options.h"
-#include "compare_utils.h"
 
-int	main(int ac, char **av)
+int				is_hidden(t_file *file)
 {
-	t_opts	opts;
-	char	c;
-	int		nb_opts;
-
-	opts.mask = 0;
-	def_opts_for_is_tty(&opts);
-	if ((nb_opts = init_opts(ac - 1, av + 1, &opts, &c)) == -1)
-		return (0);
-	set_cmp_fun(&opts);
-	set_winsize(&opts);
-	set_tab_w(&opts);
-	if (ac - nb_opts != 2)
-		return (0);
-	ls_rec(av[nb_opts + 1], av[nb_opts + 1], &opts);
+	if (file)
+	{
+		if (*file->pdent->d_name == '.')
+			return (1);
+	}
 	return (0);
+}
+
+/*
+** Retourne x arrondi a l'entier superieur.
+*/
+
+int		ft_ceil(float x)
+{
+	int	ix;
+
+	ix = (int)x;
+	if (x == (float)ix)
+		return (ix);
+	return (ix + 1);
 }

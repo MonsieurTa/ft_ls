@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 09:23:58 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/15 11:02:05 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/15 11:08:26 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,14 @@ static char		*get_major_and_minor(dev_t st_rdev)
 {
 	char	*field;
 
-	if ((*field = ft_strnew(9)) != NULL)
+	field = NULL;
+	if ((field = ft_strnew(9)) != NULL)
 	{
 		fill_field(&field);
 		fill_major(&field, st_rdev);
 		fill_minor(&field, st_rdev);
 	}
+	return (field);
 }
 
 /*

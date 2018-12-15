@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/14 12:21:34 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/15 12:19:48 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_lst_ls		*lst_mergesort(t_lst_ls *lst,
 void			ls_rec(char *path, t_opts *opts);
 
 t_lst_ls		*find_dir(t_lst_ls *lst);
-t_lst_ls	*find_file(t_lst_ls *lst);
+t_lst_ls		*find_file(t_lst_ls *lst);
 
 /*
 ** OUTIL DE TEST : Affiche le strict minimum des noms des t_file
@@ -99,10 +99,11 @@ int				print_files(t_lst_ls *lst, t_opts *opts);
 ** Initialise les fields du fichier selon les options et maj le format
 ** si besoin.
 */
-int			init_file_infs(t_file *file, t_opts *opts);
+int				init_file_infs(t_file *file, t_opts *opts);
 
-int			is_curr_or_parent(t_dirent *pdent);
+int				is_curr_or_parent(t_dirent *pdent);
 
-void		multiple_file(t_lst_info *lst, t_opts *opts, t_stat *st_stat, char *path);
+void			multiple_file(t_lst_info *lst, t_opts *opts,
+		t_stat *st_stat, char *path);
 
 #endif

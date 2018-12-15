@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:09:09 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/14 13:37:44 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/15 11:36:42 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,69 +30,61 @@ static void		null_init_all_fields(t_file *file)
 	file->fields.name_deco = NULL;
 }
 
+static	int		check_field_init(int *field_max_s, char **field,
+		int init_field_ret)
+{
+	if (*field == NULL)
+	{
+		return (-1);
+	}
+	else if (field_max_s != NULL)
+	{
+		if (init_field_ret > *field_max_s)
+		{
+			*field_max_s = init_field_ret;
+		}
+	}
+	return (0);
+}
+
+static int		init_simple_fields(t_opts *opts, t_file *file)
+{
+	int			err_nb;
+
+	err_nb = 0;
+	err_nb += check_field_init(NULL, &(file->fields.rights),
+			set_field_rights(opts, file, &(file->fields.rights)));
+	err_nb += check_field_init(&(opts->fmt.hard_link_max_s),
+			&(file->fields.hard_link),
+			set_field_nlink(opts, file, &(file->fields.hard_link)));
+	err_nb += check_field_init(&(opts->fmt.user_max_s), &(file->fields.user),
+			set_field_uid(opts, file, &(file->fields.user)));
+	err_nb += check_field_init(&(opts->fmt.group_max_s), &(file->fields.group),
+			set_field_gid(opts, file, &(file->fields.group)));
+	err_nb += check_field_init(&(opts->fmt.size_max_s), &(file->fields.size),
+			set_field_size(opts, file, &(file->fields.size)));
+	err_nb += check_field_init(NULL, &(file->fields.date),
+			set_field_date(opts, file, &(file->fields.date)));
+	err_nb += check_field_init(NULL, &(file->fields.color_start_static),
+			set_field_color_start_static(opts, file,
+				&(file->fields.color_start_static)));
+	err_nb += check_field_init(NULL, &(file->fields.color_end_static),
+			set_field_color_end_static(opts, file,
+				&(file->fields.color_end_static)));
+	return (err_nb);
+}
+
 int				init_all_fields_and_fmt(t_opts *opts, t_file *file)
 {
-	int			tmp_size;
-
 	null_init_all_fields(file);
-	set_field_rights(opts, file, &(file->fields.rights));
-	if (file->fields.rights == NULL)
-	{
-		delete_all_fields(file);
-		return (-1);
-	}
-	tmp_size = set_field_nlink(opts, file, &(file->fields.hard_link));
-	if (file->fields.hard_link == NULL)
-	{
-		delete_all_fields(file);
-		return (-1);
-	}
-	if (tmp_size > opts->fmt.hard_link_max_s)
-		opts->fmt.hard_link_max_s = tmp_size;
-	tmp_size = set_field_uid(opts, file, &(file->fields.user));
-	if (file->fields.user == NULL)
-	{
-		delete_all_fields(file);
-		return (-1);
-	}
-	if (tmp_size > opts->fmt.user_max_s)
-		opts->fmt.user_max_s = tmp_size;
-	tmp_size = set_field_gid(opts, file, &(file->fields.group));
-	if (file->fields.group == NULL)
-	{
-		delete_all_fields(file);
-		return (-1);
-	}
-	if (tmp_size > opts->fmt.group_max_s)
-		opts->fmt.group_max_s = tmp_size;
-	tmp_size = set_field_size(opts, file, &(file->fields.size));
-	if (file->fields.size == NULL)
-	{
-		delete_all_fields(file);
-		return (-1);
-	}
-	if (tmp_size > opts->fmt.size_max_s)
-		opts->fmt.size_max_s = tmp_size;
-	set_field_date(opts, file, &(file->fields.date));
-	if (file->fields.date == NULL)
-	{
-		delete_all_fields(file);
-		return (-1);
-	}
-	set_field_color_start_static(opts, file, &(file->fields.color_start_static));
-	if (file->fields.color_start_static == NULL)
-	{
-		delete_all_fields(file);
-		return (-1);
-	}
-	set_field_color_end_static(opts, file, &(file->fields.color_end_static));
-	if (file->fields.color_end_static == NULL)
+	if (init_simple_fields(opts, file) < 0)
 	{
 		delete_all_fields(file);
 		return (-1);
 	}
 	file->fields.name_with_deco_len = ft_strlen(file->pdent->d_name);
-	file->fields.name_with_deco_len += set_field_name_deco(opts, file, &(file->fields.name_deco));
+	file->fields.name_with_deco_len += set_field_name_deco(opts, file,
+			&(file->fields.name_deco));
 	if (file->fields.name_deco == NULL)
 	{
 		delete_all_fields(file);

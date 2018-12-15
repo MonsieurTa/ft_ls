@@ -6,7 +6,7 @@
 #    By: wta <wta@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 20:09:26 by wta               #+#    #+#              #
-#    Updated: 2018/12/15 09:18:46 by fwerner          ###   ########.fr        #
+#    Updated: 2018/12/15 14:26:33 by wta              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #=======================================================================  COLOR#
@@ -34,12 +34,12 @@ display_selector.c		fields_all_utils.c		fields_minimum_utils.c	\
 file_manager.c			file_utils.c			lst_sort.c				\
 lst_utils.c				options.c				options_rules.c			\
 options_tab.c			options_tty.c			path.c					\
-print.c					print_by_rules.c		print_utils.c			\
+print.c					print_utils.c			error.c					\
 recursive.c				set_attr_utils.c		set_field_color_end_static.c \
 set_field_gid.c			set_field_nlink.c		set_field_color_start_static.c \
 set_field_rights.c		set_field_name_deco.c	set_field_size.c		\
 set_field_date.c		set_field_uid.c			set_winsize.c			\
-multiple_file.c			error.c
+multiple_file.c			multiple_file_utils.c	multiple_arg.c
 HEADER		=																\
 ft_ls.h				compare_utils.h		fields_utils.h		file.h			\
 options.h			options_rules.h		print.h				set_field.h

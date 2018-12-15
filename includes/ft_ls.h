@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/15 12:19:48 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/15 14:27:31 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "libft/includes/ft_printf.h"
 # include "libft/includes/libft.h"
-# include <errno.h>
 # include <string.h>
 # include "options.h"
 # include "file.h"
@@ -104,6 +103,21 @@ int				init_file_infs(t_file *file, t_opts *opts);
 int				is_curr_or_parent(t_dirent *pdent);
 
 void			multiple_file(t_lst_info *lst, t_opts *opts,
-		t_stat *st_stat, char *path);
+					t_stat *st_stat, char *path);
+
+char			*get_filename(char *filepath);
+
+char			*get_dirpath(char *filepath, char *filename);
+
+void			print_lst(t_lst_info *lst, t_opts *opts);
+
+void			multiple_arg_dir(int idx, char **av,
+					t_lst_info *lst, t_opts *opts);
+
+void			multiple_arg(int ac, char **av, int nb_opts, t_opts *opts);
+
+void			swap(int *i, int idx, char **av);
+
+void			sort_params(int idx, int ac, char **av);
 
 #endif

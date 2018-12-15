@@ -6,7 +6,7 @@
 #    By: wta <wta@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 20:09:26 by wta               #+#    #+#              #
-#    Updated: 2018/12/15 14:35:36 by wta              ###   ########.fr        #
+#    Updated: 2018/12/15 14:38:18 by wta              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #=======================================================================  COLOR#
@@ -48,15 +48,16 @@ options.h			options_rules.h		print.h				set_field.h
 all : $(NAME)
 #=======================================================================# NAME #
 $(NAME) : $(LIBFT) $(OBJ)
-	@$(CC) $(CFLAGS) $(INC) $(OBJ) $(LIBFT) -o $@
+	$(CC) $(CFLAGS) $(INC) $(OBJ) $(LIBFT) -o $@
 	@echo "\n$(_GREEN)[CREATED]$(_WHITE)" $@
 	@echo "All objects files are in $(_DYELLOW)obj$(_WHITE)/"
 #===================================================================# MKDIROBJ #
 $(OBJDIR) :
 	@mkdir $@
-	@echo "$(_YELLOW)[CREATED]$(_WHITE)" $@
+	@echo "\n$(_YELLOW)[CREATED]$(_WHITE)" $@
 #======================================================================# FT_LS #
-$(addprefix $(OBJDIR)/,%.o) : $(addprefix $(SRCSDIR)/,%.c) $(addprefix $(INCDIR)/,$(HEADER)) | $(OBJDIR)
+$(addprefix $(OBJDIR)/,%.o) : $(addprefix $(SRCSDIR)/,%.c) $(addprefix \
+	$(INCDIR)/,$(HEADER)) | $(OBJDIR)
 	@$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 	@echo "\r                                                              \r\c"
 	@echo "$(_GREEN)[OK]$(_WHITE) $@\c"

@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 09:23:58 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/10 14:29:34 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/15 11:02:05 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,85 @@ static int		get_off_num_size(off_t nb)
 		nb /= 10;
 	}
 	return (size);
+}
+
+static void		fill_field(char **field)
+{
+	int	idx;
+
+	idx = 0;
+	while (idx < 4)
+	{
+		*field[idx] = ' ';
+		idx++;
+	}
+	*field[idx++] = ',';
+	while (idx < 9)
+	{
+		*field[idx] = ' ';
+		idx++;
+	}
+}
+
+static int		get_dev_size(dev_t nb)
+{
+	int	len;
+
+	len = 0;
+	while (nb)
+	{
+		len++;
+		nb /= 10;
+	}
+	return (len);
+}
+
+static void		fill_major(char **field, dev_t st_rdev)
+{
+	int		len;
+	int		i;
+	dev_t	maj;
+
+	i = 0;
+	len = get_dev_size(st_rdev);
+	maj = major(st_rdev);
+	while (len && i < 4)
+	{
+		*field[3 - i] = maj % 10;
+		maj /= 10;
+		i++;
+		len--;
+	}
+}
+
+static void		fill_minor(char **field, dev_t st_rdev)
+{
+	int		len;
+	int		i;
+	dev_t	min;
+
+	i = 0;
+	len = get_dev_size(st_rdev);
+	min = minor(st_rdev);
+	while (len && i < 4)
+	{
+		*field[8 - i] = min % 10;
+		min /= 10;
+		i++;
+		len--;
+	}
+}
+
+static char		*get_major_and_minor(dev_t st_rdev)
+{
+	char	*field;
+
+	if ((*field = ft_strnew(9)) != NULL)
+	{
+		fill_field(&field);
+		fill_major(&field, st_rdev);
+		fill_minor(&field, st_rdev);
+	}
 }
 
 /*

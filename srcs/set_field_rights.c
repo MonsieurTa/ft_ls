@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 12:17:25 by wta               #+#    #+#             */
-/*   Updated: 2018/12/14 10:55:25 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/15 10:21:53 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int			set_field_rights(t_opts *opts, t_file *file, char **field)
 	}
 	if ((*field = ft_strnew(11)) != NULL)
 	{
+		ft_printf("rdev=%d\n", file->stat.st_rdev);
 		get_file_type(&(file->stat), *field);
 		get_rights(file, *field);
 		return (11);

@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/12 09:17:01 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/14 16:22:55 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,11 @@ typedef struct winsize	t_ws;
 typedef enum	e_opt_name
 {
 	LS_INVALID_OPT = -1,
-	LS_EXTATT = 0,
-	LS_BYLINE,
+	LS_BYLINE = 0,
 	LS_ALL,
 	LS_BYCLMN,
 	LS_STCHTI,
 	LS_DIRASF,
-	LS_ACL,
 	LS_NOSORT,
 	LS_COLOR,
 	LS_NOOWN,
@@ -53,10 +51,13 @@ typedef enum	e_opt_name
 */
 typedef struct	s_fmt
 {
-	int		lst_size;
-	int		rights_max_s;
-	int		size_max_s;
-	int		name_max_s;
+	ssize_t		dir_block_count;
+	int			lst_size;
+	int			hard_link_max_s;
+	int			user_max_s;
+	int			group_max_s;
+	int			size_max_s;
+	int			name_with_deco_max_s;
 }				t_fmt;
 
 /*
@@ -68,6 +69,7 @@ typedef struct	s_opts
 	int		mask;
 	t_ws	ws;
 	int		tab_w;
+	int		has_dir;
 	int		(*cmp_fun)(t_file *file1, t_file *file2);
 	t_fmt	fmt;
 }				t_opts;

@@ -6,32 +6,39 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:48:29 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 11:08:08 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/15 09:19:30 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "options.h"
 #include "fields_utils.h"
+#include "error.h"
 
 //TODO ameliorer la gestion d'erreur
-t_lst_ls	*link_file(char *path, t_opts *opts)
+t_lst_ls	*link_file(char *path, t_stat *stat, t_opts *opts)
 {
 	t_lst_ls	*lst;
 	t_lst_ls	*lst_back;
 	t_file		*file;
 	DIR			*pdir;
 
-	opts->fmt.rights_max_s = 0;
+	opts->fmt.dir_block_count = 0;
+	opts->fmt.hard_link_max_s = 0;
+	opts->fmt.user_max_s = 0;
+	opts->fmt.group_max_s = 0;
 	opts->fmt.size_max_s = 0;
-	opts->fmt.name_max_s = 0;
+	opts->fmt.name_with_deco_max_s = 0;
 	opts->fmt.lst_size = 0;
 	pdir = NULL;
-	if (access(path, X_OK) != 0 || (pdir = opendir(path)) == NULL)
-		return (NULL);
+	if ((pdir = opendir(path)) == NULL)
+		return (print_error(path, 1, stat));
 	file = lst_newfile(pdir, path, opts);
 	if (file == NULL || (lst = lst_newnode(file)) == NULL)
+	{
+		closedir(pdir);
 		return (NULL);
+	}
 	lst_back = lst;
 	while ((file = lst_newfile(pdir, path, opts)) != NULL)
 	{

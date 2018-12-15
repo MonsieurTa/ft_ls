@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_field_hlnk.c                                   :+:      :+:    :+:   */
+/*   set_field_color_start_static.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/12 09:30:44 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 09:55:30 by wta              ###   ########.fr       */
+/*   Created: 2018/12/13 12:48:00 by fwerner           #+#    #+#             */
+/*   Updated: 2018/12/13 13:11:56 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "libft/includes/libft.h"
-#include "libft/includes/ft_printf.h"
+#include <stdlib.h>
 #include "options.h"
 #include "file.h"
 #include "set_field.h"
 
-nlink_t	len_nlink(nlink_t st_nlink)
-{
-	nlink_t	len;
-
-	len = (st_nlink == 0) ? 1 : 0;
-	while (st_nlink)
-	{
-		st_nlink /= 10;
-		len++;
-	}
-	return (len);
-}
-
-int		set_field_nlink(t_opts *opts, t_file *file, char **field)
+int		set_field_color_end_static(t_opts *opts, t_file *file, char **field)
 {
 	if (opts == NULL || file == NULL || field == NULL)
 	{
@@ -38,8 +23,16 @@ int		set_field_nlink(t_opts *opts, t_file *file, char **field)
 			*field = NULL;
 		return (0);
 	}
+	if (get_opt(opts, LS_COLOR) == 1)
+	{
+		if ((file->fields.color_start_static)[0] == '\0')
+			*field = "";
+		else
+			*field = "\033[0m";
+	}
 	else
-		if ((*field = ft_itoa_u((unsigned int)file->stat.st_nlink)) != NULL)
-			return (ft_strlen(*field));
+	{
+		*field = "";
+	}
 	return (0);
 }

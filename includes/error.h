@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_acl_attr.c                                     :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/11 08:44:13 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 09:12:41 by wta              ###   ########.fr       */
+/*   Created: 2018/12/14 12:25:17 by wta               #+#    #+#             */
+/*   Updated: 2018/12/14 14:27:18 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "sys/types.h"
-#include "sys/xattr.h"
-#include "sys/acl.h"
+#ifndef ERROR_H
+# define ERROR_H
 
-int		has_xattr(char *filepath)
-{
-	return (listxattr(filepath, NULL, 0, XATTR_NOFOLLOW) > 0);
-}
+void	*print_error(char *path, char print_name, t_stat *st_stat);
 
-int		has_acl(char *filepath)
-{
-	acl_t	acl;
-	int		res;
-
-	acl = NULL;
-	acl = acl_get_link_np(filepath, ACL_TYPE_EXTENDED);
-	res = (acl != NULL) ? 1 : 0;
-	acl_free(acl);
-	acl = NULL;
-	return (res);
-}
+#endif

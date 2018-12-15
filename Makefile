@@ -6,11 +6,7 @@
 #    By: wta <wta@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 20:09:26 by wta               #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2018/12/14 13:33:41 by fwerner          ###   ########.fr        #
-=======
-#    Updated: 2018/12/14 12:39:16 by wta              ###   ########.fr        #
->>>>>>> dev_multiple_file
+#    Updated: 2018/12/15 09:18:46 by fwerner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #=======================================================================  COLOR#
@@ -39,17 +35,11 @@ file_manager.c			file_utils.c			lst_sort.c				\
 lst_utils.c				options.c				options_rules.c			\
 options_tab.c			options_tty.c			path.c					\
 print.c					print_by_rules.c		print_utils.c			\
-<<<<<<< HEAD
 recursive.c				set_attr_utils.c		set_field_color_end_static.c \
 set_field_gid.c			set_field_nlink.c		set_field_color_start_static.c \
 set_field_rights.c		set_field_name_deco.c	set_field_size.c		\
-set_field_date.c		set_field_uid.c			set_winsize.c
-=======
-recursive.c				set_attr_utils.c		set_field_gid.c			\
-set_field_hlnk.c		set_field_name.c		set_field_rights.c		\
-set_field_size.c		set_field_uid.c			set_winsize.c			\
+set_field_date.c		set_field_uid.c			set_winsize.c			\
 multiple_file.c			error.c
->>>>>>> dev_multiple_file
 HEADER		=																\
 ft_ls.h				compare_utils.h		fields_utils.h		file.h			\
 options.h			options_rules.h		print.h				set_field.h

@@ -6,10 +6,9 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 09:30:44 by wta               #+#    #+#             */
-/*   Updated: 2018/12/14 10:51:35 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/15 09:09:33 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "libft/includes/libft.h"
 #include "libft/includes/ft_printf.h"
@@ -38,8 +37,7 @@ int		set_field_nlink(t_opts *opts, t_file *file, char **field)
 			*field = NULL;
 		return (0);
 	}
-	else
-		if ((*field = ft_itoa_u((unsigned int)file->stat.st_nlink)) != NULL)
-			return (ft_strlen(*field));
+	if ((*field = ft_itoa_u((unsigned int)file->stat.st_nlink)) != NULL)
+		return (ft_strlen(*field));
 	return (0);
 }

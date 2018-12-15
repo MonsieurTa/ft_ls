@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/14 16:09:23 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/15 11:23:51 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,22 @@
 #include "print.h"
 #include "error.h"
 
+static void	swap(int *i, int idx, char **av)
+{
+	char	*tmp;
+
+	tmp = av[*i];
+	av[*i] = av[*i + 1];
+	av[*i + 1] = tmp;
+	if (*i > idx)
+		(*i)--;
+}
+
 static void	sort_params(int idx, int ac, char **av)
 {
 	t_lst_info	files;
-	t_stat		st_stat1;
-	t_stat		st_stat2;
-	char		*tmp;
+	t_stat		st1;
+	t_stat		st2;
 	int	i;
 
 	files.head = NULL;
@@ -29,30 +39,16 @@ static void	sort_params(int idx, int ac, char **av)
 	i = idx;
 	while (i < ac - 1)
 	{
-		if (lstat(av[i], &st_stat1) == 0 && lstat(av[i + 1], &st_stat2) == 0)
+		if (lstat(av[i], &st1) == 0 && lstat(av[i + 1], &st2) == 0)
 		{
-			if ((S_ISREG(st_stat2.st_mode) == 1
-				&& S_ISDIR(st_stat1.st_mode) == 1)
-			|| ((st_stat2.st_mode & S_IXUSR)
-				&& (st_stat1.st_mode & S_IXUSR) == 0))
-			{
-				tmp = av[i];
-				av[i] = av[i + 1];
-				av[i + 1] = tmp;
-				if (i > idx)
-					i--;
-			}
+			if ((S_ISREG(st2.st_mode) == 1 && S_ISDIR(st1.st_mode) == 1)
+			|| ((st2.st_mode & S_IXUSR) && (st1.st_mode & S_IXUSR) == 0))
+				swap(&i, idx, av);
 			else
 				i++;
 		}
-		else if (lstat(av[i], &st_stat1) == 0 && lstat(av[i + 1], &st_stat2) == -1)
-		{	
-			tmp = av[i];
-			av[i] = av[i + 1];
-			av[i + 1] = tmp;
-			if (i > idx)
-				i--;
-		}
+		else if (lstat(av[i], &st1) == 0 && lstat(av[i + 1], &st2) == -1)
+			swap(&i, idx, av);
 		else
 			i++;
 	}

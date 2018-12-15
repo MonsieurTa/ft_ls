@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:48:29 by wta               #+#    #+#             */
-/*   Updated: 2018/12/15 09:19:30 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/15 12:32:19 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,8 @@
 #include "fields_utils.h"
 #include "error.h"
 
-//TODO ameliorer la gestion d'erreur
-t_lst_ls	*link_file(char *path, t_stat *stat, t_opts *opts)
+static void	init_fmt(t_opts *opts)
 {
-	t_lst_ls	*lst;
-	t_lst_ls	*lst_back;
-	t_file		*file;
-	DIR			*pdir;
-
 	opts->fmt.dir_block_count = 0;
 	opts->fmt.hard_link_max_s = 0;
 	opts->fmt.user_max_s = 0;
@@ -30,6 +24,16 @@ t_lst_ls	*link_file(char *path, t_stat *stat, t_opts *opts)
 	opts->fmt.size_max_s = 0;
 	opts->fmt.name_with_deco_max_s = 0;
 	opts->fmt.lst_size = 0;
+}
+
+t_lst_ls	*link_file(char *path, t_stat *stat, t_opts *opts)
+{
+	t_lst_ls	*lst;
+	t_lst_ls	*lst_back;
+	t_file		*file;
+	DIR			*pdir;
+
+	init_fmt(opts);
 	pdir = NULL;
 	if ((pdir = opendir(path)) == NULL)
 		return (print_error(path, 1, stat));

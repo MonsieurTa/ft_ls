@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:22:02 by wta               #+#    #+#             */
-/*   Updated: 2018/12/14 16:14:21 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/15 12:16:29 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*get_filename(char *filepath)
 	return ("");
 }
 
-void	*print_error(char *path, char print_name, t_stat *st_stat)
+void		*print_error(char *path, char print_name, t_stat *st_stat)
 {
 	if (st_stat == NULL || (st_stat->st_mode & S_IXUSR) == 0)
 	{

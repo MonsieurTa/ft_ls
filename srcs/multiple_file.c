@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 17:42:20 by wta               #+#    #+#             */
-/*   Updated: 2018/12/14 14:00:59 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/15 09:57:35 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_file	*single_file(char *filepath, t_stat *st_stat, t_opts *opts)
 	{
 		free(filename);
 		free(dirpath);
-		return (print_error(filename, st_stat));
+		return (print_error(filename, 0, st_stat));
 	}
 	while ((tmp = readdir(pdir)) != NULL)
 		if (ft_strequ(tmp->d_name, filename) == 1)

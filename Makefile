@@ -6,7 +6,7 @@
 #    By: wta <wta@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 20:09:26 by wta               #+#    #+#              #
-#    Updated: 2018/12/15 14:38:18 by wta              ###   ########.fr        #
+#    Updated: 2018/12/15 15:32:05 by fwerner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #=======================================================================  COLOR#
@@ -40,7 +40,7 @@ set_field_gid.c			set_field_nlink.c		set_field_color_start_static.c \
 set_field_rights.c		set_field_name_deco.c	set_field_size.c		\
 set_field_date.c		set_field_uid.c			set_winsize.c			\
 multiple_file.c			multiple_file_utils.c	multiple_arg.c			\
-get_major_and_minor.c
+get_major_and_minor.c	print_by_col.c
 HEADER		=																\
 ft_ls.h				compare_utils.h		fields_utils.h		file.h			\
 options.h			options_rules.h		print.h				set_field.h
@@ -48,7 +48,7 @@ options.h			options_rules.h		print.h				set_field.h
 all : $(NAME)
 #=======================================================================# NAME #
 $(NAME) : $(LIBFT) $(OBJ)
-	$(CC) $(CFLAGS) $(INC) $(OBJ) $(LIBFT) -o $@
+	@$(CC) $(CFLAGS) $(INC) $(OBJ) $(LIBFT) -o $@
 	@echo "\n$(_GREEN)[CREATED]$(_WHITE)" $@
 	@echo "All objects files are in $(_DYELLOW)obj$(_WHITE)/"
 #===================================================================# MKDIROBJ #
@@ -56,8 +56,7 @@ $(OBJDIR) :
 	@mkdir $@
 	@echo "\n$(_YELLOW)[CREATED]$(_WHITE)" $@
 #======================================================================# FT_LS #
-$(addprefix $(OBJDIR)/,%.o) : $(addprefix $(SRCSDIR)/,%.c) $(addprefix \
-	$(INCDIR)/,$(HEADER)) | $(OBJDIR)
+$(addprefix $(OBJDIR)/,%.o) : $(addprefix $(SRCSDIR)/,%.c) $(addprefix $(INCDIR)/,$(HEADER)) | $(OBJDIR)
 	@$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 	@echo "\r                                                              \r\c"
 	@echo "$(_GREEN)[OK]$(_WHITE) $@\c"

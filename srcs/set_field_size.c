@@ -6,13 +6,14 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 09:23:58 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/10 14:29:34 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/15 12:34:22 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/includes/libft.h"
 #include "options.h"
 #include "file.h"
+#include "set_field.h"
 
 /*
 ** Attention, code degueulasse pas loin, vaut mieux pas lire.
@@ -127,7 +128,9 @@ int				set_field_size(t_opts *opts, t_file *file, char **field)
 			*field = NULL;
 		return (0);
 	}
-	if (get_opt(opts, LS_HUREAD) == 1)
+	if (S_ISCHR(file->stat.st_mode) || S_ISBLK(file->stat.st_mode))
+		*field = get_major_and_minor(file->stat.st_rdev);
+	else if (get_opt(opts, LS_HUREAD) == 1)
 		*field = size_to_huread(file->stat.st_size);
 	else
 	{
@@ -136,8 +139,5 @@ int				set_field_size(t_opts *opts, t_file *file, char **field)
 			return (0);
 		offtoa_inside(file->stat.st_size, size_len, *field);
 	}
-	if (*field == NULL)
-		return (0);
-	else
-		return (ft_strlen(*field));
+	return (*field == NULL ? 0 : ft_strlen(*field));
 }

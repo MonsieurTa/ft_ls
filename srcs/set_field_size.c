@@ -6,13 +6,14 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 09:23:58 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/15 11:08:26 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/15 12:34:22 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/includes/libft.h"
 #include "options.h"
 #include "file.h"
+#include "set_field.h"
 
 /*
 ** Attention, code degueulasse pas loin, vaut mieux pas lire.
@@ -33,87 +34,6 @@ static int		get_off_num_size(off_t nb)
 		nb /= 10;
 	}
 	return (size);
-}
-
-static void		fill_field(char **field)
-{
-	int	idx;
-
-	idx = 0;
-	while (idx < 4)
-	{
-		*field[idx] = ' ';
-		idx++;
-	}
-	*field[idx++] = ',';
-	while (idx < 9)
-	{
-		*field[idx] = ' ';
-		idx++;
-	}
-}
-
-static int		get_dev_size(dev_t nb)
-{
-	int	len;
-
-	len = 0;
-	while (nb)
-	{
-		len++;
-		nb /= 10;
-	}
-	return (len);
-}
-
-static void		fill_major(char **field, dev_t st_rdev)
-{
-	int		len;
-	int		i;
-	dev_t	maj;
-
-	i = 0;
-	len = get_dev_size(st_rdev);
-	maj = major(st_rdev);
-	while (len && i < 4)
-	{
-		*field[3 - i] = maj % 10;
-		maj /= 10;
-		i++;
-		len--;
-	}
-}
-
-static void		fill_minor(char **field, dev_t st_rdev)
-{
-	int		len;
-	int		i;
-	dev_t	min;
-
-	i = 0;
-	len = get_dev_size(st_rdev);
-	min = minor(st_rdev);
-	while (len && i < 4)
-	{
-		*field[8 - i] = min % 10;
-		min /= 10;
-		i++;
-		len--;
-	}
-}
-
-static char		*get_major_and_minor(dev_t st_rdev)
-{
-	char	*field;
-
-	field = NULL;
-	if ((field = ft_strnew(9)) != NULL)
-	{
-		fill_field(&field);
-		fill_major(&field, st_rdev);
-		fill_minor(&field, st_rdev);
-	}
-	return (field);
 }
 
 /*
@@ -208,7 +128,9 @@ int				set_field_size(t_opts *opts, t_file *file, char **field)
 			*field = NULL;
 		return (0);
 	}
-	if (get_opt(opts, LS_HUREAD) == 1)
+	if (S_ISCHR(file->stat.st_mode) || S_ISBLK(file->stat.st_mode))
+		*field = get_major_and_minor(file->stat.st_rdev);
+	else if (get_opt(opts, LS_HUREAD) == 1)
 		*field = size_to_huread(file->stat.st_size);
 	else
 	{
@@ -217,8 +139,5 @@ int				set_field_size(t_opts *opts, t_file *file, char **field)
 			return (0);
 		offtoa_inside(file->stat.st_size, size_len, *field);
 	}
-	if (*field == NULL)
-		return (0);
-	else
-		return (ft_strlen(*field));
+	return (*field == NULL ? 0 : ft_strlen(*field));
 }

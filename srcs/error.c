@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:22:02 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 11:51:16 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/17 13:55:28 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ void		*print_error(char *path, char print_name, t_stat *st_stat)
 		{
 			if (st_stat != NULL && print_name == 1)
 			{
-				ft_putstr_fd(path, 2);
+				ft_putstr(path);
 				ft_putstr(":\n");
 			}
 			ft_putstr_fd("ls: ", 2);
 			ft_putstr_fd(get_filename(path), 2);
 			ft_putstr_fd(": ", 2);
 			ft_putstr_fd(strerror(errno), 2);
-			ft_putchar('\n');
+			ft_putchar_fd('\n', 2);
 		}
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:12:47 by wta               #+#    #+#             */
-/*   Updated: 2018/12/13 16:41:26 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/15 13:12:20 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,10 @@ t_lst_ls	*lst_newnode(t_file *file)
 	return (node);
 }
 
-t_file		*lst_newfile(DIR *pdir, char *path, t_opts *opts)
+t_dirent	*get_dent(t_opts *opts, DIR *pdir)
 {
 	t_dirent	*tmp;
-	t_file		*file;
 
-	file = NULL;
 	if (get_opt(opts, LS_ALL) == 1)
 	{
 		if ((tmp = readdir(pdir)) == NULL)
@@ -41,18 +39,30 @@ t_file		*lst_newfile(DIR *pdir, char *path, t_opts *opts)
 		while ((tmp = readdir(pdir)) != NULL)
 			if (is_curr_or_parent(tmp) == 0 && *tmp->d_name != '.')
 				break ;
-	if (tmp != NULL && (file = ft_memalloc(sizeof(t_file))) != NULL)
+	return (tmp);
+}
+
+t_file		*lst_newfile(DIR *pdir, char *path, t_opts *opts)
+{
+	t_dirent	*tmp;
+	t_file		*file;
+
+	file = NULL;
+	if ((tmp = get_dent(opts, pdir)) != NULL)
 	{
-		if ((file->pdent = ft_memalloc(tmp->d_reclen)) != NULL)
+		if ((file = ft_memalloc(sizeof(t_file))) != NULL)
 		{
-			ft_memcpy(file->pdent, tmp, tmp->d_reclen);
-			if ((file->path = get_new_path(path, file->pdent->d_name))
-					!= NULL && init_file_infs(file, opts) == 0)
-				return (file);
-			free(file->path);
+			if ((file->pdent = ft_memalloc(tmp->d_reclen)) != NULL)
+			{
+				ft_memcpy(file->pdent, tmp, tmp->d_reclen);
+				if ((file->path = get_new_path(path, file->pdent->d_name))
+						!= NULL && init_file_infs(file, opts) == 0)
+					return (file);
+				free(file->path);
+			}
+			free(file->pdent);
+			free(file);
 		}
-		free(file->pdent);
-		free(file);
 	}
 	return (NULL);
 }

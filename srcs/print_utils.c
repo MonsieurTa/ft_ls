@@ -6,13 +6,13 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:52:59 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 09:22:30 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/15 11:18:19 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int				is_hidden(t_file *file)
+int		is_hidden(t_file *file)
 {
 	if (file)
 	{

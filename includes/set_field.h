@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 09:17:47 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/14 15:25:00 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/15 12:29:10 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,12 @@ int		set_field_uid(t_opts *opts, t_file *file, char **field);
 ** caracteres de field, set field a NULL en cas d'erreur.
 */
 int		set_field_gid(t_opts *opts, t_file *file, char **field);
+
+/*
+** Retourne une string representant le majeur et le mineur du device, ou NULL
+** si erreur.
+*/
+char	*get_major_and_minor(dev_t st_rdev);
 
 int		has_xattr(char *filepath);
 int		has_acl(char *filepath);

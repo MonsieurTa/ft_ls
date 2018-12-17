@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 17:42:20 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 13:08:52 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/17 15:34:41 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 #include "fields_utils.h"
 #include "error.h"
 
-static t_dirent	*get_dent(char *filepath, t_stat *st_stat)
+static DIR	*get_dent(char *filepath, t_dirent **tmp, t_stat *st_stat)
 {
-	t_dirent	*tmp;
 	char		*filename;
 	char		*dirpath;
 	DIR			*pdir;
@@ -32,36 +31,41 @@ static t_dirent	*get_dent(char *filepath, t_stat *st_stat)
 		free(dirpath);
 		return (print_error(filename, 0, st_stat));
 	}
-	while ((tmp = readdir(pdir)) != NULL)
-		if (ft_strequ(tmp->d_name, filename) == 1)
+	while ((*tmp = readdir(pdir)) != NULL)
+		if (ft_strequ((*tmp)->d_name, filename) == 1)
 			break ;
 	free(filename);
 	free(dirpath);
-	closedir(pdir);
-	return (tmp);
+	return (pdir);
 }
 
 static t_file	*ret_dir(t_file *file, t_opts *opts)
 {
-	if (S_ISDIR(file->stat.st_mode) == 0)
-		return (file);
-	else
+	if (S_ISDIR(file->stat.st_mode) && get_opt(opts, LS_DIRASF) == 0)
+	{
 		opts->has_dir = 1;
-	return (NULL);
+		return (NULL);
+	}
+	else
+	{
+		return (file);
+	}
 }
 
 static t_file	*single_file(char *filepath, t_stat *st_stat, t_opts *opts)
 {
+	DIR			*pdir;
 	t_dirent	*tmp;
 	t_file		*file;
 
-	if ((tmp = get_dent(filepath, st_stat)) == NULL)
+	if ((pdir = get_dent(filepath, &tmp, st_stat)) == NULL)
 		return (NULL);
 	if (tmp != NULL && (file = ft_memalloc(sizeof(t_file))) != NULL)
 	{
 		if ((file->pdent = ft_memalloc(tmp->d_reclen)) != NULL)
 		{
 			ft_memcpy(file->pdent, tmp, tmp->d_reclen);
+			closedir(pdir);
 			if ((file->path = ft_strdup(filepath)) != NULL)
 			{
 				if (init_file_infs(file, opts) == 0)

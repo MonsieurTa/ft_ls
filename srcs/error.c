@@ -6,13 +6,14 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:22:02 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 13:55:28 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/17 15:17:32 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "file.h"
 #include "libft/includes/ft_printf.h"
 #include "error.h"
+#include "options.h"
 #include <sys/types.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -52,4 +53,20 @@ void		*print_error(char *path, char print_name, t_stat *st_stat)
 		}
 	}
 	return (NULL);
+}
+
+int			print_usage(char c)
+{
+	char opt_tab[LS_OPT_SIZE];
+	int	idx;
+
+	idx = -1;
+	init_opt_tab(opt_tab);
+	ft_putstr_fd("ls: illegal option -- ", 2);
+	ft_putchar_fd(c, 2);
+	ft_putstr_fd("\nusage: ls [-", 2);
+	while (++idx < LS_OPT_SIZE)
+		ft_putchar_fd(opt_tab[idx], 2);
+	ft_putstr_fd("] [file ...]\n", 2);
+	return (0);
 }

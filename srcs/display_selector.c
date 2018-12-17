@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 14:19:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 14:16:18 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/17 17:02:50 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void		display_selector(char *path, char print_name, t_opts *opts)
 	t_lst_ls	*lst;
 	t_lst_info	lst_m;
 
+	init_fmt(opts);
 	lst = NULL;
 	if ((lstat(path, &st_stat)) == -1)
 	{

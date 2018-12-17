@@ -6,11 +6,12 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 12:29:48 by wta               #+#    #+#             */
-/*   Updated: 2018/12/15 12:31:04 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/17 17:02:16 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "options.h"
+#include "fields_utils.h"
 #include "file.h"
 
 void	init_fmt(t_opts *opts)

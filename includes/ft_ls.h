@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 12:10:36 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/17 16:59:53 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ t_lst_ls		*skip_hidden(t_lst_ls *lst);
 ** en cas d'erreur et 0 en cas de succes.
 */
 int				print_files(t_lst_ls *lst, t_opts *opts);
+
+void			init_fmt(t_opts *opts);
 
 /*
 ** Initialise les fields du fichier selon les options et maj le format

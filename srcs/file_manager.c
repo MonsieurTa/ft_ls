@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:48:29 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 11:19:21 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/17 17:01:17 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,6 @@
 #include "options.h"
 #include "fields_utils.h"
 #include "error.h"
-
-static void	init_fmt(t_opts *opts)
-{
-	opts->fmt.dir_block_count = 0;
-	opts->fmt.hard_link_max_s = 0;
-	opts->fmt.user_max_s = 0;
-	opts->fmt.group_max_s = 0;
-	opts->fmt.size_max_s = 0;
-	opts->fmt.name_with_deco_max_s = 0;
-	opts->fmt.lst_size = 0;
-}
 
 t_lst_ls	*link_file(char *path, t_opts *opts)
 {
@@ -69,21 +58,4 @@ t_lst_ls	*find_file(t_lst_ls *lst)
 		|| ft_strcmp(lst->file->pdent->d_name, "..") == 0))
 		lst = lst->next;
 	return (lst);
-}
-
-int			init_file_infs(t_file *file, t_opts *opts)
-{
-	int		fun_ret;
-
-	fun_ret = lstat(file->path, &(file->stat));
-	if (fun_ret == 0)
-	{
-		if (get_opt(opts, LS_LONGF) == 1)
-			fun_ret = init_all_fields_and_fmt(opts, file);
-		else
-			fun_ret = init_minimum_fields_and_fmt(opts, file);
-		if (fun_ret == 0)
-			return (0);
-	}
-	return (-1);
 }

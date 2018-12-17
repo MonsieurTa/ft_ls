@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 17:42:20 by wta               #+#    #+#             */
-/*   Updated: 2018/12/15 14:32:24 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/17 13:08:52 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,23 @@ static t_file	*single_file(char *filepath, t_stat *st_stat, t_opts *opts)
 		if ((file->pdent = ft_memalloc(tmp->d_reclen)) != NULL)
 		{
 			ft_memcpy(file->pdent, tmp, tmp->d_reclen);
-			if ((file->path = ft_strdup(filepath)) != NULL
-					&& init_file_infs(file, opts) == 0)
-				if ((file = ret_dir(file, opts)) != NULL)
-					return (file);
+			if ((file->path = ft_strdup(filepath)) != NULL)
+			{
+				if (init_file_infs(file, opts) == 0)
+				{
+					if ((file = ret_dir(file, opts)) != NULL)
+						return (file);
+					else
+					{
+						if (get_opt(opts, LS_LONGF) == 1)
+							delete_all_fields(file);
+						else
+							delete_minimum_fields(file);
+					}
+				}
+			}
 			free(file->path);
 		}
-		if (get_opt(opts, LS_LONGF) == 1)
-			delete_all_fields(file);
-		else
-			delete_minimum_fields(file);
 		free(file->pdent);
 		free(file);
 	}

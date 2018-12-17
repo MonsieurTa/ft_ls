@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 15:09:40 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/15 15:28:32 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/17 20:23:10 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,19 @@ static t_lst_ls	**init_col_tab(t_lst_ls *lst, int max_col, int max_row)
 	return (line);
 }
 
-static int		print_col_el(t_file *file, char is_last_elem, int col_size)
+static int		print_col_el(t_file *file, t_opts *opts,
+					char is_last_elem, int col_size)
 {
 	if (is_last_elem)
 		return (ft_printf("%s%s%s%s",
 					file->fields.color_start_static,
-					file->pdent->d_name,
+					(opts->has_file == 1) ? file->path : file->pdent->d_name,
 					file->fields.color_end_static,
 					file->fields.name_deco));
 	else
 		return (ft_printf("%s%s%s%s%-*s",
 					file->fields.color_start_static,
-					file->pdent->d_name,
+					(opts->has_file == 1) ? file->path : file->pdent->d_name,
 					file->fields.color_end_static,
 					file->fields.name_deco,
 					col_size - file->fields.name_with_deco_len, ""));
@@ -82,8 +83,8 @@ int				print_by_col(t_opts *opts, t_lst_ls *lst)
 		col = 0;
 		while (col < col_fmt.max_col && line[col] != NULL)
 		{
-			if (print_col_el(line[col]->file, col + 1 == col_fmt.max_col,
-						col_fmt.col_size) < 0)
+			if (print_col_el(line[col]->file, opts,
+					col + 1 == col_fmt.max_col, col_fmt.col_size) < 0)
 				return (-1);
 			line[col] = line[col]->next;
 			col++;
@@ -91,6 +92,7 @@ int				print_by_col(t_opts *opts, t_lst_ls *lst)
 		ft_putchar('\n');
 		row++;
 	}
+	opts->has_file = 0;
 	free(line);
 	return (0);
 }

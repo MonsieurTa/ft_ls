@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 16:11:05 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/17 20:19:05 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int ac, char **av)
 	int			nb_opts;
 
 	opts.mask = 0;
+	opts.has_file = 0;
 	def_opts_for_is_tty(&opts);
 	if ((nb_opts = init_opts(ac - 1, av + 1, &opts, &c)) == -1)
 		return (print_usage(ac > 0 ? av[0] : "ft_ls", c));

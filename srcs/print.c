@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 11:09:53 by wta               #+#    #+#             */
-/*   Updated: 2018/12/15 15:11:38 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/17 20:20:07 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,19 @@
 ** Affiche la liste de fichier par ligne (affichage minimal).
 */
 
-static int		print_by_line(t_lst_ls *lst)
+static int		print_by_line(t_lst_ls *lst, t_opts *opts)
 {
 	while (lst != NULL)
 	{
 		if (ft_printf("%s%s%s%s\n",
 					lst->file->fields.color_start_static,
-					lst->file->pdent->d_name,
+					(opts->has_file == 1) ? lst->file->path : lst->file->pdent->d_name,
 					lst->file->fields.color_end_static,
 					lst->file->fields.name_deco) < 0)
 			return (-1);
 		lst = lst->next;
 	}
+	opts->has_file = 0;
 	return (0);
 }
 
@@ -73,7 +74,7 @@ int				print_files(t_lst_ls *lst, t_opts *opts)
 
 	print_ret = 0;
 	if (get_opt(opts, LS_BYLINE) == 1)
-		print_ret = print_by_line(lst);
+		print_ret = print_by_line(lst, opts);
 	else if (get_opt(opts, LS_BYCLMN) == 1)
 		print_ret = print_by_col(opts, lst);
 	else if (get_opt(opts, LS_LONGF) == 1)

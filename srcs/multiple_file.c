@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 17:42:20 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 15:34:41 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/17 19:43:57 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,8 @@ void			multiple_file(t_lst_info *lst,
 	t_file	*file;
 
 	if ((file = single_file(path, st_stat, opts)) != NULL)
+	{
+		opts->has_file = 1;
 		lst_append(&lst->head, &lst->tail, lst_newnode(file));
+	}
 }

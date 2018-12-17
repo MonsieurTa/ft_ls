@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/15 14:27:43 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/17 09:28:55 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ int	main(int ac, char **av)
 	else if (ac - 1 == nb_opts + 1)
 		display_selector(av[nb_opts + 1], 0, &opts);
 	else
-		multiple_arg(ac, av, nb_opts, &opts);
+		multiple_arg(ac - 1 - nb_opts, av + 1 + nb_opts, &opts);
 	return (0);
 }

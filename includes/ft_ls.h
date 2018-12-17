@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/15 14:27:31 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/17 12:10:36 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,8 @@ void			print_lst(t_lst_info *lst, t_opts *opts);
 void			multiple_arg_dir(int idx, char **av,
 					t_lst_info *lst, t_opts *opts);
 
-void			multiple_arg(int ac, char **av, int nb_opts, t_opts *opts);
+void			sort_params(int ac, char **av, t_opts *opts);
 
-void			swap(int *i, int idx, char **av);
-
-void			sort_params(int idx, int ac, char **av);
+void			multiple_arg(int ac, char **av, t_opts *opts);
 
 #endif

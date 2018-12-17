@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 14:24:04 by wta               #+#    #+#             */
-/*   Updated: 2018/12/15 14:28:50 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/17 12:08:05 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	print_lst(t_lst_info *lst, t_opts *opts)
 	{
 		print_files(lst->head, opts);
 		lst_rm(lst->head, opts);
-		ft_putchar('\n');
 	}
 }
 
@@ -52,6 +51,8 @@ void	multiple_arg(int ac, char **av, int nb_opts, t_opts *opts)
 				multiple_arg_dir(idx, av, &lst, opts);
 			else
 				print_lst(&lst, opts);
+			if (idx < ac - 1)
+				ft_putchar('\n');
 		}
 		else
 			print_error(av[idx], 1, NULL);

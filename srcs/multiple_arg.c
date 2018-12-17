@@ -22,7 +22,6 @@ void	print_lst(t_lst_info *lst, t_opts *opts)
 	{
 		print_files(lst->head, opts);
 		lst_rm(lst->head, opts);
-		ft_putchar('\n');
 	}
 }
 
@@ -52,6 +51,8 @@ void	multiple_arg(int ac, char **av, t_opts *opts)
 				multiple_arg_dir(idx, av, &lst, opts);
 			else
 				print_lst(&lst, opts);
+			if (idx < ac - 1)
+				ft_putchar('\n');
 		}
 		else
 			print_error(av[idx], 1, NULL);

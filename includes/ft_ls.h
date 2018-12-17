@@ -56,7 +56,7 @@ t_lst_ls		*lst_newnode(t_file *file);
 ** Cree une liste chainee qui lie tous les fichier d'un dossier depuis son
 ** chemin
 */
-t_lst_ls		*link_file(char *path, t_stat *st_stat, t_opts *opts);
+t_lst_ls		*link_file(char *path, t_opts *opts);
 
 /*
 ** Cree un pointeur sur structure t_file contenant toutes les informations

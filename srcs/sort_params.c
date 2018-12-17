@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 12:07:40 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/17 14:20:15 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/17 15:37:26 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ static int		pathcmp(char *path1, char *path2,
 	if (cmp_fun != NULL)
 	{
 		if (reverse_sort == 1)
-			return (ft_strcmp(path1, path2) * -1);
-		else
 			return (ft_strcmp(path1, path2));
+		else
+			return (ft_strcmp(path1, path2) * -1);
 	}
 	else
 	{
@@ -77,13 +77,13 @@ static int		compare_param(char *param1, char *param2, t_opts *opts)
 	{
 		if (st_ret1 != 0)
 			return (st_ret2 != 0 ? pathcmp(param1, param2, opts->cmp_fun, 0)
-					: -1);
+					: 1);
 		else
-			return (1);
+			return (-1);
 	}
 	if (get_opt(opts, LS_DIRASF) == 0
 			&& S_ISDIR(st1.st_mode) != S_ISDIR(st2.st_mode))
-		return (S_ISDIR(st1.st_mode) ? 1 : -1);
+		return (S_ISDIR(st1.st_mode) ? -1 : 1);
 	cmp_ret = compare_files(&st1, &st2, opts->cmp_fun);
 	return (cmp_ret == 0 ? pathcmp(param1, param2, opts->cmp_fun,
 				get_opt(opts, LS_REVSO)) : cmp_ret);
@@ -101,7 +101,7 @@ void			sort_params(int ac, char **av, t_opts *opts)
 		i = 0;
 		while (i < ac - 1)
 		{
-			if (compare_param(av[i], av[i + 1], opts) > 0)
+			if (compare_param(av[i], av[i + 1], opts) < 0)
 			{
 				is_sorted = 0;
 				swap_param(i, i + 1, av);

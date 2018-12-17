@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 12:07:40 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/17 12:12:13 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/17 14:20:15 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ static int		compare_param(char *param1, char *param2, t_opts *opts)
 		else
 			return (1);
 	}
-	if (S_ISDIR(st1.st_mode) != S_ISDIR(st2.st_mode))
+	if (get_opt(opts, LS_DIRASF) == 0
+			&& S_ISDIR(st1.st_mode) != S_ISDIR(st2.st_mode))
 		return (S_ISDIR(st1.st_mode) ? 1 : -1);
 	cmp_ret = compare_files(&st1, &st2, opts->cmp_fun);
 	return (cmp_ret == 0 ? pathcmp(param1, param2, opts->cmp_fun,

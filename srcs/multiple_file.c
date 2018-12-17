@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 17:42:20 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 13:08:52 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/17 14:38:51 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,15 @@ static t_dirent	*get_dent(char *filepath, t_stat *st_stat)
 
 static t_file	*ret_dir(t_file *file, t_opts *opts)
 {
-	if (S_ISDIR(file->stat.st_mode) == 0)
-		return (file);
-	else
+	if (S_ISDIR(file->stat.st_mode) && get_opt(opts, LS_DIRASF) == 0)
+	{
 		opts->has_dir = 1;
-	return (NULL);
+		return (NULL);
+	}
+	else
+	{
+		return (file);
+	}
 }
 
 static t_file	*single_file(char *filepath, t_stat *st_stat, t_opts *opts)

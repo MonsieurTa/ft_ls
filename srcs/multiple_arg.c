@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 14:24:04 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 14:19:28 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/17 16:58:48 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	multiple_arg(int ac, char **av, t_opts *opts)
 	t_stat		st_stat;
 	int			idx;
 
+	init_fmt(opts);
 	sort_params(ac, av, opts);
 	lst.head = NULL;
 	lst.tail = NULL;

@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 11:09:53 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 20:20:07 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/17 21:21:53 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static int		print_by_line(t_lst_ls *lst, t_opts *opts)
 	{
 		if (ft_printf("%s%s%s%s\n",
 					lst->file->fields.color_start_static,
-					(opts->has_file == 1) ? lst->file->path : lst->file->pdent->d_name,
+					(opts->has_file == 1) ?
+					lst->file->path : lst->file->pdent->d_name,
 					lst->file->fields.color_end_static,
 					lst->file->fields.name_deco) < 0)
 			return (-1);

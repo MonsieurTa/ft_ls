@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 15:09:40 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/17 20:23:10 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/17 21:22:46 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,20 +77,18 @@ int				print_by_col(t_opts *opts, t_lst_ls *lst)
 	init_col_fmt(opts, &col_fmt);
 	if ((line = init_col_tab(lst, col_fmt.max_col, col_fmt.max_row)) == NULL)
 		return (-1);
-	row = 0;
-	while (row < col_fmt.max_row)
+	row = -1;
+	while (++row < col_fmt.max_row)
 	{
-		col = 0;
-		while (col < col_fmt.max_col && line[col] != NULL)
+		col = -1;
+		while (++col < col_fmt.max_col && line[col] != NULL)
 		{
 			if (print_col_el(line[col]->file, opts,
 					col + 1 == col_fmt.max_col, col_fmt.col_size) < 0)
 				return (-1);
 			line[col] = line[col]->next;
-			col++;
 		}
 		ft_putchar('\n');
-		row++;
 	}
 	opts->has_file = 0;
 	free(line);

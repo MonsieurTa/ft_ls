@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 17:42:20 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 19:43:57 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/17 21:15:38 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "fields_utils.h"
 #include "error.h"
 
-static DIR	*get_dent(char *filepath, t_dirent **tmp, t_stat *st_stat)
+static DIR		*get_dent(char *filepath, t_dirent **tmp, t_stat *st_stat)
 {
 	char		*filename;
 	char		*dirpath;
@@ -42,14 +42,26 @@ static DIR	*get_dent(char *filepath, t_dirent **tmp, t_stat *st_stat)
 static t_file	*ret_dir(t_file *file, t_opts *opts)
 {
 	if (S_ISDIR(file->stat.st_mode) && get_opt(opts, LS_DIRASF) == 0)
-	{
-		opts->has_dir = 1;
 		return (NULL);
-	}
 	else
-	{
 		return (file);
+}
+
+static t_file	*setup_file(t_file *file, t_opts *opts)
+{
+	if (init_file_infs(file, opts) == 0)
+	{
+		if ((file = ret_dir(file, opts)) != NULL)
+			return (file);
+		else
+		{
+			if (get_opt(opts, LS_LONGF) == 1)
+				delete_all_fields(file);
+			else
+				delete_minimum_fields(file);
+		}
 	}
+	return (NULL);
 }
 
 static t_file	*single_file(char *filepath, t_stat *st_stat, t_opts *opts)
@@ -67,20 +79,8 @@ static t_file	*single_file(char *filepath, t_stat *st_stat, t_opts *opts)
 			ft_memcpy(file->pdent, tmp, tmp->d_reclen);
 			closedir(pdir);
 			if ((file->path = ft_strdup(filepath)) != NULL)
-			{
-				if (init_file_infs(file, opts) == 0)
-				{
-					if ((file = ret_dir(file, opts)) != NULL)
-						return (file);
-					else
-					{
-						if (get_opt(opts, LS_LONGF) == 1)
-							delete_all_fields(file);
-						else
-							delete_minimum_fields(file);
-					}
-				}
-			}
+				if ((file = setup_file(file, opts)) != NULL)
+					return (file);
 			free(file->path);
 		}
 		free(file->pdent);

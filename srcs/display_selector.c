@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 14:19:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 19:38:48 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/17 21:00:45 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		display_selector(char *path, char print_name, t_opts *opts)
 		if ((lst = link_file(path, opts)) != NULL)
 			display_dir(path, print_name, lst, opts);
 		else
-			print_error(path, 1, &st_stat);
+			print_error(path, print_name, &st_stat);
 	}
 	else
 		display_reg(path, &lst_m, opts, &st_stat);

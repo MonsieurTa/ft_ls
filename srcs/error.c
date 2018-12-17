@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:22:02 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 16:12:29 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/17 21:19:40 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,29 +36,27 @@ static char	*get_filename(char *filepath)
 
 void		*print_error(char *path, char print_name, t_stat *st_stat)
 {
-	if (st_stat == NULL || (st_stat->st_mode & S_IXUSR) == 0)
+	if (errno)
 	{
-		if (st_stat == NULL || (st_stat->st_mode & S_IRUSR) == 0)
+		if (st_stat != NULL && print_name == 1)
 		{
-			if (st_stat != NULL && print_name == 1)
-			{
-				ft_putstr(path);
-				ft_putstr(":\n");
-			}
-			ft_putstr_fd("ft_ls: ", 2);
-			ft_putstr_fd(get_filename(path), 2);
-			ft_putstr_fd(": ", 2);
-			ft_putstr_fd(strerror(errno), 2);
-			ft_putchar_fd('\n', 2);
+			ft_putstr(path);
+			ft_putstr(":\n");
 		}
+		ft_putstr_fd("ft_ls: ", 2);
+		ft_putstr_fd(get_filename(path), 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putchar_fd('\n', 2);
+		errno = 0;
 	}
 	return (NULL);
 }
 
 int			print_usage(char *cmd, char c)
 {
-	char opt_tab[LS_OPT_SIZE];
-	int	idx;
+	char	opt_tab[LS_OPT_SIZE];
+	int		idx;
 
 	idx = -1;
 	init_opt_tab(opt_tab);

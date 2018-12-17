@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:28 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/14 16:22:55 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/17 15:10:25 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,7 @@ void			set_winsize(t_opts *opt);
 ** Set la largeur d'une tabulation selon les options du programme.
 */
 void			set_tab_w(t_opts *opt);
+
+void			init_opt_tab(char *opt_tab);
 
 #endif

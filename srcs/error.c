@@ -6,13 +6,14 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:22:02 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 11:51:16 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/17 15:17:32 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "file.h"
 #include "libft/includes/ft_printf.h"
 #include "error.h"
+#include "options.h"
 #include <sys/types.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -41,15 +42,31 @@ void		*print_error(char *path, char print_name, t_stat *st_stat)
 		{
 			if (st_stat != NULL && print_name == 1)
 			{
-				ft_putstr_fd(path, 2);
+				ft_putstr(path);
 				ft_putstr(":\n");
 			}
 			ft_putstr_fd("ls: ", 2);
 			ft_putstr_fd(get_filename(path), 2);
 			ft_putstr_fd(": ", 2);
 			ft_putstr_fd(strerror(errno), 2);
-			ft_putchar('\n');
+			ft_putchar_fd('\n', 2);
 		}
 	}
 	return (NULL);
+}
+
+int			print_usage(char c)
+{
+	char opt_tab[LS_OPT_SIZE];
+	int	idx;
+
+	idx = -1;
+	init_opt_tab(opt_tab);
+	ft_putstr_fd("ls: illegal option -- ", 2);
+	ft_putchar_fd(c, 2);
+	ft_putstr_fd("\nusage: ls [-", 2);
+	while (++idx < LS_OPT_SIZE)
+		ft_putchar_fd(opt_tab[idx], 2);
+	ft_putstr_fd("] [file ...]\n", 2);
+	return (0);
 }

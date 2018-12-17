@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:04:09 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/14 09:49:22 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/17 15:09:12 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** Initialise le tableau de char d'opt passe en param.
 */
 
-static void			init_opt_tab(char *opt_tab)
+void			init_opt_tab(char *opt_tab)
 {
 	opt_tab[LS_BYLINE] = '1';
 	opt_tab[LS_ALL] = 'a';

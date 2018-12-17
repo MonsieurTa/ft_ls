@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 14:24:04 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 13:37:26 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/17 14:19:28 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	multiple_arg(int ac, char **av, t_opts *opts)
 	{
 		if (lstat(av[idx], &st_stat) != -1)
 		{
-			if (S_ISDIR(st_stat.st_mode))
+			if (S_ISDIR(st_stat.st_mode) && get_opt(opts, LS_DIRASF) == 0)
 			{
 				multiple_arg_dir(idx, av, &lst, opts);
 				if (idx < ac - 1)

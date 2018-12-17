@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 09:28:55 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/17 15:15:52 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av)
 	opts.mask = 0;
 	def_opts_for_is_tty(&opts);
 	if ((nb_opts = init_opts(ac - 1, av + 1, &opts, &c)) == -1)
-		return (0);
+		return (print_usage(c));
 	set_cmp_fun(&opts);
 	set_winsize(&opts);
 	set_tab_w(&opts);

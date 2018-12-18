@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:24:01 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 20:19:05 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/18 14:16:41 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int ac, char **av)
 	int			nb_opts;
 
 	opts.mask = 0;
+	opts.error = 0;
 	opts.has_file = 0;
 	def_opts_for_is_tty(&opts);
 	if ((nb_opts = init_opts(ac - 1, av + 1, &opts, &c)) == -1)
@@ -36,5 +37,5 @@ int	main(int ac, char **av)
 		display_selector(av[nb_opts + 1], 0, &opts);
 	else
 		multiple_arg(ac - 1 - nb_opts, av + 1 + nb_opts, &opts);
-	return (0);
+	return (opts.error);
 }

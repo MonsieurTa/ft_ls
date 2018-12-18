@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:22:02 by wta               #+#    #+#             */
-/*   Updated: 2018/12/18 10:48:59 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/18 14:13:22 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static char	*get_filename(char *filepath)
 	return ("");
 }
 
-void		*print_error(char *path, char print_name, t_stat *st_stat)
+void		*print_error(char *path, char print_name, t_stat *st_stat,
+						t_opts *opts)
 {
 	if (st_stat != NULL && ((print_name & 1) == 1))
 	{
@@ -49,6 +50,7 @@ void		*print_error(char *path, char print_name, t_stat *st_stat)
 		ft_putstr_fd(strerror(errno), 2);
 		ft_putchar_fd('\n', 2);
 		errno = 0;
+		opts->error = 1;
 	}
 	return (NULL);
 }
@@ -67,5 +69,5 @@ int			print_usage(char *cmd, char c)
 	while (++idx < LS_OPT_SIZE)
 		ft_putchar_fd(opt_tab[idx], 2);
 	ft_putstr_fd("] [file ...]\n", 2);
-	return (0);
+	return (1);
 }

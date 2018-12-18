@@ -6,21 +6,11 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 06:53:21 by wta               #+#    #+#             */
-/*   Updated: 2018/12/10 05:50:41 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/18 11:20:49 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-static int		is_slash_ended(char *path)
-{
-	int	index;
-
-	index = 0;
-	while (path[index + 1] != '\0')
-		index++;
-	return (path[index] == '/');
-}
 
 static char		*ft_strjoinpath(char const *s1, char const *s2)
 {
@@ -52,8 +42,6 @@ char			*get_new_path(char *path, char *name)
 	{
 		if (ft_strcmp(name, ".") == 0)
 			return (ft_strdup(path));
-		if (is_slash_ended(path) == 1)
-			return (ft_strjoin(path, name));
 		return (ft_strjoinpath(path, name));
 	}
 	return (NULL);

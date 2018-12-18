@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 12:17:25 by wta               #+#    #+#             */
-/*   Updated: 2018/12/11 09:29:19 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/15 12:24:23 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ static void	get_rights(t_file *file, char *field)
 		field[6] = (field[6] == 'x') ? 's' : 'S';
 	if (stat->st_mode & S_ISVTX)
 		field[9] = (field[9] == 'x') ? 't' : 'T';
-	field[10] = (has_xattr(file->path)) ? '@' : ' ';
-	field[10] = (has_acl(file->path)) ? '+' : field[10];
+	field[10] = (has_acl(file->path)) ? '+' : ' ';
+	field[10] = (has_xattr(file->path)) ? '@' : field[10];
 }
 
 int			set_field_rights(t_opts *opts, t_file *file, char **field)

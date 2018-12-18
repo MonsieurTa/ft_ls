@@ -6,13 +6,14 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:13:16 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 12:06:12 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/15 13:01:01 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static t_lst_ls	*lst_pop_append(t_lst_ls **head, t_lst_ls **tail, t_lst_ls *side)
+static t_lst_ls	*lst_pop_append(t_lst_ls **head,
+		t_lst_ls **tail, t_lst_ls *side)
 {
 	t_lst_ls	*tmp;
 

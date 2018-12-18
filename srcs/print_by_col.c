@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 15:09:40 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/17 21:22:46 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/18 08:30:49 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int				print_by_col(t_opts *opts, t_lst_ls *lst)
 		}
 		ft_putchar('\n');
 	}
-	opts->has_file = 0;
 	free(line);
 	return (0);
 }

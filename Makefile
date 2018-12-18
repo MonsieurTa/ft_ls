@@ -6,7 +6,7 @@
 #    By: wta <wta@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 20:09:26 by wta               #+#    #+#              #
-#    Updated: 2018/12/17 19:10:00 by wta              ###   ########.fr        #
+#    Updated: 2018/12/17 21:42:29 by wta              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #=======================================================================  COLOR#
@@ -25,7 +25,7 @@ OBJDIR		=	objs
 OBJ			=	$(addprefix $(OBJDIR)/,$(SRCS:.c=.o))
 CC			=	gcc
 INC			=	-I $(INCDIR) -I .
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror
 SRCS		=															\
 main.c					compare_file_acce.c		compare_file_crea.c		\
 compare_file_lexical.c	compare_file_size.c		compare_file_stch.c		\

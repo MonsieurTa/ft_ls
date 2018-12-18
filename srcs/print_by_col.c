@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 15:09:40 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/18 08:30:49 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/18 12:04:20 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ static int		print_col_el(t_file *file, t_opts *opts,
 	if (is_last_elem)
 		return (ft_printf("%s%s%s%s",
 					file->fields.color_start_static,
-					(opts->has_file == 1) ? file->path : file->pdent->d_name,
+					(opts->has_file == 1) ? file->path : file->name,
 					file->fields.color_end_static,
 					file->fields.name_deco));
 	else
 		return (ft_printf("%s%s%s%s%-*s",
 					file->fields.color_start_static,
-					(opts->has_file == 1) ? file->path : file->pdent->d_name,
+					(opts->has_file == 1) ? file->path : file->name,
 					file->fields.color_end_static,
 					file->fields.name_deco,
 					col_size - file->fields.name_with_deco_len, ""));

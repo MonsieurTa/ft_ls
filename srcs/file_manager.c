@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:48:29 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 20:56:48 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/18 12:00:54 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ t_lst_ls	*link_file(char *path, t_opts *opts)
 t_lst_ls	*find_dir(t_lst_ls *lst)
 {
 	while (lst != NULL && (!S_ISDIR(lst->file->stat.st_mode)
-		|| ft_strcmp(lst->file->pdent->d_name, ".") == 0
-		|| ft_strcmp(lst->file->pdent->d_name, "..") == 0))
+		|| ft_strcmp(lst->file->name, ".") == 0
+		|| ft_strcmp(lst->file->name, "..") == 0))
 		lst = lst->next;
 	return (lst);
 }
@@ -54,8 +54,8 @@ t_lst_ls	*find_dir(t_lst_ls *lst)
 t_lst_ls	*find_file(t_lst_ls *lst)
 {
 	while (lst != NULL
-		&& (ft_strcmp(lst->file->pdent->d_name, ".") == 0
-		|| ft_strcmp(lst->file->pdent->d_name, "..") == 0))
+		&& (ft_strcmp(lst->file->name, ".") == 0
+		|| ft_strcmp(lst->file->name, "..") == 0))
 		lst = lst->next;
 	return (lst);
 }

@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 11:30:12 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/17 21:04:05 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/18 12:00:24 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int				init_minimum_fields_and_fmt(t_opts *opts, t_file *file)
 			&(file->fields.color_start_static));
 	set_field_color_end_static(opts, file, &(file->fields.color_end_static));
 	file->fields.name_with_deco_len = (opts->has_file == 1) ?
-		ft_strlen(file->path) : ft_strlen(file->pdent->d_name);
+		ft_strlen(file->path) : ft_strlen(file->name);
 	file->fields.name_with_deco_len += set_field_name_deco(opts, file,
 			&(file->fields.name_deco));
 	if (file->fields.color_end_static == NULL

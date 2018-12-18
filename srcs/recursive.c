@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:51:37 by wta               #+#    #+#             */
-/*   Updated: 2018/12/18 12:16:33 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/18 14:14:46 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_lst_ls	*check_rec(char *path, t_opts *opts)
 	errno = 0;
 	if ((lst = link_file(path, opts)) == NULL)
 	{
-		print_error(path, 0, &st_stat);
+		print_error(path, 0, &st_stat, opts);
 		return (NULL);
 	}
 	return (lst);

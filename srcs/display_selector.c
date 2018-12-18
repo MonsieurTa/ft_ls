@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 14:19:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/18 10:48:30 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/18 12:26:38 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 #include "print.h"
 #include "error.h"
 
-static void	display_reg(char *path, t_lst_info *lst_m, t_opts *opts, t_stat *st)
+static void	display_reg(char *path, t_lst_info *lst_m, t_opts *opts)
 {
 	lst_m->head = NULL;
 	lst_m->tail = NULL;
-	multiple_file(lst_m, opts, st, path);
+	multiple_file(lst_m, opts, path);
 	if (lst_m->head != NULL)
 	{
 		print_files(lst_m->head, opts);
@@ -43,7 +43,7 @@ static void	display_dir(char *path, char print_n, t_lst_ls *lst, t_opts *opts)
 		while ((lst_tmp = find_dir(lst_tmp)) != NULL)
 		{
 			if ((get_opt(opts, LS_ALL) == 1
-						&& is_curr_or_parent(lst_tmp->file->pdent) == 0)
+						&& is_curr_or_parent(lst_tmp->file->name) == 0)
 					|| is_hidden(lst->file) == 0)
 				ls_rec(lst_tmp->file->path, opts);
 			lst_tmp = lst_tmp->next;
@@ -74,5 +74,5 @@ void		display_selector(char *path, char print_name, t_opts *opts)
 			print_error(path, print_name + 2, &st_stat);
 	}
 	else
-		display_reg(path, &lst_m, opts, &st_stat);
+		display_reg(path, &lst_m, opts);
 }

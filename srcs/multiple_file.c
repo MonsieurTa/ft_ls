@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 17:42:20 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 21:15:38 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/18 12:25:08 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,23 @@
 #include "fields_utils.h"
 #include "error.h"
 
-static DIR		*get_dent(char *filepath, t_dirent **tmp, t_stat *st_stat)
+static char		*get_filename_from_path(char *filepath)
 {
-	char		*filename;
-	char		*dirpath;
-	DIR			*pdir;
+	int		len;
 
-	if ((filename = get_filename(filepath)) == NULL)
-		return (NULL);
-	if ((dirpath = get_dirpath(filepath, filename)) == NULL)
-		return (NULL);
-	if ((pdir = opendir(dirpath)) == NULL)
+	if (filepath)
 	{
-		free(filename);
-		free(dirpath);
-		return (print_error(filename, 0, st_stat));
+		len = ft_strlen(filepath) - 1;
+		while (len >= 0 && filepath[len] == '/')
+			len--;
+		while (len >= 0 && filepath[len] != '/')
+			len--;
+		if (len < 0)
+			return (ft_strdup(filepath));
+		else
+			return (ft_strdup(&filepath[len + 1]));
 	}
-	while ((*tmp = readdir(pdir)) != NULL)
-		if (ft_strequ((*tmp)->d_name, filename) == 1)
-			break ;
-	free(filename);
-	free(dirpath);
-	return (pdir);
+	return (NULL);
 }
 
 static t_file	*ret_dir(t_file *file, t_opts *opts)
@@ -64,37 +59,30 @@ static t_file	*setup_file(t_file *file, t_opts *opts)
 	return (NULL);
 }
 
-static t_file	*single_file(char *filepath, t_stat *st_stat, t_opts *opts)
+static t_file	*single_file(char *filepath, t_opts *opts)
 {
-	DIR			*pdir;
-	t_dirent	*tmp;
 	t_file		*file;
 
-	if ((pdir = get_dent(filepath, &tmp, st_stat)) == NULL)
-		return (NULL);
-	if (tmp != NULL && (file = ft_memalloc(sizeof(t_file))) != NULL)
+	if ((file = ft_memalloc(sizeof(t_file))) != NULL)
 	{
-		if ((file->pdent = ft_memalloc(tmp->d_reclen)) != NULL)
+		if ((file->name = get_filename_from_path(filepath)) != NULL)
 		{
-			ft_memcpy(file->pdent, tmp, tmp->d_reclen);
-			closedir(pdir);
 			if ((file->path = ft_strdup(filepath)) != NULL)
 				if ((file = setup_file(file, opts)) != NULL)
 					return (file);
 			free(file->path);
 		}
-		free(file->pdent);
+		free(file->name);
 		free(file);
 	}
 	return (NULL);
 }
 
-void			multiple_file(t_lst_info *lst,
-							t_opts *opts, t_stat *st_stat, char *path)
+void			multiple_file(t_lst_info *lst, t_opts *opts, char *path)
 {
 	t_file	*file;
 
-	if ((file = single_file(path, st_stat, opts)) != NULL)
+	if ((file = single_file(path, opts)) != NULL)
 	{
 		opts->has_file = 1;
 		lst_append(&lst->head, &lst->tail, lst_newnode(file));

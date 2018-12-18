@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:12:47 by wta               #+#    #+#             */
-/*   Updated: 2018/12/15 13:12:20 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/18 12:15:25 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_dirent	*get_dent(t_opts *opts, DIR *pdir)
 	}
 	else
 		while ((tmp = readdir(pdir)) != NULL)
-			if (is_curr_or_parent(tmp) == 0 && *tmp->d_name != '.')
+			if (is_curr_or_parent(tmp->d_name) == 0 && *tmp->d_name != '.')
 				break ;
 	return (tmp);
 }
@@ -52,15 +52,14 @@ t_file		*lst_newfile(DIR *pdir, char *path, t_opts *opts)
 	{
 		if ((file = ft_memalloc(sizeof(t_file))) != NULL)
 		{
-			if ((file->pdent = ft_memalloc(tmp->d_reclen)) != NULL)
+			if ((file->name = ft_strdup(tmp->d_name)) != NULL)
 			{
-				ft_memcpy(file->pdent, tmp, tmp->d_reclen);
-				if ((file->path = get_new_path(path, file->pdent->d_name))
+				if ((file->path = get_new_path(path, file->name))
 						!= NULL && init_file_infs(file, opts) == 0)
 					return (file);
 				free(file->path);
 			}
-			free(file->pdent);
+			free(tmp);
 			free(file);
 		}
 	}
@@ -108,7 +107,7 @@ void		lst_rm(t_lst_ls *lst, t_opts *opts)
 				delete_all_fields(tmp->file);
 			else
 				delete_minimum_fields(tmp->file);
-			free(tmp->file->pdent);
+			free(tmp->file->name);
 			free(tmp->file->path);
 			free(tmp->file);
 			free(tmp);

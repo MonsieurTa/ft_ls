@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 06:23:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 16:59:53 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/18 12:27:21 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,9 @@ void			init_fmt(t_opts *opts);
 */
 int				init_file_infs(t_file *file, t_opts *opts);
 
-int				is_curr_or_parent(t_dirent *pdent);
+int				is_curr_or_parent(char *name);
 
-void			multiple_file(t_lst_info *lst, t_opts *opts,
-					t_stat *st_stat, char *path);
+void			multiple_file(t_lst_info *lst, t_opts *opts, char *path);
 
 char			*get_filename(char *filepath);
 

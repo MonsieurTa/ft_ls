@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:09:09 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/15 11:36:42 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/18 12:00:08 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int				init_all_fields_and_fmt(t_opts *opts, t_file *file)
 		delete_all_fields(file);
 		return (-1);
 	}
-	file->fields.name_with_deco_len = ft_strlen(file->pdent->d_name);
+	file->fields.name_with_deco_len = ft_strlen(file->name);
 	file->fields.name_with_deco_len += set_field_name_deco(opts, file,
 			&(file->fields.name_deco));
 	if (file->fields.name_deco == NULL)

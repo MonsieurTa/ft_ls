@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:51:37 by wta               #+#    #+#             */
-/*   Updated: 2018/12/18 10:52:49 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/18 12:16:33 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void			ls_rec(char *path, t_opts *opts)
 		{
 			if (get_opt(opts, LS_ALL) == 1)
 			{
-				if (is_curr_or_parent(lst->file->pdent) == 0)
+				if (is_curr_or_parent(lst->file->name) == 0)
 					ls_rec(lst->file->path, opts);
 			}
 			else if (is_hidden(lst->file) == 0)

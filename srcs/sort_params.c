@@ -6,7 +6,7 @@
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 12:07:40 by fwerner           #+#    #+#             */
-/*   Updated: 2018/12/17 15:37:26 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/18 12:05:54 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static void		swap_param(int idx1, int idx2, char **av)
 static int		compare_files(t_stat *fst1, t_stat *fst2,
 		int (*cmp_fun)(t_file *file1, t_file *file2))
 {
-	t_dirent	fpdent1;
-	t_dirent	fpdent2;
+	char		fname1[1];
+	char		fname2[1];
 	t_file		file1;
 	t_file		file2;
 
@@ -35,10 +35,10 @@ static int		compare_files(t_stat *fst1, t_stat *fst2,
 	{
 		file1.stat = *fst1;
 		file2.stat = *fst2;
-		file1.pdent = &fpdent1;
-		file2.pdent = &fpdent2;
-		file1.pdent->d_name[0] = '\0';
-		file2.pdent->d_name[0] = '\0';
+		file1.name = fname1;
+		file2.name = fname2;
+		file1.name[0] = '\0';
+		file2.name[0] = '\0';
 		return (cmp_fun(&file1, &file2));
 	}
 	else

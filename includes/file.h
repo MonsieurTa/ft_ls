@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 13:55:13 by wta               #+#    #+#             */
-/*   Updated: 2018/12/14 13:33:31 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/18 11:57:55 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct	s_fields
 */
 typedef struct	s_file
 {
-	t_dirent	*pdent;
+	char		*name;
 	t_stat		stat;
 	char		*path;
 	int			time;

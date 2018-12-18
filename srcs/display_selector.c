@@ -6,10 +6,11 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 14:19:36 by wta               #+#    #+#             */
-/*   Updated: 2018/12/18 09:20:07 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/18 10:48:30 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include "ft_ls.h"
 #include "options.h"
 #include "print.h"
@@ -66,6 +67,7 @@ void		display_selector(char *path, char print_name, t_opts *opts)
 	}
 	else if (S_ISDIR(st_stat.st_mode) && get_opt(opts, LS_DIRASF) == 0)
 	{
+		errno = 0;
 		if ((lst = link_file(path, opts)) != NULL)
 			display_dir(path, print_name, lst, opts);
 		else

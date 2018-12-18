@@ -6,13 +6,13 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/24 06:06:10 by wta               #+#    #+#             */
-/*   Updated: 2018/12/12 09:53:30 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/18 14:06:35 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			ft_intlen_base_u(unsigned long long n, int base)
+int		ft_intlen_base_u(unsigned long long n, int base)
 {
 	int	len;
 
@@ -45,7 +45,7 @@ char	*ft_itoa_u(unsigned long long n)
 	return (str);
 }
 
-char		*ft_convert_u(unsigned long long n, t_lpf *node)
+char	*ft_convert_u(unsigned long long n, t_lpf *node)
 {
 	char	*str;
 	int		len;

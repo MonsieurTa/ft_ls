@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   options_rules.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 11:44:00 by fwerner           #+#    #+#             */
-/*   Updated: 2018/11/14 15:17:45 by fwerner          ###   ########.fr       */
+/*   Created: 2018/12/07 08:02:04 by fwerner           #+#    #+#             */
+/*   Updated: 2018/12/07 11:44:31 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strcmp(const char *s1, const char *s2)
-{
-	while (*s1 == *s2 && *s1 != '\0' && *s2 != '\0')
-	{
-		++s1;
-		++s2;
-	}
-	return ((unsigned char)(*s1) - (unsigned char)(*s2));
-}
+#ifndef OPTIONS_RULES_H
+# define OPTIONS_RULES_H
+
+# include "options.h"
+
+/*
+** Modifie la liste des options selon la derniere option qui vient d'etre
+** ajoutee, en cas de dependance ou de conflit d'options.
+*/
+void	apply_rules_for_opt(t_opts *opts, t_opt_name opt_name);
+
+#endif

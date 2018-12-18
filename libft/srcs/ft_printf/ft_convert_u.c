@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/24 06:06:10 by wta               #+#    #+#             */
-/*   Updated: 2018/11/25 13:25:36 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/12 09:53:30 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			ft_intlen_base_u(unsigned long long n, int base)
 	return (len);
 }
 
-static char	*ft_itoa_u(unsigned long long n)
+char	*ft_itoa_u(unsigned long long n)
 {
 	char	*str;
 	int		len;

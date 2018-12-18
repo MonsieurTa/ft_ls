@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   compare_file_stch.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 11:44:00 by fwerner           #+#    #+#             */
-/*   Updated: 2018/11/14 15:17:45 by fwerner          ###   ########.fr       */
+/*   Created: 2018/12/08 11:41:21 by fwerner           #+#    #+#             */
+/*   Updated: 2018/12/12 12:36:53 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strcmp(const char *s1, const char *s2)
+#include "ft_ls.h"
+#include "compare_utils.h"
+
+int		cmp_file_stch_rev(t_file *file1, t_file *file2)
 {
-	while (*s1 == *s2 && *s1 != '\0' && *s2 != '\0')
-	{
-		++s1;
-		++s2;
-	}
-	return ((unsigned char)(*s1) - (unsigned char)(*s2));
+	return (cmp_file_stch(file1, file2) * -1);
+}
+
+int		cmp_file_stch(t_file *file1, t_file *file2)
+{
+	int		res;
+
+	res = compare_timespec(&(file1->stat.st_ctimespec),
+			&(file2->stat.st_ctimespec));
+	if (res == 0)
+		return (cmp_file_lexical(file1, file2));
+	else
+		return (res);
 }

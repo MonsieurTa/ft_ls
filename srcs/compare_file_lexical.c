@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   compare_file_lexical.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 11:44:00 by fwerner           #+#    #+#             */
-/*   Updated: 2018/11/14 15:17:45 by fwerner          ###   ########.fr       */
+/*   Created: 2018/12/08 09:16:15 by fwerner           #+#    #+#             */
+/*   Updated: 2018/12/18 11:58:24 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strcmp(const char *s1, const char *s2)
+#include "ft_ls.h"
+#include "compare_utils.h"
+
+int		cmp_file_lexical_rev(t_file *file1, t_file *file2)
 {
-	while (*s1 == *s2 && *s1 != '\0' && *s2 != '\0')
-	{
-		++s1;
-		++s2;
-	}
-	return ((unsigned char)(*s1) - (unsigned char)(*s2));
+	return (cmp_file_lexical(file1, file2) * -1);
+}
+
+int		cmp_file_lexical(t_file *file1, t_file *file2)
+{
+	return (ft_strcmp(file1->name, file2->name) * -1);
 }

@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   options_tty.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 11:44:00 by fwerner           #+#    #+#             */
-/*   Updated: 2018/11/14 15:17:45 by fwerner          ###   ########.fr       */
+/*   Created: 2018/12/11 08:21:05 by fwerner           #+#    #+#             */
+/*   Updated: 2018/12/11 08:32:22 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strcmp(const char *s1, const char *s2)
+#include <unistd.h>
+#include "options.h"
+
+void	def_opts_for_is_tty(t_opts *opts)
 {
-	while (*s1 == *s2 && *s1 != '\0' && *s2 != '\0')
+	if (isatty(STDOUT_FILENO))
 	{
-		++s1;
-		++s2;
+		set_opt_val(opts, LS_BYCLMN, 1);
 	}
-	return ((unsigned char)(*s1) - (unsigned char)(*s2));
+	else
+	{
+		set_opt_val(opts, LS_BYLINE, 1);
+	}
 }

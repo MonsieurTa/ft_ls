@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   compare_timespec.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwerner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 11:44:00 by fwerner           #+#    #+#             */
-/*   Updated: 2018/11/14 15:17:45 by fwerner          ###   ########.fr       */
+/*   Created: 2018/12/08 13:22:35 by fwerner           #+#    #+#             */
+/*   Updated: 2018/12/08 13:37:39 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strcmp(const char *s1, const char *s2)
+#include <time.h>
+#include "compare_utils.h"
+
+int		compare_timespec(struct timespec *time1, struct timespec *time2)
 {
-	while (*s1 == *s2 && *s1 != '\0' && *s2 != '\0')
+	if (time1->tv_sec > time2->tv_sec)
+		return (1);
+	else if (time1->tv_sec < time2->tv_sec)
+		return (-1);
+	else
 	{
-		++s1;
-		++s2;
+		if (time1->tv_nsec > time2->tv_nsec)
+			return (1);
+		else if (time1->tv_nsec < time2->tv_nsec)
+			return (-1);
+		else
+			return (0);
 	}
-	return ((unsigned char)(*s1) - (unsigned char)(*s2));
 }

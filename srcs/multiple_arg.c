@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 14:24:04 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 21:09:43 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/18 09:01:40 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void		multiple_arg(int ac, char **av, t_opts *opts)
 				multiple_file(&lst, opts, &st_stat, av[idx]);
 		}
 		else
-			print_error(av[idx], 1, NULL);
+			print_error(av[idx], 3, NULL);
 	}
 	print_lst(&lst, opts);
 }

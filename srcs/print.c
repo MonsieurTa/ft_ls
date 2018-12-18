@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 11:09:53 by wta               #+#    #+#             */
-/*   Updated: 2018/12/18 09:08:37 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/18 11:49:01 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,21 @@ static int		print_with_long_f(t_opts *opts, t_lst_ls *lst)
 
 	space_between_guid_and_uid = (get_opt(opts, LS_NOOWN) == 1
 			|| get_opt(opts, LS_NOGRP) == 1) ? 0 : 2;
-	if (ft_printf("total %lld\n", opts->fmt.dir_block_count) == -1)
+	if ((opts->has_file != 1)
+			&& ft_printf("total %lld\n", opts->fmt.dir_block_count) == -1)
 		return (-1);
 	while (lst != NULL)
 	{
 		if (ft_printf("%s %*s %-*s%*s%-*s  %*s %s %s%s%s%s\n",
-					lst->file->fields.rights,
-					opts->fmt.hard_link_max_s, lst->file->fields.hard_link,
-					opts->fmt.user_max_s, lst->file->fields.user,
-					space_between_guid_and_uid, "",
-					opts->fmt.group_max_s, lst->file->fields.group,
-					opts->fmt.size_max_s, lst->file->fields.size,
-					lst->file->fields.date,
-					lst->file->fields.color_start_static,
-					(opts->has_file == 1) ?
-					lst->file->path : lst->file->pdent->d_name,
-					lst->file->fields.color_end_static,
-					lst->file->fields.name_deco) < 0)
+			lst->file->fields.rights, opts->fmt.hard_link_max_s,
+			lst->file->fields.hard_link, opts->fmt.user_max_s,
+			lst->file->fields.user, space_between_guid_and_uid,
+			"", opts->fmt.group_max_s, lst->file->fields.group,
+			opts->fmt.size_max_s, lst->file->fields.size,
+			lst->file->fields.date, lst->file->fields.color_start_static,
+			(opts->has_file == 1) ? lst->file->path : lst->file->pdent->d_name,
+			lst->file->fields.color_end_static,
+			lst->file->fields.name_deco) < 0)
 			return (-1);
 		lst = lst->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:22:02 by wta               #+#    #+#             */
-/*   Updated: 2018/12/18 09:03:15 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/18 10:48:59 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static char	*get_filename(char *filepath)
 
 void		*print_error(char *path, char print_name, t_stat *st_stat)
 {
+	if (st_stat != NULL && ((print_name & 1) == 1))
+	{
+		ft_putstr(path);
+		ft_putstr(":\n");
+	}
 	if (errno)
 	{
-		if (st_stat != NULL && ((print_name & 1) == 1))
-		{
-			ft_putstr(path);
-			ft_putstr(":\n");
-		}
 		ft_putstr_fd("ft_ls: ", 2);
 		ft_putstr_fd((print_name & 2) == 2 ? path : get_filename(path), 2);
 		ft_putstr_fd(": ", 2);

@@ -6,10 +6,11 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:51:37 by wta               #+#    #+#             */
-/*   Updated: 2018/12/17 11:37:45 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/18 10:52:49 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include "ft_ls.h"
 #include "options.h"
 #include "print.h"
@@ -24,6 +25,7 @@ static t_lst_ls	*check_rec(char *path, t_opts *opts)
 	if (lstat(path, &st_stat) == -1)
 		return (NULL);
 	ft_printf("\n%s:\n", path);
+	errno = 0;
 	if ((lst = link_file(path, opts)) == NULL)
 	{
 		print_error(path, 0, &st_stat);

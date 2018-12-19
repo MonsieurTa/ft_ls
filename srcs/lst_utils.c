@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:12:47 by wta               #+#    #+#             */
-/*   Updated: 2018/12/18 12:15:25 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/19 14:01:09 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_file		*lst_newfile(DIR *pdir, char *path, t_opts *opts)
 					return (file);
 				free(file->path);
 			}
-			free(tmp);
+			free(file->name);
 			free(file);
 		}
 	}

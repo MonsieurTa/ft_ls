@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 10:00:58 by wta               #+#    #+#             */
-/*   Updated: 2018/12/19 14:04:20 by wta              ###   ########.fr       */
+/*   Updated: 2018/12/19 14:44:42 by fwerner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int		set_field_uid(t_opts *opts, t_file *file, char **field)
 		if (get_opt(opts, LS_NOOWN) == 1)
 			*field = ft_strdup("");
 		else if (get_opt(opts, LS_NUMID) == 1)
-			*field = ft_itoa_u((file->stat.st_uid));
+			*field = ft_itoa_u(file->stat.st_uid);
 		else
 		{
 			if ((pwd = getpwuid(file->stat.st_uid)) != NULL)
 				*field = ft_strdup(pwd->pw_name);
 			else
-				*field = ft_itoa(file->stat.st_uid);
+				*field = ft_itoa_u(file->stat.st_uid);
 		}
 		return (*field == NULL ? 0 : ft_strlen(*field));
 	}

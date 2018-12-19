@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 10:26:28 by wta               #+#    #+#             */
-/*   Updated: 2018/12/15 09:08:08 by fwerner          ###   ########.fr       */
+/*   Updated: 2018/12/19 14:22:19 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		set_field_gid(t_opts *opts, t_file *file, char **field)
 			if ((grp = getgrgid(file->stat.st_gid)) != NULL)
 				*field = ft_strdup(grp->gr_name);
 			else
-				*field = NULL;
+				*field = ft_itoa(file->stat.st_gid);
 		}
 		return (*field == NULL ? 0 : ft_strlen(*field));
 	}
